@@ -327,10 +327,11 @@ input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focu
 
 @media only screen and (min-width: 768px) {
     .main-nav li {
-        padding: 0px 15px;
+        padding: 10px 15px;
     }
     .main-nav li a {
-        font-size: 14px;
+        font-size: 20px;
+        text-align: right
         -webkit-transition: 0.2s color;
         transition: 0.2s color;
     }
@@ -1303,6 +1304,10 @@ header {
 
 #aside .widget {
     margin-bottom: 40px;
+}
+
+.widget{
+    color: red;
 }
 
 .widget h3 {
