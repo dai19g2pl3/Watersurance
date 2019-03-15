@@ -34,7 +34,6 @@ const Page500 = Loadable({
 });
 
 class App extends Component {
-
   render() {
     return (
       <HashRouter>

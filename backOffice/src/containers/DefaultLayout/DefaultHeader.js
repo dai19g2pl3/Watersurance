@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line
 import { Badge, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem, NavLink } from 'reactstrap';
 import PropTypes from 'prop-types';
-
+// eslint-disable-next-line
 import { AppAsideToggler, AppHeaderDropdown, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/logo.svg'
-import sygnet from '../../assets/img/brand/sygnet.svg'
+
+import watersurance from '../../assets/img/brand/watersurance.jpg'
+
+import favicon from '../../assets/img/brand/favicon.png'
 
 const propTypes = {
   children: PropTypes.node,
 };
 
 const defaultProps = {};
+
 
 class DefaultHeader extends Component {
   render() {
@@ -20,38 +25,18 @@ class DefaultHeader extends Component {
     const { children, ...attributes } = this.props;
 
     return (
-      <React.Fragment>
+      <React.Fragment>        
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand
-          full={{ src: logo, width: 89, height: 25, alt: 'CoreUI Logo' }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
-        />
+        <AppNavbarBrand 
+          full={{ src: watersurance,  width: 150, height: 45, alt: 'Watersurance' }}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          minimized={{ src: favicon, width: 60, height: 60, alt: 'Favicon' }}
+        /> 
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        <Nav className="d-md-down-none" navbar>
-          <NavItem className="px-3">
-            <Link to="/" className="nav-link" >Dashboard</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <Link to="/users">Users</Link>
-          </NavItem>
-          <NavItem className="px-3">
-            <NavLink href="#">Settings</NavLink>
-          </NavItem>
-        </Nav>
         <Nav className="ml-auto" navbar>
-          <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
-          </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-list"></i></NavLink>
-          </NavItem>
-          <NavItem className="d-md-down-none">
-            <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
-          </NavItem>
-          <AppHeaderDropdown direction="down">
+        <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
-              <img src={'../../assets/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com" />
+              <img src={'../../assets/img/avatars/favicon.png'} className="img-avatar" alt="Watersurance" />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
               <DropdownItem header tag="div" className="text-center"><strong>Account</strong></DropdownItem>
@@ -70,8 +55,10 @@ class DefaultHeader extends Component {
             </DropdownMenu>
           </AppHeaderDropdown>
         </Nav>
+        {/*
         <AppAsideToggler className="d-md-down-none" />
         {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+        
       </React.Fragment>
     );
   }
