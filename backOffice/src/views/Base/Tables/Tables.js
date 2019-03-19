@@ -3,7 +3,11 @@ import React, { Component } from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 //eslint-disable-next-line
-import filterFactory, { selectFilter, dateFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
+import cellEditFactory from 'react-bootstrap-table2-editor';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+
+const { SearchBar } = Search;
 
 const selectOptions = {
   0: 'Ativo',
@@ -21,7 +25,7 @@ const columns = [{
   sort: true,
   hidden: true
 }, {
-  dataField: 'name',
+  dataField: 'nome',
   text: 'Nome',
   sort: true,
   headerAlign: 'center'
@@ -32,7 +36,7 @@ const columns = [{
   headerAlign: 'center'
 }, {
   dataField: 'morada',
-  text:'Morada',
+  text: 'Morada',
   sort: true,
   headerAlign: 'center'
 }, {
@@ -42,37 +46,51 @@ const columns = [{
   headerAlign: 'center'
 }, {
   dataField: 'estado',
-  text:'Estado',
+  text: 'Estado',
   headerStyle: { width: 150 },
   headerAlign: 'center',
+  editable: false,
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,
     defaultValue: 0
-  })  
-}, {
-  dataField: 'dataInscricao',
-  text:'Data de Inscricao ',
-  filter: dateFilter({
-    comparatorStyle: { width: 70 },
-    dateStyle:{ width: 200 },
-    style: { display: 'inline-grid' },
-    withoutEmptyComparatorOption: true,
-  }),
-  headerAlign: 'center',
-  headerStyle: { width: 300 }
+  })
 }];
 
 export default () =>
-  <BootstrapTable 
-  keyField='id' 
-  data={ [] } 
-  columns={ columns }
-  pagination = { paginationFactory() }
-  striped
-  condensed
-  bordered={false}
-  selectRow={ { mode: 'checkbox' } }
-  defaultSorted={ defaultSorted }
-  filter={ filterFactory() }
-  />
+  <ToolkitProvider
+    keyField="id"
+    data={[]}
+    columns={columns}
+    search
+  >
+    {
+      props => (
+        <div>
+          <SearchBar
+          { ...props.searchProps }
+          className="custome-search-field"
+          style={ { color: 'pink' } }
+          delay={ 800 }
+          placeholder="Pesquisar" />
+          <BootstrapTable
+            keyField='id'
+            { ...props.baseProps }
+            data={[]}
+            columns={columns}
+            pagination={paginationFactory()}
+            striped
+            condensed
+            bordered={false}
+            selectRow={{ mode: 'checkbox' }}
+            defaultSorted={defaultSorted}
+            filter={filterFactory()}
+            cellEdit={cellEditFactory({
+              mode: 'dbclick',
+              blurToSave: true
+            })}
+          />
+        </div>
+      )
+    }
+  </ToolkitProvider>
