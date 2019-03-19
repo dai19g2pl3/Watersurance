@@ -60,7 +60,7 @@ const columns = [{
     withoutEmptyComparatorOption: true,
   }),
   headerAlign: 'center',
-  headerStyle: { width: 400 }
+  headerStyle: { width: 300 }
 }];
 
 export default () =>
