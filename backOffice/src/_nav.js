@@ -15,11 +15,11 @@ export default {
       children: [
         {
           name: 'Gerir Administradores',
-          url: '/base/breadcrumbs',
+          url: '/base/tables',
           icon: 'icon-people',
         },
         {
-          name: 'Novo Administrador',
+          name: 'Registar Administrador',
           url: '/base/cards',
           icon: 'icon-user-follow',
         },
@@ -32,13 +32,38 @@ export default {
       children: [
         {
           name: 'Gerir Clientes',
-          url: '/base/breadcrumbs',
+          url: '/base/tables',
           icon: 'icon-people',
         },
         {
-          name: 'Novo Cliente',
+          name: 'Registar Cliente',
           url: '/base/cards',
           icon: 'icon-user-follow',
+        },
+      ]
+    },
+    {
+      title: true,
+      name: 'Coisas',
+      wrapper: {
+        element: '',
+        attributes: {},
+      },
+    },
+    {
+      name: 'Ocorrência',
+      url: '/base',
+      icon: 'icon-folder',
+      children: [
+        {
+          name: 'Gerir Ocorrências',
+          url: '/base/tables',
+          icon: 'icon-folder',
+        },
+        {
+          name: 'Registar Ocorrência',
+          url: '/base/cards',
+          icon: 'icon-folder-alt',
         },
       ]
     },
