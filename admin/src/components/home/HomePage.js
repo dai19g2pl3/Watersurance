@@ -5,8 +5,8 @@ const HomePage = () => (
   <div className="jumbotron">
     <h1>WaterSurance Administration</h1>
     <p>Contra inundaçoes nao ha preocupaçoes</p>
-    <Link to="about" className="btn btn-primary btn-lg">
-      Saber mais
+    <Link to="/asdfghjkl" className="btn btn-primary btn-lg">
+      Saber menos
     </Link>
   </div>
 );

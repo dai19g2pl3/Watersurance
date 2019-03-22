@@ -1,20 +1,33 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./home/HomePage";
-import AboutPage from "./about/AboutPage";
 import Header from "./common/Header.js";
 import PageNotFound from "./PageNotFound.js";
-import AdminPage from "./admins/AdminPage.js";
+import Footer from "./common/Footer.js";
+import "./styles.css";
+import SideBar from "./common/SideBar.js";
+
 function App() {
   return (
-    <div className="container-fluid">
-      <Header />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/about" component={AboutPage} />
-        <Route exact path="/admin" component={AdminPage} />
-        <Route compnonent={PageNotFound} />
-      </Switch>
+    <div className="container-fluid" id="app">
+      <div id="app-header">
+        {" "}
+        <Header />{" "}
+      </div>
+      <div id="app-body">
+        <div id="app-sidebar">
+          <SideBar />
+        </div>
+        <div id="app-main">
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route component={PageNotFound} />
+          </Switch>
+        </div>
+      </div>
+      <div id="app-footer">
+        <Footer />
+      </div>
     </div>
   );
 }
