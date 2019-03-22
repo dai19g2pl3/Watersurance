@@ -1,4 +1,4 @@
-import React from "react";
+/*import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
@@ -63,7 +63,7 @@ const columns = [
   dataField: 'telefone',
   text: 'Telefone',
   sort: true,
-  headerAlign: 'center'*/
+  headerAlign: 'center'*/ /*
   },
   {
     dataField: "estado",
@@ -121,5 +121,4 @@ class Tables extends Component {
     );
   }
 }
-
-export default Tables;
+*/

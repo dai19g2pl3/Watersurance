@@ -43,6 +43,38 @@ class DefaultAside extends Component {
             >
               <i className="icon-list" />
             </NavLink>
+            <NavLink
+              className={classNames({ active: this.state.activeTab === "2" })}
+              onClick={() => {
+                this.toggle("2");
+              }}
+            >
+              <i className="icon-list" />
+            </NavLink>
+            <NavLink
+              className={classNames({ active: this.state.activeTab === "3" })}
+              onClick={() => {
+                this.toggle("3");
+              }}
+            >
+              <i className="icon-list" />
+            </NavLink>
+            <NavLink
+              className={classNames({ active: this.state.activeTab === "4" })}
+              onClick={() => {
+                this.toggle("4");
+              }}
+            >
+              <i className="icon-list" />
+            </NavLink>
+            <NavLink
+              className={classNames({ active: this.state.activeTab === "5" })}
+              onClick={() => {
+                this.toggle("5");
+              }}
+            >
+              <i className="icon-list" />
+            </NavLink>
           </NavItem>
         </Nav>
         <div />

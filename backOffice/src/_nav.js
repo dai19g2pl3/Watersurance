@@ -2,70 +2,34 @@ export default {
   items: [
     {
       title: true,
-      name: 'Utilizadores',
+      name: "Utilizadores",
       wrapper: {
-        element: '',
-        attributes: {},
-      },
+        element: "",
+        attributes: {}
+      }
     },
     {
-      name: 'Administrador',
-      url: '/base',
-      icon: 'icon-user',
-      children: [
-        {
-          name: 'Gerir Administradores',
-          url: '/base/tables',
-          icon: 'icon-people',
-        },
-        {
-          name: 'Registar Administrador',
-          url: '/base/cards',
-          icon: 'icon-user-follow',
-        },
-      ]
+      name: "Administrador",
+      url: "/base/tables",
+      icon: "icon-user"
     },
     {
-      name: 'Cliente',
-      url: '/base',
-      icon: 'icon-user',
-      children: [
-        {
-          name: 'Gerir Clientes',
-          url: '/base/tables',
-          icon: 'icon-people',
-        },
-        {
-          name: 'Registar Cliente',
-          url: '/base/cards',
-          icon: 'icon-user-follow',
-        },
-      ]
+      name: "Cliente",
+      url: "/base/tables",
+      icon: "icon-user"
     },
     {
       title: true,
-      name: 'Coisas',
+      name: "Coisas",
       wrapper: {
-        element: '',
-        attributes: {},
-      },
+        element: "",
+        attributes: {}
+      }
     },
     {
-      name: 'Ocorrência',
-      url: '/base',
-      icon: 'icon-folder',
-      children: [
-        {
-          name: 'Gerir Ocorrências',
-          url: '/base/tables',
-          icon: 'icon-folder',
-        },
-        {
-          name: 'Registar Ocorrência',
-          url: '/base/cards',
-          icon: 'icon-folder-alt',
-        },
-      ]
-    },
-  ],
+      name: "Ocorrência",
+      url: "/base",
+      icon: "icon-folder"
+    }
+  ]
 };
