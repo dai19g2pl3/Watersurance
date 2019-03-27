@@ -1,11 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { Component } from "react";
 
 const { SearchBar } = Search;
 
