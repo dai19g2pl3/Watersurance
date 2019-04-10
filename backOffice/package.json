@@ -29,7 +29,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-app-polyfill": "^0.2.1",
-    "react-bootstrap-table-next": "^3.0.2",
+    "react-bootstrap-table-next": "^3.1.0",
     "react-bootstrap-table2-editor": "^1.2.2",
     "react-bootstrap-table2-filter": "^1.1.7",
     "react-bootstrap-table2-overlay": "^1.0.0",
@@ -75,46 +75,46 @@
       "!src/polyfill.js"
     ]
   },
-    "engines": {
-      "node": ">=8"
+  "engines": {
+    "node": ">=8"
+  },
+  "babel": {
+    "presets": [
+      "babel-preset-react-app"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
     },
-    "babel": {
-      "presets": [
-        "babel-preset-react-app"
-      ]
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true,
+      "jest": true
     },
-    "eslintConfig": {
-      "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings"
-      ],
-      "parser": "babel-eslint",
-      "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module",
-        "ecmaFeatures": {
-          "jsx": true
-        }
-      },
-      "env": {
-        "browser": true,
-        "node": true,
-        "es6": true,
-        "jest": true
-      },
-      "rules": {
-        "no-debugger": "off",
-        "no-console": "off",
-        "no-unused-vars": "warn",
-        "react/prop-types": "warn"
-      },
-      "settings": {
-        "react": {
-          "version": "detect"
-        }
-      },
-      "root": true
-    }
+    "rules": {
+      "no-debugger": "off",
+      "no-console": "off",
+      "no-unused-vars": "warn",
+      "react/prop-types": "warn"
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "root": true
   }
+}

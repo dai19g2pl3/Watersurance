@@ -10,12 +10,12 @@ export default {
     },
     {
       name: "Administrador",
-      url: "/base/tables",
+      url: "/base/carousels",
       icon: "icon-user"
     },
     {
       name: "Cliente",
-      url: "/base/tables",
+      url: "/base/breadcrumbs",
       icon: "icon-user"
     },
     {
