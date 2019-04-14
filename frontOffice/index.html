@@ -670,11 +670,10 @@
 	<!-- /Preloader -->
 
 	<!-- Popup -->
-
 	<div id="loginModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
-				<form class="login100-form validate-form flex-sb flex-w">
+				<form id="loginForm" class="login100-form validate-form flex-sb flex-w">
 					<span class="login100-form-title p-b-32">
 						Login
 					</span>
@@ -683,7 +682,7 @@
 						Email:
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate="Email is required">
-						<input class="input100" type="text" name="mail">
+						<input id="emailLogin" class="input100" type="email" name="mail">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -694,7 +693,7 @@
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass">
+						<input id="pwdLogin" class="input100" type="password" name="pass">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -712,17 +711,17 @@
 							</a>
 						</div>
 					</div>
+
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" type="submit">
 							Login
 						</button>
 					</div>
+
 				</form>
 			</div>
 		</div>
-
 	</div>
-
 
 	<!-- jQuery Plugins -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
@@ -741,6 +740,8 @@
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 
+	<!-- Controllers -->
+	<script type="text/javascript" src="./js/controllers/loginController.js"></script>
 
 </body>
 
