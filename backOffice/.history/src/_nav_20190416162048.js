@@ -23,7 +23,7 @@ export default {
     },
     {
       name: "Cliente",
-      url: "/theme/typography",
+      url: "/base/tables",
       icon: "icon-user",
       children: [
         {
