@@ -4,10 +4,9 @@ import com.dai.watersurance.exception.AppException;
 import com.dai.watersurance.model.Role;
 import com.dai.watersurance.model.RoleName;
 import com.dai.watersurance.model.User;
-import com.dai.watersurance.payload.ApiResponse;
-import com.dai.watersurance.payload.JwtAuthenticationResponse;
-import com.dai.watersurance.payload.LoginRequest;
-import com.dai.watersurance.payload.SignUpRequest;
+import com.dai.watersurance.payload.request.LoginRequest;
+import com.dai.watersurance.payload.request.SignUpRequest;
+import com.dai.watersurance.payload.response.ApiResponse;
 import com.dai.watersurance.repository.RoleRepository;
 import com.dai.watersurance.repository.UserRepository;
 import com.dai.watersurance.security.JwtTokenProvider;
@@ -25,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Collections;
@@ -49,11 +50,10 @@ public class AuthController {
     JwtTokenProvider tokenProvider;
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsernameOrEmail(),
+                        loginRequest.getEmail(),
                         loginRequest.getPassword()
                 )
         );
@@ -61,37 +61,53 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+        
+        Cookie cookie = new Cookie("token", jwt);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setDomain("localhost");
+        response.addCookie(cookie);
+        
+        return ResponseEntity.ok(new ApiResponse(true, "User logged in successfully"));
     }
-
+    
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<Object>(new ApiResponse(false, "Username is already taken!"),
-                    HttpStatus.BAD_REQUEST);
-        }
-
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
             return new ResponseEntity<Object>(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
-        User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
-                signUpRequest.getEmail(), signUpRequest.getPassword());
+        User user = new User(signUpRequest.getName(), signUpRequest.getEmail(),
+        		signUpRequest.getPassword(), signUpRequest.getNif());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
-                .orElseThrow(() -> new AppException("User Role not set."));
+        
+        Role userRole;
+        
+        switch(signUpRequest.getRole()) {
+        	case "ROLE_USER":
+        		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        		.orElseThrow(() -> new AppException("User role not set.")); break;
+        	case "ROLE_INSURER":
+        		userRole = roleRepository.findByName(RoleName.ROLE_INSURER)
+        		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+        	case "ROLE_ADMIN":
+        		userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
+        		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+        	default:
+        		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+        		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+        }
 
         user.setRoles(Collections.singleton(userRole));
 
         User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/api/users/{username}")
-                .buildAndExpand(result.getUsername()).toUri();
+                .fromCurrentContextPath().path("/api/users/{email}")
+                .buildAndExpand(result.getEmail()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }

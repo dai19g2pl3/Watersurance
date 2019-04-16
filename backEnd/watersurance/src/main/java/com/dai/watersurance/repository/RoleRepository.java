@@ -2,6 +2,7 @@ package com.dai.watersurance.repository;
 
 import com.dai.watersurance.model.Role;
 import com.dai.watersurance.model.RoleName;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

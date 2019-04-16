@@ -1,4 +1,4 @@
-package com.dai.watersurance.payload;
+package com.dai.watersurance.payload.response;
 
 public class ApiResponse {
     private Boolean success;

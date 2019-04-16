@@ -1,4 +1,4 @@
-package com.dai.watersurance.payload;
+package com.dai.watersurance.payload.request;
 
 import javax.validation.constraints.*;
 
@@ -6,12 +6,7 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 4, max = 40)
     private String name;
-
-    @NotBlank
-    @Size(min = 3, max = 15)
-    private String username;
-
-    @NotBlank
+    
     @Size(max = 40)
     @Email
     private String email;
@@ -19,21 +14,32 @@ public class SignUpRequest {
     @NotBlank
     @Size(min = 6, max = 20)
     private String password;
+    
+    @NotNull
+    @Pattern(regexp = "\\d{9}", message = "Number must have 9 digits")
+    private String nif;
+    
+    private String role;
 
-    public String getName() {
+    @AssertTrue(message = "Ivalid role")
+    private boolean isOk() {
+    	return role.equals("ROLE_USER") || role.equals("ROLE_ADMIN") || role.equals("ROLE_INSURER");
+    }
+    
+    public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -51,4 +57,13 @@ public class SignUpRequest {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public int getNif() {
+		return Integer.parseInt(nif);
+	}
+
+	public void setNif(String nif) {
+		this.nif = nif;
+	}
+    
 }

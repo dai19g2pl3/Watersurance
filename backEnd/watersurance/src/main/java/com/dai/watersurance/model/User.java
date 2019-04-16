@@ -6,22 +6,18 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-            "username"
-        }),
-        @UniqueConstraint(columnNames = {
             "email"
         })
 })
 public class User extends DateAudit {
-    /**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -32,10 +28,6 @@ public class User extends DateAudit {
     @Size(max = 40)
     private String name;
 
-    @NotBlank
-    @Size(max = 15)
-    private String username;
-
     @NaturalId
     @NotBlank
     @Size(max = 40)
@@ -45,6 +37,9 @@ public class User extends DateAudit {
     @NotBlank
     @Size(max = 100)
     private String password;
+    
+    @NotNull()
+    private int nif;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
@@ -56,11 +51,11 @@ public class User extends DateAudit {
 
     }
 
-    public User(String name, String username, String email, String password) {
+    public User(String name, String email, String password, int nif) {
         this.name = name;
-        this.username = username;
         this.email = email;
         this.password = password;
+        this.nif = nif;
     }
 
     public Long getId() {
@@ -69,14 +64,6 @@ public class User extends DateAudit {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getName() {
@@ -103,6 +90,14 @@ public class User extends DateAudit {
         this.password = password;
     }
 
+    public int getNif() {
+        return nif;
+    }
+
+    public void setNif(int nif) {
+        this.nif = nif;
+    }
+    
     public Set<Role> getRoles() {
         return roles;
     }
