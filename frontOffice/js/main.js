@@ -20,7 +20,7 @@
 		e.preventDefault();
 		var hash = this.hash;
 		$('html, body').animate({
-			scrollTop: $(this.hash).offset().top
+			scrollTop: $(this.hash).offset()
 		}, 600);
 	});
 
@@ -91,7 +91,7 @@
 	});
 
 // Plugin options and our code
-$("#modal_trigger").leanModal({
+$("#modal_trigger").modal({
 	top: 100,
 	overlay: 0.6,
 	closeButton: ".modal_close"
