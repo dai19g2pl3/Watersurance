@@ -14,7 +14,6 @@ const selectOptions = {
   0: "Ativo",
   1: "Inativo"
 };
-
 faker.locale = "pt_BR";
 
 var user = [
@@ -74,8 +73,8 @@ const columns = [
     dataField: "name",
     text: "Nome",
     sort: true,
-    editable: true,
-    headerAlign: "center"
+    headerAlign: "center",
+    editable = true
   },
   {
     dataField: "email",
@@ -94,10 +93,10 @@ const columns = [
   {
     dataField: "isActive",
     text: "Estado",
-    editable: false,
     headerStyle: { width: 150 },
     headerAlign: "center",
-    formatter: cell => selectOptions[cell],
+    editable: false,
+    formatter: cell => selectOptions[cell]
     filter: selectFilter({
       options: selectOptions,
       defaultValue: 0
@@ -106,12 +105,12 @@ const columns = [
   {
     dataField: "actions",
     isDummyField: true,
-    editable: false,
     text: "Ações",
+    editable: false,
     formatter: (cellContent, row) => {
       return (
         <h5>
-          <i className="icon-info" /> <span />
+          <i className="icon-info" /> <span> </span>
           <i className="icon-pencil" /> <span />
           <i className="icon-trash" />
         </h5>
@@ -149,13 +148,13 @@ export default () => (
           striped
           data={user}
           condensed
-          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}
           cellEdit={cellEditFactory({
-            mode: "click",
-            blurToSave: true
+            mode: "dbclick",
+            blurToSave: true,
+            nonEditableRows: () => [0, 3,4]
           })}
         />
       </div>

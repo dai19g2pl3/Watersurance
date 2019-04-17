@@ -14,7 +14,6 @@ const selectOptions = {
   0: "Ativo",
   1: "Inativo"
 };
-
 faker.locale = "pt_BR";
 
 var user = [
@@ -81,14 +80,12 @@ const columns = [
     dataField: "email",
     text: "Email",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "nif",
     text: "NIF",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
@@ -149,7 +146,6 @@ export default () => (
           striped
           data={user}
           condensed
-          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}

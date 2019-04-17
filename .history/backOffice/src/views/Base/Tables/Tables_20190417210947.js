@@ -14,7 +14,6 @@ const selectOptions = {
   0: "Ativo",
   1: "Inativo"
 };
-
 faker.locale = "pt_BR";
 
 var user = [
@@ -74,27 +73,23 @@ const columns = [
     dataField: "name",
     text: "Nome",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "email",
     text: "Email",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "nif",
     text: "NIF",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "isActive",
     text: "Estado",
-    editable: false,
     headerStyle: { width: 150 },
     headerAlign: "center",
     formatter: cell => selectOptions[cell],
@@ -106,7 +101,6 @@ const columns = [
   {
     dataField: "actions",
     isDummyField: true,
-    editable: false,
     text: "Ações",
     formatter: (cellContent, row) => {
       return (
@@ -149,13 +143,13 @@ export default () => (
           striped
           data={user}
           condensed
-          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}
           cellEdit={cellEditFactory({
-            mode: "click",
-            blurToSave: true
+            mode: "click"
+            blurToSave: true,
+            nonEditableRows: () => [0, 4, 5]
           })}
         />
       </div>

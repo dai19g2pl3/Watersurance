@@ -10,49 +10,36 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 const { SearchBar } = Search;
 
-const selectOptions = {
-  0: "Ativo",
-  1: "Inativo"
-};
-
-faker.locale = "pt_BR";
-
 var user = [
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
+    nif: faker.random.number()
   },
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
+    nif: faker.random.number()
   },
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
+    nif: faker.random.number()
   },
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
+    nif: faker.random.number()
   },
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
+    nif: faker.random.number()
   },
   {
     name: faker.name.findName(),
     email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
+    nif: faker.random.number()
   }
 ];
 
@@ -74,49 +61,25 @@ const columns = [
     dataField: "name",
     text: "Nome",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "email",
     text: "Email",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
     dataField: "nif",
     text: "NIF",
     sort: true,
-    editable: true,
     headerAlign: "center"
   },
   {
-    dataField: "isActive",
+    dataField: "state",
     text: "Estado",
-    editable: false,
-    headerStyle: { width: 150 },
-    headerAlign: "center",
-    formatter: cell => selectOptions[cell],
-    filter: selectFilter({
-      options: selectOptions,
-      defaultValue: 0
-    })
-  },
-  {
-    dataField: "actions",
-    isDummyField: true,
-    editable: false,
-    text: "Ações",
-    formatter: (cellContent, row) => {
-      return (
-        <h5>
-          <i className="icon-info" /> <span />
-          <i className="icon-pencil" /> <span />
-          <i className="icon-trash" />
-        </h5>
-      );
-    }
+    sort: true,
+    headerAlign: "center"
   }
 
   /*,
@@ -149,12 +112,11 @@ export default () => (
           striped
           data={user}
           condensed
-          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}
           cellEdit={cellEditFactory({
-            mode: "click",
+            mode: "dbclick",
             blurToSave: true
           })}
         />

@@ -691,7 +691,7 @@ class Dashboard extends Component {
                           <i className="icon-globe progress-group-icon" />
                           <span className="title">Pesquisa Web</span>
                           <span className="ml-auto font-weight-bold">
-                            23.604{" "}
+                            13.604{" "}
                             <span className="text-muted small">(56%)</span>
                           </span>
                         </div>

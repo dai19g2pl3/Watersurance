@@ -14,7 +14,6 @@ const selectOptions = {
   0: "Ativo",
   1: "Inativo"
 };
-
 faker.locale = "pt_BR";
 
 var user = [
@@ -149,7 +148,6 @@ export default () => (
           striped
           data={user}
           condensed
-          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}

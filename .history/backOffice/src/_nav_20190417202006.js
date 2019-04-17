@@ -12,8 +12,8 @@ export default {
     {
       name: "Cliente",
       url: "/base/tables",
-      icon: "icon-user"
-    },
+      icon: "icon-user",
+    }
     {
       divider: true
     },

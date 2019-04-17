@@ -12,7 +12,19 @@ export default {
     {
       name: "Cliente",
       url: "/base/tables",
-      icon: "icon-user"
+      icon: "icon-user",
+      children: [
+        {
+          name: "Listar",
+          url: "/base/tables",
+          icon: "icon-people"
+        },
+        {
+          name: "Validar",
+          url: "/base/tables",
+          icon: "icon-user-follow"
+        }
+      ]
     },
     {
       divider: true

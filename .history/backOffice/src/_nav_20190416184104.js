@@ -6,13 +6,37 @@ export default {
     },
     {
       name: "Administrador",
-      url: "/base/tables",
-      icon: "icon-user"
+      url: "/theme/colors",
+      icon: "icon-user",
+      children: [
+        {
+          name: "Listar",
+          url: "/base/tables2",
+          icon: "icon-people"
+        },
+        {
+          name: "Validar",
+          url: "/base/tables",
+          icon: "icon-user-follow"
+        }
+      ]
     },
     {
       name: "Cliente",
-      url: "/base/tables",
-      icon: "icon-user"
+      url: "/theme/typography",
+      icon: "icon-user",
+      children: [
+        {
+          name: "Listar",
+          url: "/base/tables",
+          icon: "icon-people"
+        },
+        {
+          name: "Validar",
+          url: "/base/tables",
+          icon: "icon-user-follow"
+        }
+      ]
     },
     {
       divider: true

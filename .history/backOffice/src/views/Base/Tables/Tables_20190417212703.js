@@ -156,6 +156,7 @@ export default () => (
           cellEdit={cellEditFactory({
             mode: "click",
             blurToSave: true
+            }
           })}
         />
       </div>

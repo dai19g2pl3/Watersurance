@@ -155,7 +155,16 @@ export default () => (
           filter={filterFactory()}
           cellEdit={cellEditFactory({
             mode: "click",
-            blurToSave: true
+            blurToSave: true,
+            onStartEdit: (row, column, rowIndex, columnIndex) => {
+              console.log("start to edit!!!");
+            },
+            beforeSaveCell: (oldValue, newValue, row, column) => {
+              console.log("Before Saving Cell!!");
+            },
+            afterSaveCell: (oldValue, newValue, row, column) => {
+              console.log("After Saving Cell!!");
+            }
           })}
         />
       </div>
