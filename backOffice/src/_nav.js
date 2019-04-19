@@ -50,7 +50,7 @@ export default {
         },
         {
           name: "Terminados",
-          url: "/buttons/button-dropdowns",
+          url: "/base/form-user",
           icon: "icon-arrow-right"
         }
       ]
