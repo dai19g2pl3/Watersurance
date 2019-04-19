@@ -3,6 +3,7 @@ package com.dai.watersurance.payload.request;
 import javax.validation.constraints.*;
 
 public class SignUpRequest {
+	
     @NotBlank
     @Size(min = 4, max = 40)
     private String name;
@@ -15,9 +16,11 @@ public class SignUpRequest {
     @Size(min = 6, max = 20)
     private String password;
     
-    @NotNull
     @Pattern(regexp = "\\d{9}", message = "Number must have 9 digits")
     private String nif;
+    
+    @Pattern(regexp = "(9[1236][0-9]) ?([0-9]{3}) ?([0-9]{3})", message = "Invalid phone number")
+    private String phoneNumber;
     
     private String role;
 
@@ -64,6 +67,14 @@ public class SignUpRequest {
 
 	public void setNif(String nif) {
 		this.nif = nif;
+	}
+
+	public int getPhoneNumber() {
+		return Integer.parseInt(phoneNumber.replaceAll("\\s",""));
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
     
 }

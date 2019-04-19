@@ -1,6 +1,7 @@
 package com.dai.watersurance.controller;
 
 import com.dai.watersurance.exception.AppException;
+import com.dai.watersurance.exception.ResourceNotFoundException;
 import com.dai.watersurance.model.Role;
 import com.dai.watersurance.model.RoleName;
 import com.dai.watersurance.model.User;
@@ -28,7 +29,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -57,7 +61,24 @@ public class AuthController {
                         loginRequest.getPassword()
                 )
         );
-
+        
+        User user = userRepository.findByEmail(loginRequest.getEmail())
+        		.orElseThrow(() -> new ResourceNotFoundException("User", "email", loginRequest.getEmail()));
+        
+        
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strDate = dateFormat.format(today);
+        try {
+			Date date = dateFormat.parse(strDate);
+			user.setLastLogin(date);
+		} catch (ParseException e) {
+			return new ResponseEntity<Object>(new ApiResponse(false, "Failed to parse Date"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+        
+        userRepository.save(user);
+        
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
@@ -74,13 +95,13 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<Object>(new ApiResponse(false, "Email Address already in use!"),
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         // Creating user's account
         User user = new User(signUpRequest.getName(), signUpRequest.getEmail(),
-        		signUpRequest.getPassword(), signUpRequest.getNif());
+        		signUpRequest.getPassword(), signUpRequest.getNif(), signUpRequest.getPhoneNumber(), false, null);
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         
@@ -95,7 +116,7 @@ public class AuthController {
         		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
         	case "ROLE_ADMIN":
         		userRole = roleRepository.findByName(RoleName.ROLE_ADMIN)
-        		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+        		.orElseThrow(() -> new AppException("Admin role not set.")); break;
         	default:
         		userRole = roleRepository.findByName(RoleName.ROLE_USER)
         		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
@@ -111,4 +132,6 @@ public class AuthController {
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
+    
+    
 }

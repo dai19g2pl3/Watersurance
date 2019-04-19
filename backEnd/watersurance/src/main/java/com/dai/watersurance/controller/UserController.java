@@ -1,22 +1,26 @@
 package com.dai.watersurance.controller;
 
 import com.dai.watersurance.exception.ResourceNotFoundException;
+import com.dai.watersurance.model.Insurer;
 import com.dai.watersurance.model.User;
-import com.dai.watersurance.payload.response.PagedResponse;
-import com.dai.watersurance.payload.response.PollResponse;
+import com.dai.watersurance.payload.response.ApiResponse;
 import com.dai.watersurance.payload.response.UserIdentityAvailability;
-import com.dai.watersurance.payload.response.UserProfile;
 import com.dai.watersurance.payload.response.UserSummary;
-import com.dai.watersurance.repository.PollRepository;
+import com.dai.watersurance.payload.request.SetInsurerRequest;
+import com.dai.watersurance.projection.NoPwdUser;
+import com.dai.watersurance.repository.InsurerRepository;
 import com.dai.watersurance.repository.UserRepository;
-import com.dai.watersurance.repository.VoteRepository;
 import com.dai.watersurance.security.UserPrincipal;
-import com.dai.watersurance.service.PollService;
 import com.dai.watersurance.security.CurrentUser;
-import com.dai.watersurance.util.AppConstants;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,15 +30,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
-
+    
     @Autowired
-    private PollRepository pollRepository;
-
-    @Autowired
-    private VoteRepository voteRepository;
-
-    @Autowired
-    private PollService pollService;
+    private InsurerRepository insurerRepository;
 
     @SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -51,35 +49,38 @@ public class UserController {
         Boolean isAvailable = !userRepository.existsByEmail(email);
         return new UserIdentityAvailability(isAvailable);
     }
-
-    @GetMapping("/users/{email}")
-    public UserProfile getUserProfile(@PathVariable(value = "email") String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
-
-        long pollCount = pollRepository.countByCreatedBy(user.getId());
-        long voteCount = voteRepository.countByUserId(user.getId());
-
-        UserProfile userProfile = new UserProfile(user.getId(),  user.getName(), user.getCreatedAt(), pollCount, voteCount);
-
-        return userProfile;
+    
+    //Warning: It's returning passwords!!
+    @PreAuthorize("hasRole('INSURER') or hasRole('ADMIN')")
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getUsers() {
+    	List<User> users = userRepository.findAll();
+    	
+    	return ResponseEntity.ok(users);
     }
-
-    @GetMapping("/users/{username}/polls")
-    public PagedResponse<PollResponse> getPollsCreatedBy(@PathVariable(value = "username") String username,
-                                                         @CurrentUser UserPrincipal currentUser,
-                                                         @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-                                                         @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsCreatedBy(username, currentUser, page, size);
+    
+    @PreAuthorize("hasRole('INSURER') or hasRole('ADMIN')")
+    @GetMapping("/user/{id}")
+    public ResponseEntity<NoPwdUser> getUser(@PathVariable(value = "id") long id) {
+    	NoPwdUser user = userRepository.findById(id, NoPwdUser.class)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    	
+    	return ResponseEntity.ok(user);
     }
-
-
-    @GetMapping("/users/{username}/votes")
-    public PagedResponse<PollResponse> getPollsVotedBy(@PathVariable(value = "username") String username,
-                                                       @CurrentUser UserPrincipal currentUser,
-                                                       @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-                                                       @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-        return pollService.getPollsVotedBy(username, currentUser, page, size);
+    
+    @PutMapping("/user/setInsurer/{id}")
+    public ResponseEntity<ApiResponse> setUserInsurer(@PathVariable(value = "id") long id, @Valid @RequestBody SetInsurerRequest setInsurerRequest) {        
+    	User user = userRepository.findById(id)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    	
+    	Insurer insurer = insurerRepository.findByName(setInsurerRequest.getName())
+    			.orElseThrow(() -> new ResourceNotFoundException("Insurer", "name", setInsurerRequest.getName()));  
+    	
+    	user.setInsurer(insurer);
+    	userRepository.save(user);
+    	
+        return ResponseEntity.ok().body(new ApiResponse(true, "User insurance changed successfully"));
     }
-
+    
+    
 }
