@@ -16,6 +16,7 @@ const Popovers = React.lazy(() => import("./views/Base/Popovers"));
 const ProgressBar = React.lazy(() => import("./views/Base/ProgressBar"));
 const Switches = React.lazy(() => import("./views/Base/Switches"));
 const Tables = React.lazy(() => import("./views/Base/Tables"));
+//const Tables2 = React.lazy(() => import("./views/Base/Tables2"));
 const Tabs = React.lazy(() => import("./views/Base/Tabs"));
 const Tooltips = React.lazy(() => import("./views/Base/Tooltips"));
 const BrandButtons = React.lazy(() => import("./views/Buttons/BrandButtons"));
@@ -40,6 +41,7 @@ const Typography = React.lazy(() => import("./views/Theme/Typography"));
 const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const User = React.lazy(() => import("./views/Users/User"));
+const FormUser = React.lazy(() => import("./views/Base/FormUser"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -53,6 +55,7 @@ const routes = [
   { path: "/base/forms", name: "Forms", component: Forms },
   { path: "/base/switches", name: "Switches", component: Switches },
   { path: "/base/tables", name: "Tables", component: Tables },
+  // { path: "/base/tables2", name: "Tables2", component: Tables2 },
   { path: "/base/tabs", name: "Tabs", component: Tabs },
   { path: "/base/breadcrumbs", name: "Breadcrumbs", component: Breadcrumbs },
   { path: "/base/carousels", name: "Carousel", component: Carousels },
@@ -104,7 +107,8 @@ const routes = [
   { path: "/widgets", name: "Widgets", component: Widgets },
   { path: "/charts", name: "Charts", component: Charts },
   { path: "/users", exact: true, name: "Users", component: Users },
-  { path: "/users/:id", exact: true, name: "User Details", component: User }
+  { path: "/users/:id", exact: true, name: "User Details", component: User },
+  { path : "/base/form-user", exat: true, name: "Form User", component: FormUser }
 ];
 
 export default routes;

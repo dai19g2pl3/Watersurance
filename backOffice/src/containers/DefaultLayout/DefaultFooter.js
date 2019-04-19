@@ -1,21 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 const propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 const defaultProps = {};
 
 class DefaultFooter extends Component {
   render() {
-
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
 
     return (
       <React.Fragment>
-        <span className="ml-auto"><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Watersurance </a> 2019&copy;DAI</span>
+        <span className="ml-auto">
+          Powered by{" "}
+          <a href="https://www.facebook.com/Watersurance-418786832250079/">
+            Watersurance
+          </a>
+        </span>
       </React.Fragment>
     );
   }

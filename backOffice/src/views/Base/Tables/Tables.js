@@ -1,9 +1,10 @@
+//eslint-disable-next-line
 import React, { Component } from "react";
+import faker from "faker";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
-import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 const { SearchBar } = Search;
@@ -13,20 +14,47 @@ const selectOptions = {
   1: "Inativo"
 };
 
-const data = [
-  { id: 0, nome: "asd", email: "asd@asd.com", estado: 0 },
+faker.locale = "pt_BR";
+
+var user = [
   {
-    id: 1,
-    nome: "qwe",
-    email: "fdsaasf@asd.com",
-    estado: 1
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 1
   },
-  { id: 2, nome: "asdf", email: "afassd@asuymfd.com", estado: 0 },
-  { id: 3, nome: "yuiokj", email: "fad@asmuyd.com", estado: 1 },
-  { id: 4, nome: "dgtbr", email: "htrthe@njmuy.com", estado: 1 },
-  { id: 5, nome: "asfgt", email: "gtrh@ffdsa.com", estado: 1 },
-  { id: 6, nome: "wegrwe", email: "sadff@dsf.com", estado: 0 }
+  {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 0
+  },
+  {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 1
+  },
+  {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 0
+  },
+  {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 1
+  },
+  {
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    nif: faker.random.number(),
+    isActive: 0
+  }
 ];
+
 const defaultSorted = [
   {
     dataField: "name",
@@ -37,88 +65,90 @@ const defaultSorted = [
 const columns = [
   {
     dataField: "id",
-    text: "ID",
+    text: "ID Cliente",
     sort: true,
-    hidden: false
+    hidden: true
   },
   {
-    dataField: "nome",
+    dataField: "name",
     text: "Nome",
     sort: true,
     headerAlign: "center"
   },
   {
     dataField: "email",
-    text: "E-mail",
+    text: "Email",
     sort: true,
-    textAlign: "center",
     headerAlign: "center"
-    /*}, {
-  dataField: 'morada',
-  text: 'Morada',
-  sort: true,
-  headerAlign: 'center'
-}, {
-  dataField: 'telefone',
-  text: 'Telefone',
-  sort: true,
-  headerAlign: 'center'*/
   },
   {
-    dataField: "estado",
+    dataField: "nif",
+    text: "NIF",
+    sort: true,
+    headerAlign: "center"
+  },
+  {
+    dataField: "isActive",
     text: "Estado",
     headerStyle: { width: 150 },
     headerAlign: "center",
-    editable: false,
     formatter: cell => selectOptions[cell],
     filter: selectFilter({
       options: selectOptions,
       defaultValue: 0
     })
+  },
+  {
+    dataField: "actions",
+    isDummyField: true,
+    text: "Ações",
+    formatter: (cellContent, row) => {
+      return (
+        <h5>
+          <i className="icon-info" /> <span />
+          <i className="icon-pencil" /> <span />
+          <i className="icon-trash" />
+        </h5>
+      );
+    }
   }
+
+  /*,
+  {
+    dataField: "lastLogin",
+    text: "Ultimo Login",
+    sort: true,
+    headerAlign: "center"
+  }*/
 ];
 
-class Tables extends Component {
-  render() {
-    return (
-      <div id="table">
-        <Tables>
-          <ToolkitProvider keyField="id" data={[data]} columns={columns} search>
-            {props => (
-              <div>
-                <SearchBar
-                  {...props.searchProps}
-                  className="custome-search-field"
-                  style={{ color: "pink" }}
-                  delay={800}
-                  placeholder="Pesquisar"
-                />
-                <BootstrapTable
-                  keyField="id"
-                  {...props.baseProps}
-                  data={data}
-                  columns={columns}
-                  pagination={paginationFactory()}
-                  striped
-                  condensed
-                  bordered={false}
-                  selectRow={{ mode: "checkbox" }}
-                  rowStyle={{ textAlign: "center" }}
-                  defaultSorted={defaultSorted}
-                  filter={filterFactory()}
-                  cellEdit={cellEditFactory({
-                    mode: "dbclick",
-                    blurToSave: true
-                  })}
-                />
-              </div>
-            )}
-          </ToolkitProvider>
-        </Tables>
-        )
+export default () => (
+  <ToolkitProvider keyField="id" data={user} columns={columns} search>
+    {props => (
+      <div>
+        <SearchBar
+          {...props.searchProps}
+          className="custome-search-field"
+          style={{
+            color: "black"
+          }}
+          delay={800}
+          placeholder="Pesquisar"
+        />
+        <BootstrapTable
+          keyField="id"
+          {...props.baseProps}
+          columns={columns}
+          pagination={paginationFactory()}
+          striped
+          data={user}
+          condensed
+          editable
+          bordered={false}
+          defaultSorted={defaultSorted}
+          filter={filterFactory()}
+        />
       </div>
-    );
-  }
-}
-
-export default Tables;
+    )}
+  </ToolkitProvider>
+);
