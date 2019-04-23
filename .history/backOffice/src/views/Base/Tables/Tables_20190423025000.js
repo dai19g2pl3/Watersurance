@@ -6,23 +6,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-//eslint-disable-next-line
-import Popup from "reactjs-popup";
-import FormUser from "../FormUser/FormUser";
-
-const expandRow = {
-  renderer: row => (
-    <div>
-      <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
-      <p>
-        You can render anything here, also you can add additional data on every
-        row object
-      </p>
-      <FormUser />
-    </div>
-  )
-};
-
+import { Popover } from "reactstrap";
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -85,7 +69,6 @@ const columns = [
     sort: true,
     hidden: true
   },
-
   {
     dataField: "name",
     text: "Nome",
@@ -114,6 +97,37 @@ const columns = [
       options: selectOptions,
       defaultValue: 0
     })
+  },
+  {
+    dataField: "actions",
+    isDummyField: true,
+    headerAlign: "center",
+    text: "Ações",
+    formatter: (cellContent, row) => {
+      return (
+        <h5>
+          <span>
+            <Popover>
+              <i
+                type="button"
+                id="Popover-2"
+                className="icon-info"
+                aria-label={null}
+              />{" "}
+            </Popover>
+          </span>
+
+          <span>
+            {" "}
+            <i className="icon-pencil" />{" "}
+          </span>
+          <span>
+            {" "}
+            <i className="icon-trash" />
+          </span>
+        </h5>
+      );
+    }
   }
 ];
 
@@ -135,8 +149,10 @@ export default () => (
           {...props.baseProps}
           columns={columns}
           pagination={paginationFactory()}
+          striped
           data={user}
-          expandRow={expandRow}
+          condensed
+          editable
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}

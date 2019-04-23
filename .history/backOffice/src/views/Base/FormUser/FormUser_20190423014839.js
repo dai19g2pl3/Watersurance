@@ -27,7 +27,7 @@ export default class FormUser extends React.Component {
           </Col>
         </Row>
         <FormGroup>
-          <Label for="exampleAddress">Nome</Label>
+          <Label for="exampleAddress">Address</Label>
           <Input
             type="text"
             name="address"

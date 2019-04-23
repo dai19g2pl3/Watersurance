@@ -18,7 +18,7 @@ const expandRow = {
         You can render anything here, also you can add additional data on every
         row object
       </p>
-      <FormUser />
+      <p></FormUser></p>
     </div>
   )
 };

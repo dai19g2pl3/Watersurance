@@ -17,7 +17,7 @@ import Tabs from "./Tabs";
 import Tooltips from "./Tooltips";
 import FormUser from "./FormUser";
 
-export {
+export default {
   Breadcrumbs,
   Cards,
   Carousels,

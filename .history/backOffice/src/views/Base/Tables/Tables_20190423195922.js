@@ -10,19 +10,6 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import Popup from "reactjs-popup";
 import FormUser from "../FormUser/FormUser";
 
-const expandRow = {
-  renderer: row => (
-    <div>
-      <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
-      <p>
-        You can render anything here, also you can add additional data on every
-        row object
-      </p>
-      <FormUser />
-    </div>
-  )
-};
-
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -136,7 +123,6 @@ export default () => (
           columns={columns}
           pagination={paginationFactory()}
           data={user}
-          expandRow={expandRow}
           bordered={false}
           defaultSorted={defaultSorted}
           filter={filterFactory()}

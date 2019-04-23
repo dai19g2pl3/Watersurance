@@ -25,9 +25,20 @@ export default class FormUser extends React.Component {
               />
             </FormGroup>
           </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for="examplePassword">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="examplePassword"
+                placeholder="password placeholder"
+              />
+            </FormGroup>
+          </Col>
         </Row>
         <FormGroup>
-          <Label for="exampleAddress">Nome</Label>
+          <Label for="exampleAddress">Address</Label>
           <Input
             type="text"
             name="address"
