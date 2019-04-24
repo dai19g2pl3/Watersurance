@@ -1,21 +1,16 @@
-$(document).ready(function() {
-    $('#loginForm').on('submit', function(e) {
+$(document).ready(function () {
+    $('#loginForm').on('submit', function (e) {
         e.preventDefault();
         login();
     })
 });
-/*window.addEventListener("load", function() {
-    document.getElementById('loginForm').addEventListener("submit", function(e) {
-      e.preventDefault();
-      login();
-    })
-  });
-*/
+
 function login() {
+    alert("arroz");
     var data = {};
-    data.usernameOrEmail = document.getElementById('emailLogin').value
+    data.email = document.getElementById('emailLogin').value
     data.password = document.getElementById('pwdLogin').value
-    console.log(JSON.stringify(data));
+    alert(JSON.stringify(data));
     fetch('http://localhost:8080/api/auth/signin', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -25,7 +20,7 @@ function login() {
     }).then(response =>
         response.json().then(json => {
             if (!response.ok) {
-                alert(arroz);
+                alert(json);
                 return Promise.reject(json);
             }
             console.log("submitted with success");
