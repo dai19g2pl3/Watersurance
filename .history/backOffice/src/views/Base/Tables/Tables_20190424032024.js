@@ -98,7 +98,6 @@ const columns = [
     dataField: "edit",
     isDummyField: true,
     text: "Editar",
-    headerAlign: "center",
     formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
         <div>

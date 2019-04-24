@@ -112,6 +112,12 @@ const routes = [
     exact: true,
     name: "Form User",
     component: FormUser
+  },
+  {
+    path: "/base/form-add-user",
+    exact: true,
+    name: "FormAddUser",
+    component: FormAddUser
   }
 ];
 

@@ -6,8 +6,6 @@ import {
   Form,
   FormGroup,
   Label,
-  //eslint-disable-next-line
-  FormFeedback,
   Input /*, FormText*/
 } from "reactstrap";
 import PopPop from "react-poppop";
@@ -33,8 +31,8 @@ export default class FormUser extends React.Component {
           color="primary"
           onClick={() => this.toggleShow(true)}
         >
-          <i className="icon-pencil" />
-          &nbsp;Editar
+          <i className="icon-user-follow" />
+          &nbsp;Adicionar
         </Button>
         <PopPop
           position="centerCenter"
@@ -54,7 +52,6 @@ export default class FormUser extends React.Component {
                     name="name"
                     id="exampleName"
                     placeholder="Insira aqui o seu nome"
-                    required
                   />
                 </FormGroup>
               </Col>
@@ -66,7 +63,6 @@ export default class FormUser extends React.Component {
                 name="email"
                 id="exampleEmail"
                 placeholder="Insira aqui o seu email"
-                required
               />
             </FormGroup>
             <FormGroup>
@@ -74,25 +70,25 @@ export default class FormUser extends React.Component {
               <Input
                 type="text"
                 name="address"
-                id="exampleAddress"
+                id="exampleAddress2"
                 placeholder="Insira aqui a morada"
-                required
               />
             </FormGroup>
-            <FormGroup>
-              <Label for="exampleNIF">NIF</Label>
-              <Input
-                type="number"
-                name="nif"
-                id="exampleNIF"
-                placeholder="Insira aqui o NIF"
-                required
-              />
-            </FormGroup>
-            <FormGroup check>
-              <Input type="checkbox" name="isActive" id="exampleIsActive" />
-              <Label for="exampleIsActive">Ativo/Inativo</Label>
-            </FormGroup>
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="exampleCity">Cidade</Label>
+                  <Input type="text" name="city" id="exampleCity" />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="exampleZip">Código-Postal</Label>
+                  <Input type="text" name="zip" id="exampleZip" />
+                </FormGroup>
+              </Col>
+            </Row>
+
             <Button>Confirmar</Button>
           </Form>
         </PopPop>

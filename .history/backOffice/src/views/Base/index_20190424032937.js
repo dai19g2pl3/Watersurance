@@ -36,6 +36,5 @@ export {
   Tabs,
   Tooltips,
   Paginations,
-  FormUser,
-  FormAddUser
+  FormUser
 };

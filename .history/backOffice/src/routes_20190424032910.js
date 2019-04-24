@@ -42,7 +42,7 @@ const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const User = React.lazy(() => import("./views/Users/User"));
 const FormUser = React.lazy(() => import("./views/Base/FormUser"));
-
+const FormAddUser = React.lazy(() => import("./views/Base/FormAddUser"));
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
@@ -112,6 +112,12 @@ const routes = [
     exact: true,
     name: "Form User",
     component: FormUser
+  },
+  {
+    path: "/base/form-add-user",
+    exact: true,
+    name: "FormAddUser",
+    component: FormAddUser
   }
 ];
 

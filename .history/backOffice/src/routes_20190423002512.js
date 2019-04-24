@@ -109,7 +109,7 @@ const routes = [
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   {
     path: "/base/form-user",
-    exact: true,
+    exat: true,
     name: "Form User",
     component: FormUser
   }

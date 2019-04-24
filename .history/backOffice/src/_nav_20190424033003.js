@@ -45,7 +45,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/buttons/form-user",
+          url: "/buttons/form-add-user",
           icon: "icon-arrow-right"
         },
         {
