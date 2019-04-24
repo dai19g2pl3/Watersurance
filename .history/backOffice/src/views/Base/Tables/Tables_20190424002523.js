@@ -8,7 +8,9 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+//eslint-disable-next-line
 import FormUser from "../FormUser/FormUser";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -98,11 +100,35 @@ const columns = [
     dataField: "edit",
     isDummyField: true,
     text: "Editar",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
+    events: {
+      onClick: (e, column, columnIndex, row, rowIndex) => {
+        console.log(e);
+        console.log(column);
+        console.log(columnIndex);
+        console.log(row);
+        console.log(rowIndex);
+        alert('Click on Product ID field');
+      }
+    }
+    formatter: (cell, row) => {
       return (
-        <div>
-          <FormUser />
-        </div>
+        <span>
+          <Button color="primary" id="PopoverEdit" onClick={this.toggle}>
+            <i className="icon-pencil" />
+            &nbsp;Editar
+          </Button>
+          <Popover
+            placement="left"
+            isOpen={this.state.popoverOpen}
+            target="PopoverEdit"
+            toggle={this.toggle}
+          >
+            <PopoverHeader>Editar</PopoverHeader>
+            <PopoverBody>
+              <FormUser />
+            </PopoverBody>
+          </Popover>
+        </span>
       );
     }
   }
@@ -115,6 +141,27 @@ const defaultSorted = [
 ];
 
 class Tables extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false,
+      popovers: [
+        {
+          placement: "left",
+          text: "Left"
+        }
+      ]
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+
   render() {
     return (
       <div>

@@ -26,14 +26,14 @@ export default class FormUser extends React.Component {
     const { show } = this.state;
     return (
       <div>
-        <Button
+        <button
           className="btn btn-default"
-          color="primary"
+          backgroundColor="primary"
           onClick={() => this.toggleShow(true)}
         >
           <i className="icon-pencil" />
           &nbsp;Editar
-        </Button>
+        </button>
         <PopPop
           position="centerCenter"
           open={show}
@@ -46,50 +46,61 @@ export default class FormUser extends React.Component {
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="exampleName">Nome</Label>
+                  <Label for="exampleEmail">Email</Label>
                   <Input
-                    type="text"
-                    name="name"
-                    id="exampleName"
-                    placeholder="Insira aqui o seu nome"
+                    type="email"
+                    name="email"
+                    id="exampleEmail"
+                    placeholder="with a placeholder"
                   />
                 </FormGroup>
               </Col>
             </Row>
             <FormGroup>
-              <Label for="exampleEmail">Email</Label>
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="Insira aqui o seu email"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleAddress">Morada</Label>
+              <Label for="exampleAddress">Nome</Label>
               <Input
                 type="text"
                 name="address"
+                id="exampleAddress"
+                placeholder="1234 Main St"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleAddress2">Address 2</Label>
+              <Input
+                type="text"
+                name="address2"
                 id="exampleAddress2"
-                placeholder="Insira aqui a morada"
+                placeholder="Apartment, studio, or floor"
               />
             </FormGroup>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="exampleCity">Cidade</Label>
+                  <Label for="exampleCity">City</Label>
                   <Input type="text" name="city" id="exampleCity" />
                 </FormGroup>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
                 <FormGroup>
-                  <Label for="exampleZip">Código-Postal</Label>
+                  <Label for="exampleState">State</Label>
+                  <Input type="text" name="state" id="exampleState" />
+                </FormGroup>
+              </Col>
+              <Col md={2}>
+                <FormGroup>
+                  <Label for="exampleZip">Zip</Label>
                   <Input type="text" name="zip" id="exampleZip" />
                 </FormGroup>
               </Col>
             </Row>
-
-            <Button>Confirmar</Button>
+            <FormGroup check>
+              <Input type="checkbox" name="check" id="exampleCheck" />
+              <Label for="exampleCheck" check>
+                Check me out
+              </Label>
+            </FormGroup>
+            <Button>Sign in</Button>
           </Form>
         </PopPop>
       </div>

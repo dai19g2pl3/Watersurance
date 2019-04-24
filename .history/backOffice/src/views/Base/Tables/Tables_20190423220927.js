@@ -7,8 +7,9 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
-import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+import Popup from "reactjs-popup";
 import FormUser from "../FormUser/FormUser";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -57,6 +58,13 @@ var user = [
   }
 ];
 
+const defaultSorted = [
+  {
+    dataField: "name",
+    order: "desc"
+  }
+];
+
 const columns = [
   {
     dataField: "id",
@@ -93,59 +101,14 @@ const columns = [
       options: selectOptions,
       defaultValue: 0
     })
-  },
-  {
-    dataField: "edit",
-    isDummyField: true,
-    text: "Editar",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <FormUser />
-        </div>
-      );
-    }
-  }
-];
-const defaultSorted = [
-  {
-    dataField: "name",
-    order: "desc"
   }
 ];
 
-class Tables extends Component {
-  render() {
-    return (
-      <div>
-        <ToolkitProvider keyField="id" data={user} columns={columns} search>
-          {props => (
-            <div>
-              <SearchBar
-                {...props.searchProps}
-                className="custome-search-field"
-                style={{
-                  color: "black"
-                }}
-                delay={800}
-                placeholder="Pesquisar"
-              />
-              <BootstrapTable
-                keyField="id"
-                {...props.baseProps}
-                columns={columns}
-                pagination={paginationFactory()}
-                data={user}
-                bordered={false}
-                defaultSorted={defaultSorted}
-                filter={filterFactory()}
-              />
-            </div>
-          )}
-        </ToolkitProvider>
-      </div>
-    );
-  }
+class Tables extends React.Component {
+  <BootstrapTable
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  bordered={ false }
+/>
 }
-
-export default Tables;

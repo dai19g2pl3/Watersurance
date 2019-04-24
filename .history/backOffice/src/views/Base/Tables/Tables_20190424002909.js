@@ -8,7 +8,10 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+//eslint-disable-next-line
 import FormUser from "../FormUser/FormUser";
+import Popup from "reactjs-popup";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -100,9 +103,12 @@ const columns = [
     text: "Editar",
     formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
-        <div>
-          <FormUser />
-        </div>
+        <Popup>
+          <Button color="primary" id="PopoverEdit">
+            <i className="icon-pencil" />
+            &nbsp;Editar
+          </Button>
+        </Popup>
       );
     }
   }
@@ -115,6 +121,27 @@ const defaultSorted = [
 ];
 
 class Tables extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false,
+      popovers: [
+        {
+          placement: "left",
+          text: "Left"
+        }
+      ]
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+
   render() {
     return (
       <div>

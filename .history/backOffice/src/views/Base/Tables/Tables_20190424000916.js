@@ -6,9 +6,25 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-//eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
 import FormUser from "../FormUser/FormUser";
+
+class Tables extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+  
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -57,6 +73,13 @@ var user = [
   }
 ];
 
+const defaultSorted = [
+  {
+    dataField: "name",
+    order: "desc"
+  }
+];
+
 const columns = [
   {
     dataField: "id",
@@ -98,23 +121,29 @@ const columns = [
     dataField: "edit",
     isDummyField: true,
     text: "Editar",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
+    formatter: (cellContent, row) => {
       return (
         <div>
-          <FormUser />
+          <Button id="PopoverEdit" onClick={this.toggle}>
+            Editar
+          </Button>
+          <Popover
+            placement="left"
+            isOpen={this.state.popoverOpen}
+            target="PopoverEdit"
+            toggle={this.toggle}
+          >
+            <PopoverHeader>Editar Utilizador</PopoverHeader>
+            <PopoverBody>
+              <FormUser />
+            </PopoverBody>
+          </Popover>
         </div>
       );
     }
   }
 ];
-const defaultSorted = [
-  {
-    dataField: "name",
-    order: "desc"
-  }
-];
 
-class Tables extends Component {
   render() {
     return (
       <div>

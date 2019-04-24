@@ -8,7 +8,10 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+//eslint-disable-next-line
 import FormUser from "../FormUser/FormUser";
+import PopPop from "react-poppop";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -97,14 +100,37 @@ const columns = [
   {
     dataField: "edit",
     isDummyField: true,
-    text: "Editar",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
+    text: "Editar"
+    /*formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
-        <div>
-          <FormUser />
-        </div>
+        
       );
     }
+    /*
+    formatter: (cell, row, rowIndex, formatExtraData) => {
+      return (
+        <Popup
+          trigger={
+            <Button color="primary" id="PopupEdit">
+              <i className="icon-pencil" />
+              &nbsp;Editar
+            </Button>
+          }
+          modal
+        >
+          {close => (
+            <div className="modal">
+              <div className="header"> Editar Utilizador </div>
+              <div className="content">
+                <div>
+                  <FormUser />
+                </div>
+              </div>
+            </div>
+          )}
+        </Popup>
+      );
+    }*/
   }
 ];
 const defaultSorted = [
@@ -115,7 +141,19 @@ const defaultSorted = [
 ];
 
 class Tables extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false
+    };
+  }
+
+  toggleShow = show => {
+    this.setState({ show });
+  };
+
   render() {
+    const { show } = this.state;
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>

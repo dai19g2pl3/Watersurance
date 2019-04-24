@@ -6,9 +6,9 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-//eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
 import FormUser from "../FormUser/FormUser";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -57,6 +57,13 @@ var user = [
   }
 ];
 
+const defaultSorted = [
+  {
+    dataField: "name",
+    order: "desc"
+  }
+];
+
 const columns = [
   {
     dataField: "id",
@@ -98,54 +105,75 @@ const columns = [
     dataField: "edit",
     isDummyField: true,
     text: "Editar",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
+    formatter: (cellContent, row) => {
       return (
         <div>
-          <FormUser />
+          <Button id="PopoverEdit" onClick={this.toggle}>
+            Editar
+          </Button>
+          <Popover
+            placement="left"
+            isOpen={this.state.popoverOpen}
+            target="PopoverEdit"
+            toggle={this.toggle}
+          >
+            <PopoverHeader>Editar Utilizador</PopoverHeader>
+            <PopoverBody>
+              <FormUser />
+            </PopoverBody>
+          </Popover>
         </div>
       );
     }
   }
 ];
-const defaultSorted = [
-  {
-    dataField: "name",
-    order: "desc"
-  }
-];
 
-class Tables extends Component {
-  render() {
+class Tables extends Component{
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false,
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen,
+    });
+  }
+  render(){
     return (
-      <div>
-        <ToolkitProvider keyField="id" data={user} columns={columns} search>
-          {props => (
-            <div>
-              <SearchBar
-                {...props.searchProps}
-                className="custome-search-field"
-                style={{
-                  color: "black"
-                }}
-                delay={800}
-                placeholder="Pesquisar"
-              />
-              <BootstrapTable
-                keyField="id"
-                {...props.baseProps}
-                columns={columns}
-                pagination={paginationFactory()}
-                data={user}
-                bordered={false}
-                defaultSorted={defaultSorted}
-                filter={filterFactory()}
-              />
-            </div>
-          )}
-        </ToolkitProvider>
-      </div>
-    );
+      <div><ToolkitProvider keyField="id" data={user} columns={columns} search>
+      {props => (
+        <div>
+          <SearchBar
+            {...props.searchProps}
+            className="custome-search-field"
+            style={{
+              color: "black"
+            }}
+            delay={800}
+            placeholder="Pesquisar"
+          />
+          <BootstrapTable
+            keyField="id"
+            {...props.baseProps}
+            columns={columns}
+            pagination={paginationFactory()}
+            data={user}
+            bordered={false}
+            defaultSorted={defaultSorted}
+            filter={filterFactory()}
+          />
+        </div>
+      )}
+    </ToolkitProvider></div>
+    )
   }
 }
 
-export default Tables;
+export default () => (
+  
+);

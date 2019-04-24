@@ -8,7 +8,7 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
-import FormUser from "../FormUser/FormUser";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -97,14 +97,13 @@ const columns = [
   {
     dataField: "edit",
     isDummyField: true,
-    text: "Editar",
+    text: "Editar"
     formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
-        <div>
-          <FormUser />
-        </div>
+        <div><FormUser/></div>
       );
     }
+    
   }
 ];
 const defaultSorted = [

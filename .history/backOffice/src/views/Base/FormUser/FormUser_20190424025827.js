@@ -83,13 +83,13 @@ export default class FormUser extends React.Component {
               </Col>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="exampleZip">Código-Postal</Label>
+                  <Label for="exampleZip">Codigo-Postal</Label>
                   <Input type="text" name="zip" id="exampleZip" />
                 </FormGroup>
               </Col>
             </Row>
 
-            <Button>Confirmar</Button>
+            <Button>Sign in</Button>
           </Form>
         </PopPop>
       </div>

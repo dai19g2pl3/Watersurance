@@ -8,7 +8,10 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 //eslint-disable-next-line
 import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+//eslint-disable-next-line
 import FormUser from "../FormUser/FormUser";
+import Popup from "reactjs-popup";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -100,9 +103,36 @@ const columns = [
     text: "Editar",
     formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
-        <div>
-          <FormUser />
-        </div>
+        <Popup
+          trigger={
+            <Button color="primary" id="PopupEdit">
+              <i className="icon-pencil" />
+              &nbsp;Editar
+            </Button>
+          }
+          modal
+        >
+          {close => (
+            <div className="modal">
+              <a className="close" onClick={close}>
+                &times;
+              </a>
+              <div className="header"> Modal Title </div>
+              <div className="content">
+                {" "}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque,
+                a nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet
+                quibusdam voluptates delectus doloremque, explicabo tempore
+                dicta adipisci fugit amet dignissimos?
+                <br />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Consequatur sit commodi beatae optio voluptatum sed eius cumque,
+                delectus saepe repudiandae explicabo nemo nam libero ad,
+                doloribus, voluptas rem alias. Vitae?
+              </div>
+            </div>
+          )}
+        </Popup>
       );
     }
   }
@@ -115,6 +145,27 @@ const defaultSorted = [
 ];
 
 class Tables extends Component {
+  constructor(props) {
+    super(props);
+
+    this.toggle = this.toggle.bind(this);
+    this.state = {
+      popoverOpen: false,
+      popovers: [
+        {
+          placement: "left",
+          text: "Left"
+        }
+      ]
+    };
+  }
+
+  toggle() {
+    this.setState({
+      popoverOpen: !this.state.popoverOpen
+    });
+  }
+
   render() {
     return (
       <div>
