@@ -58,7 +58,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #6195FF;
 }
 
 /*---------------------------------------------*/
@@ -193,6 +193,13 @@ iframe {
   position: relative;
 }
 
+.wrap-signup100 {
+  width: 560px;
+  background: #fff;
+  border-radius: 10px;
+  position: relative;
+}
+
 
 /*==================================================================
 [ Form ]*/
@@ -315,11 +322,11 @@ iframe {
 }
 
 .btn-show-pass:hover {
-  color: #57b846;
+  color: #6195FF;
 }
 
 .btn-show-pass.active {
-  color: #57b846;
+  color: #6195FF;
 }
 
 /*==================================================================
@@ -370,7 +377,7 @@ iframe {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #57b846;
+  color: #6195FF;
 }
 
 
@@ -412,7 +419,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #57b846;
+  background-color: #6195FF;
 }
 
 
@@ -497,3 +504,30 @@ iframe {
     padding-right: 15px;
   }
 }
+
+@media (max-width: 800px) {
+  .wrap-signup100 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/*///////////////////////////////////////////////////////////////////
+[ Pop Up ]*/
+.modal-body {
+  max-height: 800px;
+}
+
+/*///////////////////////////////////////////////////////////////////
+[ Hide input type number spinner ]*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
