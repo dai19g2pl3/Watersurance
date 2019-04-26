@@ -20,7 +20,7 @@
 		e.preventDefault();
 		var hash = this.hash;
 		$('html, body').animate({
-			scrollTop: $(this.hash).offset()
+			scrollTop: $(this.hash).offset().top
 		}, 600);
 	});
 
@@ -52,13 +52,6 @@
 
 		// Back To Top Appear
 		wScroll > 700 ? $('#back-to-top').fadeIn() : $('#back-to-top').fadeOut();
-	});
-
-	///////////////////////////
-	// magnificPopup
-	$('.work').magnificPopup({
-		delegate: '.lightbox',
-		type: 'image'
 	});
 
 	///////////////////////////
@@ -97,81 +90,6 @@ $("#modal_trigger").modal({
 	closeButton: ".modal_close"
 });
 
-$(function() {
-	// Calling Login Form
-	$("#login_form").click(function() {
-			$(".social_login").hide();
-			$(".user_login").show();
-			return false;
-	});
-
-	// Calling Register Form
-	$("#register_form").click(function() {
-			$(".social_login").hide();
-			$(".user_register").show();
-			$(".header_title").text('Register');
-			return false;
-	});
-
-	// Going back to Social Forms
-	$(".back_btn").click(function() {
-			$(".user_login").hide();
-			$(".user_register").hide();
-			$(".social_login").show();
-			$(".header_title").text('Login');
-			return false;
-	});
-});
-
-/*==================================================================
-    [ Validate ]*/
-    var input = $('.validate-input .input100');
-
-    $('.validate-form').on('submit',function(){
-        var check = true;
-
-        for(var i=0; i<input.length; i++) {
-            if(validate(input[i]) == false){
-                showValidate(input[i]);
-                check=false;
-            }
-        }
-
-        return check;
-    });
-
-
-    $('.validate-form .input100').each(function(){
-        $(this).focus(function(){
-           hideValidate(this);
-        });
-    });
-
-    function validate (input) {
-        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
-            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-                return false;
-            }
-        }
-        else {
-            if($(input).val().trim() == ''){
-                return false;
-            }
-        }
-    }
-
-    function showValidate(input) {
-        var thisAlert = $(input).parent();
-
-        $(thisAlert).addClass('alert-validate');
-    }
-
-    function hideValidate(input) {
-        var thisAlert = $(input).parent();
-
-        $(thisAlert).removeClass('alert-validate');
-    }
-    
     /*==================================================================
     [ Show pass ]*/
     var showPass = 0;

@@ -1,21 +1,21 @@
-$(document).ready(function() {
-    $('#loginForm').on('submit', function(e) {
+$(document).ready(function () {
+    validatorLogin();
+
+    $('#btnSignUpCancel').click(function(){
+        $('#signUpModal').modal('toggle');
+    });
+
+    $('#loginForm').on('submit', function (e) {
         e.preventDefault();
-        login();
+        validatorLogin();
     })
 });
-/*window.addEventListener("load", function() {
-    document.getElementById('loginForm').addEventListener("submit", function(e) {
-      e.preventDefault();
-      login();
-    })
-  });
-*/
+
 function login() {
     var data = {};
-    data.usernameOrEmail = document.getElementById('emailLogin').value
-    data.password = document.getElementById('pwdLogin').value
-    console.log(JSON.stringify(data));
+    data.email = document.getElementById('email').value
+    data.password = document.getElementById('pwd').value
+
     fetch('http://localhost:8080/api/auth/signin', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -25,11 +25,35 @@ function login() {
     }).then(response =>
         response.json().then(json => {
             if (!response.ok) {
-                alert(arroz);
                 return Promise.reject(json);
             }
+            document.getElementById("loginForm").reset();
             console.log("submitted with success");
             return json;
         })
     )
+}
+
+function validatorLogin() {
+    let validator = new Validator(document.querySelector('form[name="loginForm"]'), function(err, res) {
+        if (res) {
+            login();
+        }
+    }, {
+            rules: {
+                customMinLength: function (value, params) {
+                        return this.min(value.replace(/\s{2,}/g, ' ').length, params);
+                }
+            },
+            messages: {
+                en: {
+                    customMinLength: {
+                            empty: 'Insira a sua password',
+                            incorrect: 'Introdoziu menos de {0} carateres'
+                        }
+                }
+                
+            }
+        });
+
 }
