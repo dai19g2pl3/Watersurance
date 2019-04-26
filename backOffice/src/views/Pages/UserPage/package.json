@@ -1,7 +1,7 @@
 {
-    "name": "FormUser",
+    "name": "UserPage",
     "version": "0.0.0",
     "private": true,
-    "main": "./FormUser.js"
+    "main": "./UserPage.js"
   }
   
