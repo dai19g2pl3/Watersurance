@@ -16,7 +16,6 @@ import Tables from "./Tables";
 import Tabs from "./Tabs";
 import Tooltips from "./Tooltips";
 import FormUser from "./FormUser";
-import FormAddUser from "./FormAddUser";
 
 export {
   Breadcrumbs,
@@ -36,6 +35,5 @@ export {
   Tabs,
   Tooltips,
   Paginations,
-  FormUser,
-  FormAddUser
+  FormUser
 };

@@ -1,10 +1,6 @@
 $(document).ready(function () {
     validatorLogin();
 
-    $('#btnSignUpCancel').click(function(){
-        $('#signUpModal').modal('toggle');
-    });
-
     $('#loginForm').on('submit', function (e) {
         e.preventDefault();
         validatorLogin();
@@ -13,8 +9,8 @@ $(document).ready(function () {
 
 function login() {
     var data = {};
-    data.email = document.getElementById('email').value
-    data.password = document.getElementById('pwd').value
+    data.email = document.getElementById('loginEmail').value;
+    data.password = document.getElementById('loginPwd').value;
 
     fetch('http://localhost:8080/api/auth/signin', {
         headers: { 'Content-Type': 'application/json' },
@@ -28,10 +24,12 @@ function login() {
                 return Promise.reject(json);
             }
             document.getElementById("loginForm").reset();
-            console.log("submitted with success");
+            location.replace('http://localhost:3000/#/base/tables');
             return json;
         })
-    )
+    ).catch((err) => {
+        alert(err);
+    });
 }
 
 function validatorLogin() {

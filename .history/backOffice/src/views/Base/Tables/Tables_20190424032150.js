@@ -6,8 +6,9 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
 import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnEditar from "../BtnEditar/BtnEditar";
-import BtnApagar from "../BtnApagar/BtnApagar";
+//eslint-disable-next-line
+import { Popover, Button, PopoverHeader, PopoverBody } from "reactstrap";
+import FormUser from "../FormUser/FormUser";
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -101,20 +102,7 @@ const columns = [
     formatter: (cell, row, rowIndex, formatExtraData) => {
       return (
         <div>
-          <BtnEditar />
-        </div>
-      );
-    }
-  },
-  {
-    dataField: "delete",
-    isDummyField: true,
-    text: "Apagar",
-    headerAlign: "center",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <BtnApagar />
+          <FormUser />
         </div>
       );
     }

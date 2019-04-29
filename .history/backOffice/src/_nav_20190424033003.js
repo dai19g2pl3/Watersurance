@@ -5,7 +5,7 @@ export default {
       name: "Utilizadores"
     },
     {
-      name: "Segurador",
+      name: "Administrador",
       url: "/base/tables",
       icon: "icon-user"
     },
@@ -21,42 +21,36 @@ export default {
       title: true,
       name: "Watersurance"
     },
-
     {
-      name: "Contratos",
-      url: "/base/tables",
-      icon: "icon-notebook"
-    },
-    {
-      name: "Habitações",
-      url: "/base/tables",
-      icon: "icon-home",
-      children: [
-        {
-          name: "Listar",
-          url: "/base/tables",
-          icon: "icon-arrow-right"
-        },
-        {
-          name: "Adicionar",
-          url: "/base/form-habitacao",
-          icon: "icon-arrow-right"
-        }
-      ]
-    },
-    {
-      name: "Ocorrências",
+      name: "Ocorrencias",
       url: "/theme/colors",
       icon: "icon-tag",
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/breadcrumbs",
           icon: "icon-arrow-right"
         },
         {
           name: "Submeter",
-          url: "/base/form-ocorrencia",
+          url: "/base/cards",
+          icon: "icon-arrow-right"
+        }
+      ]
+    },
+    {
+      name: "Contratos",
+      url: "/buttons",
+      icon: "icon-notebook",
+      children: [
+        {
+          name: "Listar",
+          url: "/buttons/form-add-user",
+          icon: "icon-arrow-right"
+        },
+        {
+          name: "Terminados",
+          url: "/base/form-user",
           icon: "icon-arrow-right"
         }
       ]

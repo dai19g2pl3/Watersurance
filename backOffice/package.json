@@ -25,6 +25,7 @@
     "faker": "^4.1.0",
     "flag-icon-css": "^3.3.0",
     "font-awesome": "^4.7.0",
+    "formik": "^1.5.2",
     "jquery": "^3.4.0",
     "kleur": "^3.0.3",
     "node-sass": "^4.11.0",
@@ -46,7 +47,8 @@
     "react-test-renderer": "^16.8.4",
     "reactstrap": "^7.1.0",
     "simple-line-icons": "^2.4.1",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.3",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "react-scripts": "^3.0.0"

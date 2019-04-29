@@ -41,11 +41,7 @@ const Typography = React.lazy(() => import("./views/Theme/Typography"));
 const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const User = React.lazy(() => import("./views/Users/User"));
-const BtnEditar = React.lazy(() => import("./views/Base/BtnEditar"));
-const BtnApagar = React.lazy(() => import("./views/Base/BtnApagar"));
-const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
-const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
-const CardUser = React.lazy(() => import("./views/Base/CardUser"));
+const FormUser = React.lazy(() => import("./views/Base/FormUser"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -112,34 +108,16 @@ const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   {
-    path: "/base/btnEditar",
+    path: "/base/form-user",
     exact: true,
-    name: "Button Editar",
-    component: BtnEditar
+    name: "Form User",
+    component: FormUser
   },
   {
-    path: "/base/btnApagar",
+    path: "/base/form-add-user",
     exact: true,
-    name: "Button Apagar",
-    component: BtnApagar
-  },
-  {
-    path: "/base/form-ocorrencia",
-    exact: true,
-    name: "Form Ocorrencia",
-    component: FormOcorrencia
-  },
-  {
-    path: "/base/form-habitacao",
-    exact: true,
-    name: "Form Habitacao",
-    component: FormHabitacao
-  },
-  {
-    path: "/base/card-user",
-    exact: true,
-    name: "Card User",
-    component: CardUser
+    name: "FormAddUser",
+    component: FormAddUser
   }
 ];
 
