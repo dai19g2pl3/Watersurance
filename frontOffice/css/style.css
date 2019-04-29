@@ -306,7 +306,7 @@ ul, ol {
     .main-nav li a {
         font-size: 20px;
         text-align: right
-        -webkit-transition 0.2s color;
+        -webkit-transition: 0.2s color;
         transition: 0.2s color;
     }
     .main-nav>li>a {
