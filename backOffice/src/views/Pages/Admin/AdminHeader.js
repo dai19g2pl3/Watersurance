@@ -8,8 +8,9 @@ import {
   AppNavbarBrand,
   AppSidebarToggler
 } from "@coreui/react";
-import logo from "../../assets/img/brand/logo.jpg";
-import favicon from "../../assets/img/brand/favicon.png";
+import logo from "../../../assets/img/brand/logo.jpg";
+import favicon from "../../../assets/img/brand/favicon.png";
+//assets/img/brand/favicon.png";
 
 //eslint-disable-next-line
 var bgColors = {
@@ -26,8 +27,7 @@ const propTypes = {
 };
 
 const defaultProps = {};
-
-class DefaultHeader extends Component {
+class ClienteHeader extends Component {
   render() {
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -58,7 +58,7 @@ class DefaultHeader extends Component {
             <DropdownToggle nav>
               <Link to="/cliente">
                 <img
-                  src={"../../assets/img/avatars/6.jpg"}
+                  src={"../../assets/img/avatars/3.jpg"}
                   className="img-avatar"
                   alt="admin@bootstrapmaster.com"
                 />
@@ -71,7 +71,7 @@ class DefaultHeader extends Component {
   }
 }
 
-DefaultHeader.propTypes = propTypes;
-DefaultHeader.defaultProps = defaultProps;
+ClienteHeader.propTypes = propTypes;
+ClienteHeader.defaultProps = defaultProps;
 
-export default DefaultHeader;
+export default ClienteHeader;

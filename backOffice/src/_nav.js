@@ -15,6 +15,11 @@ export default {
       icon: "icon-user"
     },
     {
+      name: "Meu Perfil",
+      url: "/base/card-user",
+      icon: "icon-user"
+    },
+    {
       divider: true
     },
     {
@@ -91,6 +96,11 @@ export default {
         {
           name: "Error 500",
           url: "/500",
+          icon: "icon-star"
+        },
+        {
+          name: "Cliente",
+          url: "/Cliente",
           icon: "icon-star"
         }
       ]

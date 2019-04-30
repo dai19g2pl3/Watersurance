@@ -15,8 +15,12 @@ import Switches from "./Switches";
 import Tables from "./Tables";
 import Tabs from "./Tabs";
 import Tooltips from "./Tooltips";
-import FormUser from "./FormUser";
-import FormAddUser from "./FormAddUser";
+import FormHabitacao from "./FormHabitacao/FormHabitacao";
+import CardUser from "./CardUser/CardUser";
+import FormOcorrencia from "./FormOcorrencia/FormOcorrencia";
+import BtnAddObject from "./BtnAddObject/BtnAddObject";
+import BtnApagar from "./BtnApagar/BtnApagar";
+import BtnEditar from "./BtnEditar/BtnEditar";
 
 export {
   Breadcrumbs,
@@ -36,6 +40,10 @@ export {
   Tabs,
   Tooltips,
   Paginations,
-  FormUser,
-  FormAddUser
+  FormHabitacao,
+  CardUser,
+  FormOcorrencia,
+  BtnAddObject,
+  BtnApagar,
+  BtnEditar
 };

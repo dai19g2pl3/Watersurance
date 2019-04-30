@@ -14,6 +14,11 @@ const DefaultLayout = Loadable({
   loading
 });
 
+const ClienteLayout = Loadable({
+  loader: () => import("./containers/ClienteLayout"),
+  loading
+});
+
 // Pages
 const Login = Loadable({
   loader: () => import("./views/Pages/Login"),
@@ -49,6 +54,11 @@ class App extends Component {
           />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
+          <Route
+            path="/Cliente"
+            name="Cliente Page"
+            component={ClienteLayout}
+          />
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>
       </HashRouter>
