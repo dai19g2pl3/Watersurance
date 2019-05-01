@@ -77,13 +77,13 @@
 				</div>
 
 				<!--  Main navigation  -->
-				<ul class="main-nav nav navbar-nav navbar-right">
+				<ul class="main-nav nav navbar-nav navbar-right"> 
 					<li><a href="#home">Home</a></li>
 					<li><a href="#sobre">Sobre Nós</a></li>
 					<li><a href="#seguradora">Seguradora</a></li>
 					<li><a href="#equipa">Equipa</a></li>
 					<li><a href="#contactos">Contactos</a></li>
-					<li><a href="" data-toggle="modal" data-target="#loginModal">Login</a></li>
+					<li id="logLi"><a href="" data-toggle="modal" data-target="#loginModal" id="loginNav">Login</a></li>
 				</ul>
 				<!-- /Main navigation -->
 
@@ -99,7 +99,7 @@
 
 					<div class="col-md-10 col-md-offset-1">
 						<div class="home-content">
-							<img class="img-responsive" src="./img/watersurance1.png" alt="">
+
 						</div>
 					</div>
 
@@ -679,12 +679,12 @@
 						<form id="loginForm" name="loginForm">
 							<div class="form-group">
 								<label for="email" class="control-label">Email:</label>
-								<input type="email" class="form-control" id="email" name="email"
+								<input type="email" class="form-control" id="loginEmail" name="email"
 									data-rule="required|email">
 							</div>
 							<div class="form-group">
 								<label for="pwd" class="control-label">Palavra-passe:</label>
-								<input type="password" class="form-control" id="pwd" name="pwd"
+								<input type="password" class="form-control" id="loginPwd" name="pwd"
 									data-rule="required|customMinLength-6" autocomplete="off">
 							</div>
 							<div class="flex-sb-m w-full p-b-48">
@@ -717,7 +717,7 @@
 						<form id="signUpForm" name="signUpForm">
 							<div class="form-group">
 								<label for="name" class="control-label">Nome:</label>
-								<input type="name" class="form-control" id="name" name="name" data-rule="required|name">
+								<input type="name" class="form-control" id="signUpName" name="name" data-rule="required|name">
 							</div>
 							<div class="form-group">
 								<label for="email" class="control-label">Email:</label>
@@ -731,12 +731,12 @@
 							</div>
 							<div class="form-group">
 								<label for="nif" class="control-label">Nif:</label>
-								<input type="number" class="form-control" id="nif" name="nif"
+								<input type="number" class="form-control" id="signUpNif" name="nif"
 									data-rule="required|nif-9-9">
 							</div>
 							<div class="form-group">
 								<label for="telemovel" class="control-label">Telemóvel:</label>
-								<input type="number" class="form-control" id="phoneNumber" name="phone"
+								<input type="number" class="form-control" id="signUpPhoneNumber" name="phone"
 									data-rule="required|phone">
 							</div>
 							<div class="flex-sb-m w-full p-b-48">
@@ -761,7 +761,6 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/owl.carousel.min.js"></script>
-	<!--<script type="text/javascript" src="js/jquery.magnific-popup.js"></script>-->
 	<script type="text/javascript" src="js/main.js"></script>
 
 	<div id="dropDownSelect1"></div>
@@ -777,6 +776,7 @@
 	<!-- Controllers -->
 	<script type="text/javascript" src="./js/controllers/loginController.js"></script>
 	<script type="text/javascript" src="./js/controllers/signUpController.js"></script>
+	<script type="text/javascript" src="./js/controllers/logoutController.js"></script>
 
 	<!-- Validators -->
 	<script src="js/validators/js-form-validator.js"></script>
