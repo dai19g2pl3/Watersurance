@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultLayout from "./containers/DefaultLayout";
-
+import ClienteLayout from "./containers/ClienteLayout";
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
 const Carousels = React.lazy(() => import("./views/Base/Carousels"));
@@ -27,6 +27,7 @@ const ButtonGroups = React.lazy(() => import("./views/Buttons/ButtonGroups"));
 const Buttons = React.lazy(() => import("./views/Buttons/Buttons"));
 const Charts = React.lazy(() => import("./views/Charts"));
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
+const DashboardCliente = React.lazy(() => import("./views/DashboardCliente"));
 const CoreUIIcons = React.lazy(() => import("./views/Icons/CoreUIIcons"));
 const Flags = React.lazy(() => import("./views/Icons/Flags"));
 const FontAwesome = React.lazy(() => import("./views/Icons/FontAwesome"));
@@ -45,12 +46,25 @@ const BtnEditar = React.lazy(() => import("./views/Base/BtnEditar"));
 const BtnApagar = React.lazy(() => import("./views/Base/BtnApagar"));
 const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
+const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  { path: "/dashboard", exact: true, name: "Dashboard", component: Dashboard },
+  {
+    path: "/cliente/dashboard",
+    exact: true,
+    name: "Dashboard Cliente",
+    component: DashboardCliente
+  },
+  {
+    path: "/cliente",
+    exact: true,
+    name: "HomeCliente",
+    component: ClienteLayout
+  },
   { path: "/theme", exact: true, name: "Theme", component: Colors },
   { path: "/theme/colors", name: "Colors", component: Colors },
   { path: "/theme/typography", name: "Typography", component: Typography },
@@ -140,6 +154,12 @@ const routes = [
     exact: true,
     name: "Card User",
     component: CardUser
+  },
+  {
+    path: "/base/form-cliente",
+    exact: true,
+    name: "Form Cliente",
+    component: FormCliente
   }
 ];
 

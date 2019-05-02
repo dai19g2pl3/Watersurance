@@ -55,7 +55,7 @@ class App extends Component {
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
           <Route
-            path="/Cliente"
+            path="/cliente"
             name="Cliente Page"
             component={ClienteLayout}
           />

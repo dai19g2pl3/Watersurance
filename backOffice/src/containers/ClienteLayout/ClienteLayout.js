@@ -28,11 +28,6 @@ class ClienteLayout extends React.Component {
     <div className="animated fadeIn pt-1 text-center">Loading...</div>
   );
 
-  signOut(e) {
-    e.preventDefault();
-    this.props.history.push("/login");
-  }
-
   render() {
     return (
       <div className="app">
@@ -67,7 +62,7 @@ class ClienteLayout extends React.Component {
                       />
                     ) : null;
                   })}
-                  <Redirect from="/" to="/Cliente" />
+                  <Redirect from="/cliente" to="/cliente/dashboard" />
                 </Switch>
               </Suspense>
             </Container>

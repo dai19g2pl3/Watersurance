@@ -13,7 +13,7 @@ export default {
       icon: "icon-user"
     },
     {
-      name: "Contratos",
+      name: "Contrato",
       url: "/base/tables",
       icon: "icon-notebook"
     },

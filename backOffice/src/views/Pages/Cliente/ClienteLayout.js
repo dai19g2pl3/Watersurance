@@ -67,7 +67,7 @@ class ClienteLayout extends React.Component {
                       />
                     ) : null;
                   })}
-                  <Redirect from="/" to="/Cliente" />
+                  <Redirect from="/cliente" to="/cliente/dashboard" />
                 </Switch>
               </Suspense>
             </Container>

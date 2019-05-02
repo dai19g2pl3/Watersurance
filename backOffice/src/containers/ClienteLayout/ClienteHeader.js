@@ -1,76 +1,77 @@
-import React from "react";
-import {
-  Dropdown,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { DropdownToggle, Nav, NavItem } from "reactstrap";
 import PropTypes from "prop-types";
-NavItem.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  active: PropTypes.bool
-  // pass in custom element to use
-};
-NavLink.propTypes = {
-  disabled: PropTypes.bool,
-  active: PropTypes.bool,
-  // pass in custom element to use
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  // ref will only get you a reference to the NavLink component, use innerRef to get a reference to the DOM element (for things like focus management).
-  innerRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-};
-Nav.propTypes = {
-  tabs: PropTypes.bool,
-  pills: PropTypes.bool,
-  card: PropTypes.bool,
-  justified: PropTypes.bool,
-  fill: PropTypes.bool,
-  vertical: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  horizontal: PropTypes.string,
-  navbar: PropTypes.bool,
-  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-  // pass in custom element to use
-};
-export default class ClienteHeader extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      dropdownOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  }
+import {
+  AppHeaderDropdown,
+  AppNavbarBrand,
+  AppSidebarToggler
+} from "@coreui/react";
+import logo from "./../../assets/img/brand/logo.jpg";
+import favicon from "./../../assets/img/brand/favicon.png";
+//assets/img/brand/favicon.png";
+
+//eslint-disable-next-line
+var bgColors = {
+  Default: "#81b71a",
+  Blue: "#00B1E1",
+  Cyan: "#37BC9B",
+  Green: "#8CC152",
+  Red: "#E9573F",
+  Yellow: "#F6BB42",
+  White: "#ffffff"
+};
+const propTypes = {
+  children: PropTypes.node
+};
+
+const defaultProps = {};
+class ClienteHeader extends Component {
   render() {
+    // eslint-disable-next-line
+    const { children, ...attributes } = this.props;
+
     return (
-      <div>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink href="/components/">Perfil</NavLink>
+      <React.Fragment>
+        <AppSidebarToggler className="d-lg-none" display="md" mobile />
+        <AppNavbarBrand
+          full={{ src: logo, width: 160, height: 50, alt: "Watersurance Logo" }}
+          minimized={{
+            src: favicon,
+            width: 30,
+            height: 30,
+            alt: "Watersurance Logo"
+          }}
+        />
+        <AppSidebarToggler className="d-md-down-none" display="lg" />
+
+        <Nav className="d-md-down-none" navbar>
+          <NavItem className="px-3">
+            <Link to="/cliente/dashboard" className="nav-link">
+              Home Page
+            </Link>
           </NavItem>
-          <NavItem>
-            <NavLink href="/">Contrato</NavLink>
-          </NavItem>
-          <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>
-              Ocorrências
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem href="/">Listar</DropdownItem>
-              <DropdownItem href="/">Submeter</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
         </Nav>
-      </div>
+        <Nav className="ml-auto" navbar>
+          <AppHeaderDropdown direction="down">
+            <DropdownToggle nav>
+              <Link to="/cliente/dashboard">
+                <img
+                  src={"../../assets/img/avatars/3.jpg"}
+                  className="img-avatar"
+                  alt="admin@bootstrapmaster.com"
+                />
+              </Link>
+            </DropdownToggle>
+          </AppHeaderDropdown>
+        </Nav>
+      </React.Fragment>
     );
   }
 }
+
+ClienteHeader.propTypes = propTypes;
+ClienteHeader.defaultProps = defaultProps;
+
+export default ClienteHeader;

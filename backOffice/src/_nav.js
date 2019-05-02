@@ -100,7 +100,7 @@ export default {
         },
         {
           name: "Cliente",
-          url: "/Cliente",
+          url: "/cliente/dashboard",
           icon: "icon-star"
         }
       ]

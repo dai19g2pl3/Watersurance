@@ -1,0 +1,6 @@
+{
+  "name": "ClienteLayout",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ClienteLayout.js"
+}
