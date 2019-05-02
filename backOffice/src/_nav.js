@@ -11,7 +11,7 @@ export default {
     },
     {
       name: "Cliente",
-      url: "/base/tables",
+      url: "/base/table-user",
       icon: "icon-user"
     },
     {

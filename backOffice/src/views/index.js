@@ -21,7 +21,8 @@ import {
   BtnEditar,
   CardUser,
   FormHabitacao,
-  FormOcorrencia
+  FormOcorrencia,
+  TableUser
 } from "./Base";
 
 import {
@@ -82,5 +83,6 @@ export {
   CardUser,
   FormHabitacao,
   FormOcorrencia,
-  Cliente
+  Cliente,
+  TableUser
 };

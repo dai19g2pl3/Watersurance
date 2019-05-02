@@ -8,127 +8,110 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { getAllUsers } from '../../../actions/usersAction'
+
 const { SearchBar } = Search;
 
 const selectOptions = {
-  0: "Ativo",
-  1: "Inativo"
+  1: "Ativo",
+  0: "Inativo"
 };
 
 faker.locale = "pt_BR";
 
-var user = [
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
-  },
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
-  },
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
-  },
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
-  },
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 1
-  },
-  {
-    name: faker.name.findName(),
-    email: faker.internet.email(),
-    nif: faker.random.number(),
-    isActive: 0
-  }
-];
-
-const columns = [
-  {
-    dataField: "id",
-    text: "ID Cliente",
-    sort: true,
-    hidden: true
-  },
-
-  {
-    dataField: "name",
-    text: "Nome",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "email",
-    text: "Email",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "nif",
-    text: "NIF",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "isActive",
-    text: "Estado",
-    headerStyle: { width: 150 },
-    headerAlign: "center",
-    formatter: cell => selectOptions[cell],
-    filter: selectFilter({
-      options: selectOptions,
-      defaultValue: 0
-    })
-  },
-  {
-    dataField: "edit",
-    isDummyField: true,
-    text: "Editar",
-    headerAlign: "center",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <BtnEditar />
-        </div>
-      );
-    }
-  },
-  {
-    dataField: "delete",
-    isDummyField: true,
-    text: "Apagar",
-    headerAlign: "center",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <BtnApagar />
-        </div>
-      );
-    }
-  }
-];
-const defaultSorted = [
-  {
-    dataField: "name",
-    order: "desc"
-  }
-];
-
 class Tables extends Component {
+  componentDidMount() {
+    this.props.getAllUsers()
+  }
+
   render() {
+    const columns = [
+      {
+        dataField: "id",
+        text: "ID Cliente",
+        sort: true,
+        hidden: true
+      },
+
+      {
+        dataField: "name",
+        text: "Nome",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "email",
+        text: "Email",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "nif",
+        text: "NIF",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "isActive",
+        text: "Estado",
+        headerStyle: { width: 150 },
+        headerAlign: "center",
+        formatter: cell => selectOptions[cell],
+        filter: selectFilter({
+          options: selectOptions,
+          defaultValue: 0
+        })
+      },
+      {
+        dataField: "edit",
+        isDummyField: true,
+        text: "Editar",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnEditar />
+            </div>
+          );
+        }
+      },
+      {
+        dataField: "delete",
+        isDummyField: true,
+        text: "Apagar",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnApagar />
+            </div>
+          );
+        }
+      }
+    ];
+    const defaultSorted = [
+      {
+        dataField: "name",
+        order: "desc"
+      }
+    ];
+
+    const fetchUser = this.props.users;
+    let data = [];
+
+    fetchUser.forEach(function (user) {
+      let isActive;
+
+      if (user.isActive === false) {
+        isActive = 0;
+      } else isActive = 1
+
+      data.push({ id: user.id, name: user.name, email: user.email, nif: user.nif, isActive: isActive })
+    });
+    console.log(data);
+    var user = data;
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -161,4 +144,16 @@ class Tables extends Component {
   }
 }
 
-export default Tables;
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Tables);

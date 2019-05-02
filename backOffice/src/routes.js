@@ -46,6 +46,7 @@ const BtnApagar = React.lazy(() => import("./views/Base/BtnApagar"));
 const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
+const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -140,6 +141,12 @@ const routes = [
     exact: true,
     name: "Card User",
     component: CardUser
+  },
+  {
+    path: "/base/table-user",
+    exact: true,
+    name: "Table User",
+    component: TableUser
   }
 ];
 
