@@ -21,7 +21,8 @@ import {
   BtnEditar,
   CardUser,
   FormHabitacao,
-  FormOcorrencia
+  FormOcorrencia,
+  TableUser
 } from "./Base";
 
 import {
@@ -83,5 +84,10 @@ export {
   CardUser,
   FormHabitacao,
   FormOcorrencia,
+<<<<<<< HEAD
   DashboardCliente
+=======
+  Cliente,
+  TableUser
+>>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
 };

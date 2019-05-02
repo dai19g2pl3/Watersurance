@@ -48,6 +48,7 @@ const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
+const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -156,10 +157,17 @@ const routes = [
     component: CardUser
   },
   {
+<<<<<<< HEAD
     path: "/base/form-cliente",
     exact: true,
     name: "Form Cliente",
     component: FormCliente
+=======
+    path: "/base/table-user",
+    exact: true,
+    name: "Table User",
+    component: TableUser
+>>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
   }
 ];
 
