@@ -4,27 +4,12 @@ import { DropdownToggle, Nav, NavItem } from "reactstrap";
 import PropTypes from "prop-types";
 
 import {
-<<<<<<< HEAD
-<<<<<<< HEAD
   AppHeaderDropdown,
   AppNavbarBrand,
   AppSidebarToggler
 } from "@coreui/react";
 import logo from "./../../assets/img/brand/logo.jpg";
 import favicon from "./../../assets/img/brand/favicon.png";
-//assets/img/brand/favicon.png";
-=======
-=======
->>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
->>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
 
 //eslint-disable-next-line
 var bgColors = {
