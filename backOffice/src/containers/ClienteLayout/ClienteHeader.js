@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 import {
 <<<<<<< HEAD
+<<<<<<< HEAD
   AppHeaderDropdown,
   AppNavbarBrand,
   AppSidebarToggler
@@ -13,6 +14,8 @@ import logo from "./../../assets/img/brand/logo.jpg";
 import favicon from "./../../assets/img/brand/favicon.png";
 //assets/img/brand/favicon.png";
 =======
+=======
+>>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
   Nav,
   NavItem,
   NavLink,

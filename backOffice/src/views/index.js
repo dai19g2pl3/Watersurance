@@ -85,7 +85,12 @@ export {
   FormHabitacao,
   FormOcorrencia,
 <<<<<<< HEAD
+<<<<<<< HEAD
   DashboardCliente
+=======
+  Cliente,
+  TableUser
+>>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
 =======
   Cliente,
   TableUser

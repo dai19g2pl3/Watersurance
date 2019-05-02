@@ -157,17 +157,16 @@ const routes = [
     component: CardUser
   },
   {
-<<<<<<< HEAD
     path: "/base/form-cliente",
     exact: true,
     name: "Form Cliente",
     component: FormCliente
-=======
+  },
+  {
     path: "/base/table-user",
     exact: true,
     name: "Table User",
     component: TableUser
->>>>>>> 73bd5f087d215bedcae666ca4e48772a3dcb0e1f
   }
 ];
 
