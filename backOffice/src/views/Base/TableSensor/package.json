@@ -1,0 +1,6 @@
+{
+  "name": "TableSensor",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableSensor.js"
+}
