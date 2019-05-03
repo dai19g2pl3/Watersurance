@@ -7,98 +7,117 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { getAllUsers } from '../../../actions/usersAction'
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getAllUsers } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
 const selectOptions = {
-  0: "Ativo",
-  1: "Inativo"
+  1: "Ativo",
+  0: "Inativo"
 };
-
-const columns = [
-  {
-    dataField: "id",
-    text: "ID Cliente",
-    sort: true,
-    hidden: true
-  },
-
-  {
-    dataField: "name",
-    text: "Nome",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "email",
-    text: "Email",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "nif",
-    text: "NIF",
-    sort: true,
-    headerAlign: "center"
-  },
-  {
-    dataField: "isActive",
-    text: "Estado",
-    headerStyle: { width: 150 },
-    headerAlign: "center",
-    formatter: cell => selectOptions[cell],
-    filter: selectFilter({
-      options: selectOptions,
-      defaultValue: 0
-    })
-  },
-  {
-    dataField: "edit",
-    isDummyField: true,
-    text: "Editar",
-    headerAlign: "center",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <BtnEditar />
-        </div>
-      );
-    }
-  },
-  {
-    dataField: "delete",
-    isDummyField: true,
-    text: "Apagar",
-    headerAlign: "center",
-    formatter: (cell, row, rowIndex, formatExtraData) => {
-      return (
-        <div>
-          <BtnApagar />
-        </div>
-      );
-    }
-  }
-];
-const defaultSorted = [
-  {
-    dataField: "name",
-    order: "desc"
-  }
-];
 
 class TableUser extends Component {
   componentDidMount() {
-    this.props.getAllUsers()
+    this.props.getAllUsers();
   }
 
   render() {
-    console.log('this.props', this.props)
+    const columns = [
+      {
+        dataField: "id",
+        text: "ID Cliente",
+        sort: true,
+        hidden: true
+      },
+
+      {
+        dataField: "name",
+        text: "Nome",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "email",
+        text: "Email",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "nif",
+        text: "NIF",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "isActive",
+        text: "Estado",
+        headerStyle: { width: 150 },
+        headerAlign: "center",
+        formatter: cell => selectOptions[cell],
+        filter: selectFilter({
+          options: selectOptions,
+          defaultValue: 0
+        })
+      },
+      {
+        dataField: "edit",
+        isDummyField: true,
+        text: "Editar",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnEditar />
+            </div>
+          );
+        }
+      },
+      {
+        dataField: "delete",
+        isDummyField: true,
+        text: "Apagar",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnApagar />
+            </div>
+          );
+        }
+      }
+    ];
+    const defaultSorted = [
+      {
+        dataField: "name",
+        order: "desc"
+      }
+    ];
+
+    const fetchUser = this.props.users;
+    let data = [];
+
+    fetchUser.forEach(function(user) {
+      let isActive;
+
+      if (user.isActive === false) {
+        isActive = 0;
+      } else isActive = 1;
+
+      data.push({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        nif: user.nif,
+        isActive: isActive
+      });
+    });
+    console.log(data);
+    var user = data;
     return (
       <div>
-        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
+        <ToolkitProvider keyField="id" data={user} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -115,7 +134,7 @@ class TableUser extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={{}}
+                data={user}
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
@@ -131,13 +150,16 @@ class TableUser extends Component {
 function mapStateToProps(state) {
   return {
     users: state.users
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getAllUsers: bindActionCreators(getAllUsers, dispatch)
-  }
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableUser);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TableUser);

@@ -2,17 +2,13 @@
 
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import FormCliente from "../FormCliente";
+import FormCliente from "../FormCliente/FormCliente";
 
-class BtnEditar extends React.Component {
-  constructor(props, user) {
-    super(props, user);
+class BtnAdicionar extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      modal: false,
-      name: user.name,
-      email: user.email,
-      nif: user.nif,
-      id: user.id
+      modal: false
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -49,4 +45,4 @@ class BtnEditar extends React.Component {
   }
 }
 
-export default BtnEditar;
+export default BtnAdicionar;

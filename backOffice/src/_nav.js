@@ -4,19 +4,10 @@ export default {
       title: true,
       name: "Utilizadores"
     },
-    {
-      name: "Segurador",
-      url: "/base/tables",
-      icon: "icon-user"
-    },
+
     {
       name: "Cliente",
       url: "/base/table-user",
-      icon: "icon-user"
-    },
-    {
-      name: "Meu Perfil",
-      url: "/base/card-user",
       icon: "icon-user"
     },
     {
@@ -28,7 +19,7 @@ export default {
     },
 
     {
-      name: "Contratos",
+      name: "Sensores",
       url: "/base/tables",
       icon: "icon-notebook"
     },

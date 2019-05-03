@@ -1,24 +1,15 @@
-//eslint-disable-next-line
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-//eslint-disable-next-line
-import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
+import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnEditar from "../BtnEditar/BtnEditar";
-import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getAllUsers } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
-const selectOptions = {
-  1: "Ativo",
-  0: "Inativo"
-};
-
-class Tables extends Component {
+class TableSensor extends Component {
   componentDidMount() {
     this.props.getAllUsers();
   }
@@ -26,66 +17,26 @@ class Tables extends Component {
   render() {
     const columns = [
       {
-        dataField: "id",
-        text: "ID Cliente",
-        sort: true,
-        hidden: true
-      },
-
-      {
         dataField: "name",
         text: "Nome",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "email",
-        text: "Email",
+        dataField: "habitation",
+        text: "Habitacao",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "nif",
-        text: "NIF",
-        sort: true,
+        dataField: "sensor1",
+        text: "Sensor 1",
         headerAlign: "center"
       },
       {
-        dataField: "isActive",
-        text: "Estado",
-        headerStyle: { width: 150 },
-        headerAlign: "center",
-        formatter: cell => selectOptions[cell],
-        filter: selectFilter({
-          options: selectOptions,
-          defaultValue: 0
-        })
-      },
-      {
-        dataField: "edit",
-        isDummyField: true,
-        text: "Editar",
-        headerAlign: "center",
-        formatter: (cell, row, rowIndex, formatExtraData) => {
-          return (
-            <div>
-              <BtnEditar user={user} />
-            </div>
-          );
-        }
-      },
-      {
-        dataField: "delete",
-        isDummyField: true,
-        text: "Apagar",
-        headerAlign: "center",
-        formatter: (cell, row, rowIndex, formatExtraData) => {
-          return (
-            <div>
-              <BtnApagar />
-            </div>
-          );
-        }
+        dataField: "sensor2",
+        text: "Sensor 2",
+        headerAlign: "center"
       }
     ];
     const defaultSorted = [
@@ -162,4 +113,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Tables);
+)(TableSensor);
