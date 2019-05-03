@@ -7,9 +7,6 @@ import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -18,11 +15,7 @@ const selectOptions = {
   0: "Inativo"
 };
 
-class Tables extends Component {
-  componentDidMount() {
-    this.props.getAllUsers();
-  }
-
+class TableHabitation extends Component {
   render() {
     const columns = [
       {
@@ -69,7 +62,7 @@ class Tables extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar user={user} />
+              <BtnEditar />
             </div>
           );
         }
@@ -95,29 +88,9 @@ class Tables extends Component {
       }
     ];
 
-    const fetchUser = this.props.users;
-    let data = [];
-
-    fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        nif: user.nif,
-        isActive: isActive
-      });
-    });
-    console.log(data);
-    var user = data;
     return (
       <div>
-        <ToolkitProvider keyField="id" data={user} columns={columns} search>
+        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -134,7 +107,7 @@ class Tables extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={user}
+                data={{}}
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
@@ -146,20 +119,4 @@ class Tables extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    users: state.users
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Tables);
+export default TableHabitation;

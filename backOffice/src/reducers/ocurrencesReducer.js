@@ -1,12 +1,13 @@
-import { FETCH_USERS } from "../actions/usersAction";
-import { ADD_USER } from "../actions/usersAction";
+import { FETCH_OCURRENCES, FETCH_LAST_OCURRENCES } from "../actions/ocurrencesAction";
+
+
 let initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_USERS:
+    case FETCH_OCURRENCES:
       return [...state, ...action.payload];
-    case ADD_USER:
+    case FETCH_LAST_OCURRENCES:
       return [...state, ...action.payload];
     default:
       return state;

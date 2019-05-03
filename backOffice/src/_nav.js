@@ -4,19 +4,10 @@ export default {
       title: true,
       name: "Utilizadores"
     },
-    {
-      name: "Segurador",
-      url: "/base/tables",
-      icon: "icon-user"
-    },
+
     {
       name: "Cliente",
       url: "/base/table-user",
-      icon: "icon-user"
-    },
-    {
-      name: "Meu Perfil",
-      url: "/base/card-user",
       icon: "icon-user"
     },
     {
@@ -28,8 +19,8 @@ export default {
     },
 
     {
-      name: "Contratos",
-      url: "/base/tables",
+      name: "Sensores",
+      url: "/base/table-sensor",
       icon: "icon-notebook"
     },
     {
@@ -39,7 +30,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/table-habitation",
           icon: "icon-arrow-right"
         },
         {
@@ -56,7 +47,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/table-user",
           icon: "icon-arrow-right"
         },
         {
@@ -68,42 +59,6 @@ export default {
     },
     {
       divider: true
-    },
-    {
-      title: true,
-      name: "Extras"
-    },
-    {
-      name: "Pages",
-      url: "/pages",
-      icon: "icon-star",
-      children: [
-        {
-          name: "Login",
-          url: "/login",
-          icon: "icon-star"
-        },
-        {
-          name: "Register",
-          url: "/register",
-          icon: "icon-star"
-        },
-        {
-          name: "Error 404",
-          url: "/404",
-          icon: "icon-star"
-        },
-        {
-          name: "Error 500",
-          url: "/500",
-          icon: "icon-star"
-        },
-        {
-          name: "Cliente",
-          url: "/Cliente",
-          icon: "icon-star"
-        }
-      ]
     }
   ]
 };

@@ -1,37 +1,22 @@
-//eslint-disable-next-line
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-//eslint-disable-next-line
-import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
+import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnEditar from "../BtnEditar/BtnEditar";
-import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
+import { getAllOcurrences, getLastOcurrences} from "../../../actions/ocurrencesAction";
 
 const { SearchBar } = Search;
 
-const selectOptions = {
-  1: "Ativo",
-  0: "Inativo"
-};
-
-class Tables extends Component {
+class TableSensor extends Component {
   componentDidMount() {
-    this.props.getAllUsers();
+    this.props.getAllOcurrences;
+    this.props.getLastOcurrences;
   }
 
   render() {
     const columns = [
-      {
-        dataField: "id",
-        text: "ID Cliente",
-        sort: true,
-        hidden: true
-      },
-
       {
         dataField: "name",
         text: "Nome",
@@ -39,53 +24,20 @@ class Tables extends Component {
         headerAlign: "center"
       },
       {
-        dataField: "email",
-        text: "Email",
+        dataField: "habitation",
+        text: "Habitacao",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "nif",
-        text: "NIF",
-        sort: true,
+        dataField: "sensor1",
+        text: "Sensor 1",
         headerAlign: "center"
       },
       {
-        dataField: "isActive",
-        text: "Estado",
-        headerStyle: { width: 150 },
-        headerAlign: "center",
-        formatter: cell => selectOptions[cell],
-        filter: selectFilter({
-          options: selectOptions,
-          defaultValue: 0
-        })
-      },
-      {
-        dataField: "edit",
-        isDummyField: true,
-        text: "Editar",
-        headerAlign: "center",
-        formatter: (cell, row, rowIndex, formatExtraData) => {
-          return (
-            <div>
-              <BtnEditar user={user} />
-            </div>
-          );
-        }
-      },
-      {
-        dataField: "delete",
-        isDummyField: true,
-        text: "Apagar",
-        headerAlign: "center",
-        formatter: (cell, row, rowIndex, formatExtraData) => {
-          return (
-            <div>
-              <BtnApagar />
-            </div>
-          );
-        }
+        dataField: "sensor2",
+        text: "Sensor 2",
+        headerAlign: "center"
       }
     ];
     const defaultSorted = [
@@ -95,16 +47,11 @@ class Tables extends Component {
       }
     ];
 
-    const fetchUser = this.props.users;
+    const fetchLastOcurrences = this.props.lastOcurrences;
     let data = [];
-
-    fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
+    console.log('this.props', this.props);
+    /*
+    fetchLastOcurrences.forEach(function(ocurrence) {
       data.push({
         id: user.id,
         name: user.name,
@@ -115,6 +62,7 @@ class Tables extends Component {
     });
     console.log(data);
     var user = data;
+    */
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -149,17 +97,19 @@ class Tables extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users
+    ocurrences: state.ocurrences,
+    lastOcurrences: state.lastOcurrences
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    getAllOcurrences: bindActionCreators(getAllOcurrences, dispatch),
+    getLastOcurrences: bindActionCreators(getLastOcurrences, dispatch)
   };
 }
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Tables);
+)(TableSensor);
