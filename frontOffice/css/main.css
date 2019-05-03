@@ -70,7 +70,7 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #6195FF;
+  color: orange;
 }
 
 /*---------------------------------------------*/
@@ -117,7 +117,7 @@ textarea:focus:-moz-placeholder { color:transparent; }
 textarea:focus::-moz-placeholder { color:transparent; }
 textarea:focus:-ms-input-placeholder { color:transparent; }
 
-input::-webkit-input-placeholder { color: #999999;}
+input::-webkit-input-placeholder { color: orange;}
 input:-moz-placeholder { color: #999999;}
 input::-moz-placeholder { color: #999999;}
 input:-ms-input-placeholder { color: #999999;}
@@ -334,11 +334,11 @@ iframe {
 }
 
 .btn-show-pass:hover {
-  color: #6195FF;
+  color: orange;
 }
 
 .btn-show-pass.active {
-  color: #6195FF;
+  color: orange;
 }
 
 /*==================================================================
@@ -389,7 +389,7 @@ iframe {
 }
 
 .input-checkbox100:checked + .label-checkbox100::before {
-  color: #6195FF;
+  color:orange;
 }
 
 
@@ -421,7 +421,7 @@ iframe {
   padding: 0 20px;
   min-width: 150px;
   height: 55px;
-  background-color: #333333;
+  background-color: orange;
   border-radius: 27px;
 
   -webkit-transition: all 0.4s;
@@ -431,7 +431,7 @@ iframe {
 }
 
 .login100-form-btn:hover {
-  background-color: #6195FF;
+  background-color: black;
 }
 
 

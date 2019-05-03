@@ -587,11 +587,11 @@ header {
 }
 
 .header-wrapper .breadcrumb .breadcrumb-item.active {
-    color: #868F9B;
+    color: wheat;
 }
 
 .breadcrumb>li+li:before {
-    color: #868F9B;
+    color: wheat;
 }
 
 
@@ -1458,7 +1458,7 @@ header {
   line-height: 50px;
   text-align: center;
   border-radius: 3px;
-  background-color: #6195FF;
+  background-color:orange;
   color:#FFF;
 }
 
