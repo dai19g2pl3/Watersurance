@@ -1610,7 +1610,7 @@ header {
 
 .owl-theme .owl-nav [class*='owl-']:hover {
     opacity: 0.8;
-    background: #6195FF;
+    background:orange;
 }
 
 
@@ -1670,7 +1670,7 @@ header {
 }
 .preloader span {
     display: inline-block;
-    background-color: #6195FF;
+    background-color:orange;
     width: 25px;
     height: 25px;
     -webkit-animation: 1s preload ease-in-out infinite;
