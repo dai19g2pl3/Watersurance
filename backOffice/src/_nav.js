@@ -20,7 +20,7 @@ export default {
 
     {
       name: "Sensores",
-      url: "/base/tables",
+      url: "/base/table-sensor",
       icon: "icon-notebook"
     },
     {
@@ -30,7 +30,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/table-habitation",
           icon: "icon-arrow-right"
         },
         {
@@ -47,7 +47,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/table-user",
           icon: "icon-arrow-right"
         },
         {
@@ -59,42 +59,6 @@ export default {
     },
     {
       divider: true
-    },
-    {
-      title: true,
-      name: "Extras"
-    },
-    {
-      name: "Pages",
-      url: "/pages",
-      icon: "icon-star",
-      children: [
-        {
-          name: "Login",
-          url: "/login",
-          icon: "icon-star"
-        },
-        {
-          name: "Register",
-          url: "/register",
-          icon: "icon-star"
-        },
-        {
-          name: "Error 404",
-          url: "/404",
-          icon: "icon-star"
-        },
-        {
-          name: "Error 500",
-          url: "/500",
-          icon: "icon-star"
-        },
-        {
-          name: "Cliente",
-          url: "/Cliente",
-          icon: "icon-star"
-        }
-      ]
     }
   ]
 };

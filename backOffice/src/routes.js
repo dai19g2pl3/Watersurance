@@ -49,6 +49,11 @@ const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
 const TableUser = React.lazy(() => import("./views/Base/TableUser"));
+const TableSensor = React.lazy(() => import("./views/Base/TableSensor"));
+const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
+const TableHabitation = React.lazy(() =>
+  import("./views/Base/TableHabitation")
+);
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -167,6 +172,24 @@ const routes = [
     exact: true,
     name: "Table User",
     component: TableUser
+  },
+  {
+    path: "/base/table-sensor",
+    exact: true,
+    name: "Table Sensor",
+    component: TableSensor
+  },
+  {
+    path: "/base/btnAdicionar",
+    exact: true,
+    name: "Adicionar User",
+    component: BtnAdicionar
+  },
+  {
+    path: "/base/table-habitation",
+    exact: true,
+    name: "Table Home",
+    component: TableHabitation
   }
 ];
 
