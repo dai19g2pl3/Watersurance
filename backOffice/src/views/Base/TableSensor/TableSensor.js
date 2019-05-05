@@ -5,13 +5,14 @@ import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
+import { getAllOcurrences, getLastOcurrences} from "../../../actions/ocurrencesAction";
 
 const { SearchBar } = Search;
 
 class TableSensor extends Component {
   componentDidMount() {
-    this.props.getAllUsers();
+    this.props.getAllOcurrences;
+    this.props.getLastOcurrences;
   }
 
   render() {
@@ -46,16 +47,11 @@ class TableSensor extends Component {
       }
     ];
 
-    const fetchUser = this.props.users;
+    const fetchLastOcurrences = this.props.lastOcurrences;
     let data = [];
-
-    fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
+    console.log('this.props', this.props);
+    /*
+    fetchLastOcurrences.forEach(function(ocurrence) {
       data.push({
         id: user.id,
         name: user.name,
@@ -66,6 +62,7 @@ class TableSensor extends Component {
     });
     console.log(data);
     var user = data;
+    */
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -100,13 +97,15 @@ class TableSensor extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users
+    ocurrences: state.ocurrences,
+    lastOcurrences: state.lastOcurrences
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    getAllOcurrences: bindActionCreators(getAllOcurrences, dispatch),
+    getLastOcurrences: bindActionCreators(getLastOcurrences, dispatch)
   };
 }
 

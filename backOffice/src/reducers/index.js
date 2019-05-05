@@ -1,10 +1,10 @@
 import users from "./usersReducer";
-import addUser from "./usersReducer";
+import ocurrences from "./ocurrencesReducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   users,
-  addUser
+  ocurrences
 });
 
 export default rootReducer;
