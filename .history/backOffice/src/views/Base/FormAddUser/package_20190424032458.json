@@ -1,7 +1,0 @@
-{
-    "name": "FormAddUser",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./FormAddUser.js"
-  }
-  
