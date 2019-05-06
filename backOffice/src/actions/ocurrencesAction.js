@@ -3,11 +3,17 @@ export const FETCH_LAST_OCURRENCES = "FETCH_LAST_OCURRENCES";
 
 export const getAllOcurrences = () => {
   return dispatch => {
-    fetch(`http://localhost:5000/api/ocurrences`, {
-      method: "GET",
-      credentials: "include"
+    const headers = new Headers({
+      "Content-Type": "application/json",
     })
-      .then(res => res.json())
+    const options = {
+      headers: headers
+    }
+    fetch(`http://localhost:5000/api/ocurrences`,{
+      mode: 'cors'
+    })
+      .then(response => response.json());
+      /*
       .then(ocurrences => {
         console.log("deu fetch");
         dispatch({
@@ -15,6 +21,7 @@ export const getAllOcurrences = () => {
           payload: ocurrences
         });
       });
+      */
   };
 };
 
@@ -22,9 +29,10 @@ export const getLastOcurrences = () => {
     return dispatch => {
       fetch(`http://localhost:5000/api/lastOcurrences`, {
         method: "GET",
-        credentials: "include"
+        mode: "no-cors"
       })
-        .then(res => res.json())
+        .then(res => console.log(res))
+        /*
         .then(lastOcurrences => {
           console.log("deu fetch");
           dispatch({
@@ -32,5 +40,6 @@ export const getLastOcurrences = () => {
             payload: lastOcurrences
           });
         });
+        */
     };
   };
