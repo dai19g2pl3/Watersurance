@@ -7,6 +7,7 @@ $(document).ready(function () {
     } 
 
     $('#logoutNav').on('click', function (e) {
+        e.preventDefault();
         logout();
     })
 });
@@ -25,7 +26,7 @@ function doesHttpOnlyCookieExist(cookiename) {
 }
 
 function logout() {
-    fetch('http://localhost:8080/api/auth/logout', {
+    fetch('https://watersurance-api.herokuapp.com/api/auth/logout', {
         method: 'GET',
         credentials: 'include'
     }).then(response =>
@@ -33,6 +34,7 @@ function logout() {
             if (!response.ok) {
                 return Promise.reject(json);
             }
+            location.reload();
             return json;
         })
     )

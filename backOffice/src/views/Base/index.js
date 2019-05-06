@@ -22,6 +22,7 @@ import BtnAddObject from "./BtnAddObject";
 import BtnApagar from "./BtnApagar";
 import BtnEditar from "./BtnEditar";
 import TableUser from "./TableUser";
+import TableSensor from "./TableSensor";
 
 export {
   Breadcrumbs,
@@ -47,5 +48,6 @@ export {
   BtnAddObject,
   BtnApagar,
   BtnEditar,
-  TableUser
+  TableUser,
+  TableSensor
 };

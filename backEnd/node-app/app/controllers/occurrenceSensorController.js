@@ -38,7 +38,7 @@ exports.create = (req, res) => {
 };
 
 exports.findLastOnes = (req, res) => {
-    Ocurrence.find().sort({date:-1}).limit(10)
+    Ocurrence.find().sort({date:-1}).limit(1)
     .then(ocurrences => {
         res.send(ocurrences);
     }).catch(err => {

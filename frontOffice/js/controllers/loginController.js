@@ -12,7 +12,7 @@ function login() {
     data.email = document.getElementById('loginEmail').value;
     data.password = document.getElementById('loginPwd').value;
 
-    fetch('http://localhost:8080/api/auth/signin', {
+    fetch('https://watersurance-api.herokuapp.com/api/auth/signin', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
         credentials: 'include',

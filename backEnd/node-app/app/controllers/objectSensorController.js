@@ -12,7 +12,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findLastOnes = (req, res) => {
-    object.find().sort({date:-1}).limit(10)
+    object.find().sort({date:-1}).limit(1)
     .then(objects => {
         res.send(objects);
     }).catch(err => {
