@@ -28,23 +28,19 @@
       }
     }
     .carouse-control{
-      &.left{
-    
-      }
-
-      &.right{
-        background-image: url("./setaD.png");
+      &.left, &.right{
+        background-image: none;
       }
     }
   }
   
   // non-related styling:
   body{
-    background: #ffa500;
-    color: #ffa500;
+    background: #333;
+    color: #ddd;
   }
   h1{
-    color: #ffa500;
+    color: white;
     font-size: 2.25em;
     text-align: center;
     margin-top: 1em;
