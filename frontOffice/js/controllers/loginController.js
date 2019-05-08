@@ -11,7 +11,7 @@ function login() {
     var data = {};
     data.email = document.getElementById('loginEmail').value;
     data.password = document.getElementById('loginPwd').value;
-
+    
     fetch('https://watersurance-api.herokuapp.com/api/auth/signin', {
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
@@ -23,8 +23,9 @@ function login() {
             if (!response.ok) {
                 return Promise.reject(json);
             }
+            localStorage.setItem('token', json.accessToken);
+            location.replace('http://localhost:3000/#/dashboard');
             document.getElementById("loginForm").reset();
-            location.replace('http://localhost:3000/#/base/tables');
             return json;
         })
     ).catch((err) => {
