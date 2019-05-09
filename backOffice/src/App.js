@@ -13,12 +13,6 @@ const DefaultLayout = Loadable({
   loader: () => import("./containers/DefaultLayout"),
   loading
 });
-
-const ClienteLayout = Loadable({
-  loader: () => import("./containers/ClienteLayout"),
-  loading
-});
-
 // Pages
 const Login = Loadable({
   loader: () => import("./views/Pages/Login"),
@@ -40,6 +34,11 @@ const Page500 = Loadable({
   loading
 });
 
+const User = Loadable({
+  loader: () => import("./views/Pages/User"),
+  loading
+});
+
 class App extends Component {
   render() {
     return (
@@ -54,11 +53,7 @@ class App extends Component {
           />
           <Route exact path="/404" name="Page 404" component={Page404} />
           <Route exact path="/500" name="Page 500" component={Page500} />
-          <Route
-            path="/cliente"
-            name="Cliente Page"
-            component={ClienteLayout}
-          />
+          <Route path="/user" name="Perfil User" component={User} />
           <Route path="/" name="Home" component={DefaultLayout} />
         </Switch>
       </HashRouter>

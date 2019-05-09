@@ -10,11 +10,6 @@ import BtnApagar from "../BtnApagar/BtnApagar";
 
 const { SearchBar } = Search;
 
-const selectOptions = {
-  1: "Ativo",
-  0: "Inativo"
-};
-
 class TableHabitation extends Component {
   render() {
     const columns = [
@@ -30,29 +25,6 @@ class TableHabitation extends Component {
         text: "Nome",
         sort: true,
         headerAlign: "center"
-      },
-      {
-        dataField: "email",
-        text: "Email",
-        sort: true,
-        headerAlign: "center"
-      },
-      {
-        dataField: "nif",
-        text: "NIF",
-        sort: true,
-        headerAlign: "center"
-      },
-      {
-        dataField: "isActive",
-        text: "Estado",
-        headerStyle: { width: 150 },
-        headerAlign: "center",
-        formatter: cell => selectOptions[cell],
-        filter: selectFilter({
-          options: selectOptions,
-          defaultValue: 0
-        })
       },
       {
         dataField: "edit",

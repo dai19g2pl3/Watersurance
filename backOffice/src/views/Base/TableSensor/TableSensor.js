@@ -5,14 +5,17 @@ import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllOcurrences, getLastOcurrences} from "../../../actions/ocurrencesAction";
+import {
+  getAllOcurrences,
+  getLastOcurrences
+} from "../../../actions/ocurrencesAction";
 
 const { SearchBar } = Search;
 
 class TableSensor extends Component {
   componentDidMount() {
-    this.props.getAllOcurrences;
-    this.props.getLastOcurrences;
+    this.props.getAllOcurrences();
+    this.props.getLastOcurrences();
   }
 
   render() {
@@ -46,10 +49,10 @@ class TableSensor extends Component {
         order: "desc"
       }
     ];
-
+    /*
     const fetchLastOcurrences = this.props.lastOcurrences;
     let data = [];
-    console.log('this.props', this.props);
+    console.log("this.props", this.props);
     /*
     fetchLastOcurrences.forEach(function(ocurrence) {
       data.push({
@@ -65,7 +68,7 @@ class TableSensor extends Component {
     */
     return (
       <div>
-        <ToolkitProvider keyField="id" data={user} columns={columns} search>
+        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -82,7 +85,7 @@ class TableSensor extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={user}
+                data={{}}
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
