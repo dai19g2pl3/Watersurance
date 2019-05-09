@@ -1,4 +1,3 @@
-//eslint-disable-next-line
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -113,7 +112,6 @@ class Tables extends Component {
         isActive: isActive
       });
     });
-    console.log(data);
     var user = data;
     return (
       <div>

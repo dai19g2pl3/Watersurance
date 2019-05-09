@@ -21,25 +21,28 @@ class TableSensor extends Component {
   render() {
     const columns = [
       {
+        dataField: "id",
+        text: "ID Cliente",
+        sort: true,
+        hidden: true
+      },
+
+      {
         dataField: "name",
         text: "Nome",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "habitation",
-        text: "Habitacao",
+        dataField: "email",
+        text: "Email",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "sensor1",
-        text: "Sensor 1",
-        headerAlign: "center"
-      },
-      {
-        dataField: "sensor2",
-        text: "Sensor 2",
+        dataField: "nif",
+        text: "NIF",
+        sort: true,
         headerAlign: "center"
       }
     ];
@@ -54,7 +57,16 @@ class TableSensor extends Component {
     let data = [];
     console.log("this.props", this.props);
     /*
-    fetchLastOcurrences.forEach(function(ocurrence) {
+    const fetchUser = this.props.users;
+    let data = [];
+
+    fetchUser.forEach(function(user) {
+      let isActive;
+
+      if (user.isActive === false) {
+        isActive = 0;
+      } else isActive = 1;
+
       data.push({
         id: user.id,
         name: user.name,
@@ -63,7 +75,6 @@ class TableSensor extends Component {
         isActive: isActive
       });
     });
-    console.log(data);
     var user = data;
     */
     return (
@@ -71,15 +82,6 @@ class TableSensor extends Component {
         <ToolkitProvider keyField="id" data={{}} columns={columns} search>
           {props => (
             <div>
-              <SearchBar
-                {...props.searchProps}
-                className="custome-search-field"
-                style={{
-                  color: "black"
-                }}
-                delay={800}
-                placeholder="Pesquisar"
-              />
               <BootstrapTable
                 keyField="id"
                 {...props.baseProps}
@@ -88,7 +90,6 @@ class TableSensor extends Component {
                 data={{}}
                 bordered={false}
                 defaultSorted={defaultSorted}
-                filter={filterFactory()}
               />
             </div>
           )}

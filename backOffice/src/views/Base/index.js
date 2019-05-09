@@ -12,6 +12,7 @@ import BtnApagar from "./BtnApagar";
 import BtnEditar from "./BtnEditar";
 import TableUser from "./TableUser";
 import CardCasa from "./CardCasa";
+import TableSensor from "./TableSensor";
 
 export {
   Breadcrumbs,
@@ -27,5 +28,6 @@ export {
   BtnApagar,
   BtnEditar,
   TableUser,
-  CardCasa
+  CardCasa,
+  TableSensor
 };
