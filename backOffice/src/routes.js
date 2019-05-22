@@ -11,14 +11,13 @@ const Tables = React.lazy(() => import("./views/Base/Tables"));
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const DashboardCliente = React.lazy(() => import("./views/DashboardCliente"));
 const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
-const Users = React.lazy(() => import("./views/Users/Users"));
-const User = React.lazy(() => import("./views/Users/User"));
 const BtnEditar = React.lazy(() => import("./views/Base/BtnEditar"));
 const BtnApagar = React.lazy(() => import("./views/Base/BtnApagar"));
 const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
+const CardCasa = React.lazy(() => import("./views/Base/CardCasa"));
 const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 const TableSensor = React.lazy(() => import("./views/Base/TableSensor"));
 const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
@@ -51,8 +50,6 @@ const routes = [
   { path: "/base/navbars", name: "Navbars", component: Navbars },
   { path: "/base/navs", name: "Navs", component: Navs },
   { path: "/widgets", name: "Widgets", component: Widgets },
-  { path: "/users", exact: true, name: "Users", component: Users },
-  { path: "/users/:id", exact: true, name: "User Details", component: User },
   {
     path: "/base/btnEditar",
     exact: true,
@@ -112,6 +109,12 @@ const routes = [
     exact: true,
     name: "Table Home",
     component: TableHabitation
+  },
+  {
+    path: "/base/card-casa",
+    exact: true,
+    name: "Card Casa",
+    component: CardCasa
   }
 ];
 

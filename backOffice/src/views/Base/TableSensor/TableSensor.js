@@ -5,12 +5,14 @@ import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllOcurrences, getLastOcurrences} from "../../../actions/ocurrencesAction";
+import {
+  getAllOcurrences,
+  getLastOcurrences
+} from "../../../actions/ocurrencesAction";
 
 const { SearchBar } = Search;
 
 class TableSensor extends Component {
-  
   componentDidMount() {
     this.props.getAllOcurrences();
     this.props.getLastOcurrences();
@@ -42,7 +44,7 @@ class TableSensor extends Component {
         text: "NIF",
         sort: true,
         headerAlign: "center"
-      },
+      }
     ];
     const defaultSorted = [
       {
@@ -50,6 +52,10 @@ class TableSensor extends Component {
         order: "desc"
       }
     ];
+    /*
+    const fetchLastOcurrences = this.props.lastOcurrences;
+    let data = [];
+    console.log("this.props", this.props);
     /*
     const fetchUser = this.props.users;
     let data = [];
@@ -73,7 +79,7 @@ class TableSensor extends Component {
     */
     return (
       <div>
-        <ToolkitProvider keyField="id" data={{}} columns={columns}>
+        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
           {props => (
             <div>
               <BootstrapTable
