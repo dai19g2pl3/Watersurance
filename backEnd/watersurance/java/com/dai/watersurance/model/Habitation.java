@@ -1,7 +1,10 @@
 package com.dai.watersurance.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -43,6 +47,15 @@ public class Habitation extends UserDateAudit {
 	@OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private User user;	
+	
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "habitation",
+			orphanRemoval = true)
+	private Set<Occurrence> occurrences = new HashSet<>();
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "habitation",
+			orphanRemoval = true)
+	private Set<InsuredObject> insuredObjects = new HashSet<>();
+	
 	public Habitation() {}
 	
 	public Habitation(String address, String zipCode, int sensorQtd, User user) {
@@ -94,6 +107,22 @@ public class Habitation extends UserDateAudit {
 
 	public Long getUserId() {
 		return user.getId();
+	}
+	
+	public Set<Occurrence> getOccurrences() {
+		return occurrences;
+	}
+
+	public void setOccurrences(Set<Occurrence> occurrences) {
+		this.occurrences = occurrences;
+	}
+
+	public Set<InsuredObject> getInsuredObjects() {
+		return insuredObjects;
+	}
+
+	public void setInsuredObjects(Set<InsuredObject> insuredObjects) {
+		this.insuredObjects = insuredObjects;
 	}
 
 	@Override

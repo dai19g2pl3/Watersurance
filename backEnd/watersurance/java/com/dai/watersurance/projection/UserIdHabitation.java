@@ -1,11 +1,14 @@
 package com.dai.watersurance.projection;
 
 import java.time.Instant;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
 import com.dai.watersurance.model.Habitation;
+import com.dai.watersurance.model.InsuredObject;
+import com.dai.watersurance.model.Occurrence;
 
 @Projection(name = "userIdHabitation", types = { Habitation.class })
 public interface UserIdHabitation {
@@ -28,5 +31,9 @@ public interface UserIdHabitation {
 	String getSensorQtd();
 	
 	Long getUserId();
+	
+	Set<InsuredObject> getInsuredObjects();
+	
+	Set<Occurrence> getOccurrences();
 	
 }

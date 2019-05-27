@@ -51,7 +51,8 @@ public class ContractService {
                 .body(new ByteArrayResource(dbFile.getData()));
     }
 	
-	public ResponseEntity<?> getMyContract(@PathVariable(value = "id") long id, @CurrentUser UserPrincipal currentUser) {
+	public ResponseEntity<?> getMyContract(@PathVariable(value = "id") long id,
+			@CurrentUser UserPrincipal currentUser) {
 		User user = userRepository.findById(currentUser.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
 		

@@ -1,16 +1,19 @@
 package com.dai.watersurance.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,18 +41,28 @@ public class Occurrence extends UserDateAudit {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@Column(nullable = false)
+	private double price;
+	
+	@ManyToOne(optional = false)
     @JoinColumn(name = "habitation_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Habitation habitation;
+	
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "occurrence",
+			orphanRemoval = true)
+	private Set<InsuredObject> insuredObjects = new HashSet<>();
 
 	public Occurrence() {}
 	
-	public Occurrence(Long id, Date startDate, Date endDate) {
-		this.id = id;
+	public Occurrence(Date startDate, Date endDate, Habitation habitation, 
+			double price, Set<InsuredObject> insuredObjects) {
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.habitation = habitation;
+		this.price = price;
+		this.insuredObjects = insuredObjects;
 	}
 
 	public Long getId() {
@@ -76,6 +89,30 @@ public class Occurrence extends UserDateAudit {
 		this.endDate = endDate;
 	}
 	
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public Habitation getHabitation() {
+		return habitation;
+	}
+
+	public void setHabitation(Habitation habitation) {
+		this.habitation = habitation;
+	}
+
+	public Set<InsuredObject> getInsuredObjects() {
+		return insuredObjects;
+	}
+
+	public void setInsuredObjects(Set<InsuredObject> insuredObjects) {
+		this.insuredObjects = insuredObjects;
+	}
+
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;

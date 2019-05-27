@@ -31,12 +31,11 @@ public class HabitationController {
 	@Autowired
 	private HabitationService habitationService;
 	
-	@GetMapping("/habitation/me")
+	@GetMapping("/my/habitations")
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<List<Habitation>> getMyHabitations(@CurrentUser UserPrincipal currentUser) {
 		return habitationService.getMyHabitations(currentUser);
 	}
-	
 	
 	@GetMapping("/habitations")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('INSURER')")
