@@ -85,8 +85,9 @@ public class AuthService {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		//CookieUtils.addCookie(response, "token", jwt, 604800000);
 		String jwt = tokenProvider.generateToken(authentication); 	
+		CookieUtils.addCookie(response, "token", jwt, 604800000);
+		
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}
 
@@ -113,8 +114,9 @@ public class AuthService {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
-		//CookieUtils.addCookie(response, "token", jwt, 604800000);
 		String jwt = tokenProvider.generateToken(authentication);
+		CookieUtils.addCookie(response, "token", jwt, 604800000);
+
 		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
 	}
 
@@ -143,7 +145,7 @@ public class AuthService {
 	}
 
 	public ResponseEntity<ApiResponse> logoutUser(HttpServletRequest request, HttpServletResponse response) {
-		Boolean isOK = CookieUtils.deleteCookie(request, response, "token");
+		boolean isOK = CookieUtils.deleteCookie(request, response, "token");
 
 		if (isOK == true) {
 			return ResponseEntity.ok().body(new ApiResponse(true, "User logged out successfully"));

@@ -23,8 +23,8 @@ function login() {
             if (!response.ok) {
                 return Promise.reject(json);
             }
-            localStorage.setItem('token', json.accessToken);
-            location.replace('http://localhost:3000/#/dashboard');
+            //localStorage.setItem('token', json.accessToken);
+            //location.href = 'http://localhost:3000/#/dashboard';
             document.getElementById("loginForm").reset();
             return json;
         })
