@@ -1,23 +1,12 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import {
-  getAllOcurrences,
-  getLastOcurrences
-} from "../../../actions/ocurrencesAction";
 
 const { SearchBar } = Search;
 
+const data = [];
 class TableSensor extends Component {
-  componentDidMount() {
-    this.props.getAllOcurrences();
-    this.props.getLastOcurrences();
-  }
-
   render() {
     const columns = [
       {
@@ -52,7 +41,40 @@ class TableSensor extends Component {
         order: "desc"
       }
     ];
-    /*
+    return (
+      <div>
+        <ToolkitProvider keyField="id" data={data} columns={columns} search>
+          {props => (
+            <div>
+              <SearchBar
+                {...props.searchProps}
+                className="custome-search-field"
+                style={{
+                  color: "black"
+                }}
+                delay={800}
+                placeholder="Pesquisar"
+              />
+              <BootstrapTable
+                keyField="id"
+                {...props.baseProps}
+                columns={columns}
+                pagination={paginationFactory()}
+                data={data}
+                bordered={false}
+                defaultSorted={defaultSorted}
+              />
+            </div>
+          )}
+        </ToolkitProvider>
+      </div>
+    );
+  }
+}
+
+export default TableSensor;
+
+/*
     const fetchLastOcurrences = this.props.lastOcurrences;
     let data = [];
     console.log("this.props", this.props);
@@ -77,43 +99,3 @@ class TableSensor extends Component {
     });
     var user = data;
     */
-    return (
-      <div>
-        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
-          {props => (
-            <div>
-              <BootstrapTable
-                keyField="id"
-                {...props.baseProps}
-                columns={columns}
-                pagination={paginationFactory()}
-                data={{}}
-                bordered={false}
-                defaultSorted={defaultSorted}
-              />
-            </div>
-          )}
-        </ToolkitProvider>
-      </div>
-    );
-  }
-}
-
-function mapStateToProps(state) {
-  return {
-    ocurrences: state.ocurrences,
-    lastOcurrences: state.lastOcurrences
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getAllOcurrences: bindActionCreators(getAllOcurrences, dispatch),
-    getLastOcurrences: bindActionCreators(getLastOcurrences, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableSensor);

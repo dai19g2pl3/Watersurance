@@ -3,7 +3,7 @@ export const ADD_USER = "ADD_USER";
 
 export const getAllUsers = () => {
   return dispatch => {
-    fetch(`http://localhost:8080/api/users`, {
+    fetch(`https://watersurance-api.herokuapp.com/api/users`, {
       method: "GET",
       credentials: "include"
     })
@@ -20,7 +20,7 @@ export const getAllUsers = () => {
 
 export const addUser = newUser => {
   return dispatch => {
-    fetch(`http://localhost:8080/api/signup`, {
+    fetch(`https://watersurance-api.herokuapp.com/api/signup`, {
       method: "POST",
       credentials: "include"
     })

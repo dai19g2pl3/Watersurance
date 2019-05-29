@@ -61,7 +61,7 @@ class User extends React.Component {
     return (
       <div>
         <Container>
-          <div>
+          <div className="user-header">
             <Nav pills>
               <NavItem>
                 <NavLink href="/user" active>

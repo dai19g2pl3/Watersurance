@@ -16,7 +16,6 @@ const selectOptions = {
   1: "Ativo",
   0: "Inativo"
 };
-
 class Tables extends Component {
   componentDidMount() {
     this.props.getAllUsers();

@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { DropdownToggle, Nav, NavItem } from "reactstrap";
+import { Nav, NavItem } from "reactstrap";
 import PropTypes from "prop-types";
-
-import {
-  AppHeaderDropdown,
-  AppNavbarBrand,
-  AppSidebarToggler
-} from "@coreui/react";
+import { AppNavbarBrand, AppSidebarToggler } from "@coreui/react";
 import logo from "../../assets/img/brand/logo.jpg";
 import favicon from "../../assets/img/brand/favicon.png";
 
@@ -28,6 +23,20 @@ const propTypes = {
 const defaultProps = {};
 
 class DefaultHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: false
+    };
+
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
+  }
   render() {
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -54,17 +63,14 @@ class DefaultHeader extends Component {
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
-          <AppHeaderDropdown direction="down">
-            <DropdownToggle nav>
-              <Link to="/cliente">
-                <img
-                  src={"../../assets/img/avatars/6.jpg"}
-                  className="img-avatar"
-                  alt="admin@bootstrapmaster.com"
-                />
-              </Link>
-            </DropdownToggle>
-          </AppHeaderDropdown>
+          <NavItem className="px-3">
+            <img
+              onClick={this.toggle}
+              src={"../../assets/img/avatars/6.jpg"}
+              className="img-avatar"
+              alt="admin@bootstrapmaster.com"
+            />
+          </NavItem>
         </Nav>
       </React.Fragment>
     );

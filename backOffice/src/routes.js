@@ -1,6 +1,5 @@
 import React from "react";
 import DefaultLayout from "./containers/DefaultLayout";
-import ClienteLayout from "./containers/ClienteLayout";
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -34,12 +33,6 @@ const routes = [
     exact: true,
     name: "Dashboard Cliente",
     component: DashboardCliente
-  },
-  {
-    path: "/cliente",
-    exact: true,
-    name: "HomeCliente",
-    component: ClienteLayout
   },
   { path: "/base", exact: true, name: "Base", component: Cards },
   { path: "/base/cards", name: "Cards", component: Cards },
