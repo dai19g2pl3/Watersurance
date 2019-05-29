@@ -1,12 +1,12 @@
 $(document).ready(function () {
 
     setInterval(() => {
-        if(!(doesCookieExists('accessToken') == null)) {
+        if(getCookie('token') != null) {
             replaceWithLogout();
-        }
+        } 
     }, 1000 );
 
-    if(!(doesCookieExists('accessToken') == null)) {
+    if(getCookie('token') != null) {
         replaceWithLogout();
     }
 
@@ -14,27 +14,13 @@ $(document).ready(function () {
         e.preventDefault();
         logout();
     })
+    
 });
 
-function doesCookieExists(cookieName) {
-    var dc = document.cookie;
-    var prefix = cookieName + "=";
-    var begin = dc.indexOf("; " + prefix);
-    if (begin == -1) {
-        begin = dc.indexOf(prefix);
-        if (begin != 0) return null;
-    }
-    else
-    {
-        begin += 2;
-        var end = document.cookie.indexOf(";", begin);
-        if (end == -1) {
-        end = dc.length;
-        }
-    }
-
-    return decodeURI(dc.substring(begin + prefix.length, end));
-} 
+function getCookie(name) {
+    var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+    return v ? v[2] : null;
+}
 
 function logout() {
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
@@ -43,7 +29,10 @@ function logout() {
 
 function replaceWithLogout() {
     const loginNav = document.getElementById('loginNav');
+
     loginNav.remove();
+
+    
 
     const logLi = document.getElementById('logLi');
     const a = document.createElement("a");
@@ -64,7 +53,8 @@ function replaceWithLogin() {
     a.dataset.target = '#loginModal';
     a.id = 'loginNav';
     a.text = 'Login'
-    logLi.appendChild(a);   
+    logLi.appendChild(a); 
+    
 }
 /* Server cookie
 $(document).ready(function () {

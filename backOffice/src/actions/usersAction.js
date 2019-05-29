@@ -1,15 +1,25 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const ADD_USER = "ADD_USER";
 
+const headers = new Headers({
+  'Content-Type': 'application/json',
+})
+
+function getCookie(name) {
+  var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? v[2] : null;
+}
+
+headers.append('Authorization', 'Bearer ' + getCookie('token'));
+
 export const getAllUsers = () => {
   return dispatch => {
-    fetch(`http://localhost:8080/api/users`, {
+    fetch(`https://watersurance-api.herokuapp.com/api/users`, {
       method: "GET",
-      credentials: "include"
+      headers: headers
     })
       .then(res => res.json())
       .then(users => {
-        console.log("deu fetch");
         dispatch({
           type: FETCH_USERS,
           payload: users
@@ -20,9 +30,10 @@ export const getAllUsers = () => {
 
 export const addUser = newUser => {
   return dispatch => {
-    fetch(`http://localhost:8080/api/signup`, {
+    fetch(`https://watersurance-api.herokuapp.com/api/signup`, {
       method: "POST",
-      credentials: "include"
+      credentials: "include",
+      headers: headers
     })
       .then(res => res.json())
       .then(users => {

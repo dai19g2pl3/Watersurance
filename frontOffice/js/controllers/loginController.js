@@ -7,6 +7,11 @@ $(document).ready(function() {
   });
 });
 
+function getCookie(name) {
+  var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  return v ? v[2] : null;
+}
+
 function login() {
   var data = {};
   data.email = document.getElementById("loginEmail").value;
@@ -25,9 +30,10 @@ function login() {
           return Promise.reject(json);
         }
 
-        document.cookie = "accessToken=" + json.accessToken + "; path=/;";
+        document.cookie = "token=" + json.accessToken + "; path=/;";
         location.href = 'http://localhost:3000/#/dashboard';
         document.getElementById("loginForm").reset();
+        
         return json;
       })
     )
