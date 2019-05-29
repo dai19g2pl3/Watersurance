@@ -1,14 +1,13 @@
-//eslint-disable-next-line
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-//eslint-disable-next-line
-import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
+import BtnEditar from "../BtnEditar/BtnEditar";
 
 const { SearchBar } = Search;
+
+const data = [];
 
 class TableHabitation extends Component {
   render() {
@@ -27,6 +26,18 @@ class TableHabitation extends Component {
         headerAlign: "center"
       },
       {
+        dataField: "email",
+        text: "Email",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "nif",
+        text: "NIF",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
         dataField: "edit",
         isDummyField: true,
         text: "Editar",
@@ -34,7 +45,7 @@ class TableHabitation extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar />
+              <BtnEditar user={data} />
             </div>
           );
         }
@@ -59,10 +70,9 @@ class TableHabitation extends Component {
         order: "desc"
       }
     ];
-
     return (
       <div>
-        <ToolkitProvider keyField="id" data={{}} columns={columns} search>
+        <ToolkitProvider keyField="id" data={data} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -79,10 +89,9 @@ class TableHabitation extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={{}}
+                data={data}
                 bordered={false}
                 defaultSorted={defaultSorted}
-                filter={filterFactory()}
               />
             </div>
           )}
@@ -91,4 +100,31 @@ class TableHabitation extends Component {
     );
   }
 }
+
 export default TableHabitation;
+
+/*
+    const fetchLastOcurrences = this.props.lastOcurrences;
+    let data = [];
+    console.log("this.props", this.props);
+    /*
+    const fetchUser = this.props.users;
+    let data = [];
+
+    fetchUser.forEach(function(user) {
+      let isActive;
+
+      if (user.isActive === false) {
+        isActive = 0;
+      } else isActive = 1;
+
+      data.push({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        nif: user.nif,
+        isActive: isActive
+      });
+    });
+    var user = data;
+    */
