@@ -305,7 +305,7 @@ ul, ol {
     }
     .main-nav li a {
         font-size: 20px;
-        text-align: right
+        text-align: right;
         -webkit-transition: 0.2s color;
         transition: 0.2s color;
     }
@@ -615,7 +615,7 @@ header {
 
 .about:after {
     content: "";
-    background-color: #1C1D21;
+    background-color: #ffecd3;
     position: absolute;
     left: 0;
     top: 0;
@@ -636,7 +636,7 @@ header {
 }
 
 .about:hover h3 {
-    color: #fff;
+    color: #1C1D21;
 }
 
 
@@ -777,7 +777,7 @@ header {
 
 .service:after {
     content: "";
-    background-color: #1C1D21;
+    background-color: #ffecd3;
     position: absolute;
     left: 0;
     top: 0;
@@ -798,7 +798,7 @@ header {
 }
 
 .service:hover h3 {
-    color: #fff;
+    color: #1C1D21;
 }
 
 /*------------------------------------*\
@@ -981,7 +981,7 @@ header {
 
 .team::after {
     content: "";
-    background-color: #1C1D21;
+    background-color: #ffecd3;
     position: absolute;
     left: 0;
     right: 0;
@@ -1007,7 +1007,7 @@ header {
 }
 
 .team .overlay {
-    background: #1C1D21;
+
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1042,7 +1042,7 @@ header {
 }
 
 .team:hover .team-content h3 {
-    color: #FFF;
+    color: #1C1D21;
 }
 
 .team:hover .team-content span {
