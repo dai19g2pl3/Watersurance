@@ -12,7 +12,7 @@ import {
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addUser } from "../../../actions/usersAction";
+//import { addUser } from "../../../actions/usersAction";
 
 class FormCliente extends React.Component {
   constructor(props) {
@@ -125,7 +125,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addUser: bindActionCreators(addUser, dispatch)
+    //addUser: bindActionCreators(addUser, dispatch)
   };
 }
 

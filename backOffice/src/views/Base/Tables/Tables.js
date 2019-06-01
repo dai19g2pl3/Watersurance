@@ -8,7 +8,7 @@ import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
+import { fetchAllUsers } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -18,7 +18,7 @@ const selectOptions = {
 };
 class Tables extends Component {
   componentDidMount() {
-    this.props.getAllUsers();
+    this.props.fetchAllUsers();
   }
 
   render() {
@@ -152,7 +152,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    //getAllUsers: bindActionCreators(getAllUsers, dispatch)
   };
 }
 

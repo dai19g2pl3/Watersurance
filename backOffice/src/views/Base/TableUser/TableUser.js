@@ -9,7 +9,7 @@ import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
+import { fetchAllUsers, addUser } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -20,8 +20,9 @@ const selectOptions = {
 
 class TableUser extends Component {
   componentDidMount() {
-    this.props.getAllUsers();
-  }
+    this.props.fetchAllUsers();
+    
+  };
 
   render() {
     const columns = [
@@ -31,7 +32,6 @@ class TableUser extends Component {
         sort: true,
         hidden: true
       },
-
       {
         dataField: "name",
         text: "Nome",
@@ -113,8 +113,14 @@ class TableUser extends Component {
         isActive: isActive
       });
     });
-    console.log(data);
     var user = data;
+    
+    const rowEvents = {
+      onClick: (e, row, rowIndex) => {
+        console.log(`row: ${row}`);
+        console.log(`rowIndex: ${rowIndex}`)
+      }
+    };
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -138,6 +144,7 @@ class TableUser extends Component {
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
+                rowEvents={ rowEvents }
               />
             </div>
           )}
@@ -155,7 +162,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
+    addUser: bindActionCreators(addUser, dispatch)
   };
 }
 
