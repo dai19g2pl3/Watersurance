@@ -1,7 +1,5 @@
 package com.dai.watersurance.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +36,9 @@ public class SensorController {
 		return sensorService.getLastObjectSensorValue(id);
 	}
 	
-	@GetMapping("/occurrenceSensor/{id}")
+	@PostMapping("/occurrenceSensor/{id}")
 	@PreAuthorize("hasRole('ADMIN') or hasRole('INSURER') or hasRole('USER')")
-	public ResponseEntity<List<Sensor>> registerSensorOccurrence(@PathVariable(value = "id") long id,
+	public ResponseEntity<ApiResponse> registerSensorOccurrence(@PathVariable(value = "id") long id,
 			@Valid @RequestBody SensorOccurrenceRequest sensorOccurrenceRequest) {
 		return sensorService.registerSensorOccurrence(id, sensorOccurrenceRequest);
 	}

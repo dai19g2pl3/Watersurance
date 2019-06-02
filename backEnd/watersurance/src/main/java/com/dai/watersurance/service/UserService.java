@@ -24,7 +24,9 @@ import com.dai.watersurance.model.User;
 import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
+import com.dai.watersurance.payload.request.UpdatePasswordRequest;
 import com.dai.watersurance.payload.request.UpdateUserOrInsurerRequest;
+import com.dai.watersurance.payload.request.UpdateUserProfileRequest;
 import com.dai.watersurance.payload.response.ApiResponse;
 import com.dai.watersurance.payload.response.UserIdentityAvailability;
 import com.dai.watersurance.projection.NoPwdUser;
@@ -224,6 +226,31 @@ public class UserService {
     	
     	userRepository.save(user);
         return ResponseEntity.ok().body(new ApiResponse(true, "User updated successfully"));
+    }
+    
+    public ResponseEntity<ApiResponse> updateMyPassword(@CurrentUser UserPrincipal currentUser, 
+    		@Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {        
+    	User user = userRepository.findById(currentUser.getId(), User.class)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
+    	
+    	user.setPassword(passwordEncoder.encode(updatePasswordRequest.getPassword()));
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "Password updated successfully"));
+    }
+    
+    public ResponseEntity<ApiResponse> updateMyProfile(@CurrentUser UserPrincipal currentUser, 
+    		@Valid @RequestBody UpdateUserProfileRequest updateUserProfileRequest) {
+    	User user = userRepository.findById(currentUser.getId(), User.class)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
+    	
+    	user.setEmail(updateUserProfileRequest.getEmail());
+    	user.setName(updateUserProfileRequest.getName());
+    	user.setNif(updateUserProfileRequest.getNif());
+    	user.setPhoneNumber(updateUserProfileRequest.getPhoneNumber());
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "Profile updated successfully"));
     }
 
     public ResponseEntity<ApiResponse> deleteAdmin(@PathVariable(value = "id") long id) {
