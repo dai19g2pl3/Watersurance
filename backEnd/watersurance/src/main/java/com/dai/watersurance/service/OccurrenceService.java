@@ -76,7 +76,7 @@ public class OccurrenceService {
 	public ResponseEntity<ApiResponse> registerOccurrence(@PathVariable(value = "id") long id,
 			@Valid @RequestBody PostOccurrenceRequest postOccurrenceRequest) {
 		Habitation habitation = habitationRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Habitation", "id", id));;
+				.orElseThrow(() -> new ResourceNotFoundException("Habitation", "id", id));
 		
 		Occurrence occurrence = new Occurrence();
 		Set<Long> insuredObjectIds = postOccurrenceRequest.getInsuredObjects();
