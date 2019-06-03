@@ -31,7 +31,18 @@ function login() {
         }
 
         document.cookie = "token=" + json.accessToken + "; path=/;";
-        location.href = 'http://localhost:3000/#/dashboard';
+        if(json.role === "ROLE_ADMIN") {
+          location.href = 'http://localhost:6969/#/dashboard';         
+        }
+
+        if(json.role === "ROLE_INSURER") {
+          location.href = 'http://localhost:3000/#/dashboard';
+        }
+
+        if(json.role === "ROLE_USER") {
+          location.href = 'http://localhost:7000/#/dashboard';
+        }
+
         document.getElementById("loginForm").reset();
         
         return json;

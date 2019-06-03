@@ -56,22 +56,23 @@ export const updateUser = (user) => {
   };
 };
 
-export const addUser = user => dispatch => {
-  fetch(`https://watersurance-api.herokuapp.com/api/signup` + user.id, {
-    method: "POST",
-    credentials: "include",
-    headers: headers
-  })
-    .then(res => res.json())
-    .then(
-      dispatch({
-        type: ADD_USER_SUCCESS,
-        payload: user
-      }),
-      error => {
-        dispatch({ type: ADD_USER_FAILURE, payload: error.response });
-      }
-    );
+export const addUser = (user) => {
+  return dispatch => {
+    fetch(`https://watersurance-api.herokuapp.com/api/user/table/` + user.id, {
+      method: "POST",
+      credentials: "include",
+      headers: headers,
+      body: JSON.stringify(user)
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log("deu fetch");
+        dispatch({
+          type: UPDATE_USER_SUCCESS,
+          payload: user.id
+        });
+      });
+  };
 };
 
 export const deleteUser = id => {
