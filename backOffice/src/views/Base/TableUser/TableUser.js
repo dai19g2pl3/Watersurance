@@ -48,19 +48,18 @@ class TableUser extends Component {
     e.preventDefault();
     console.log("Aleluia");
     console.log(user.id);
-    
-    if(user.isActive === 1) {
+
+    if (user.isActive === 1) {
       user.isActive = "true";
     } else user.isActive = "false";
     console.log(user);
-    
+
     this.props.updateUser(user);
     setInterval(() => {
       if (this.props.users.length === 0) {
         this.props.fetchAllUsers();
       }
     }, 250);
-    
   };
 
   render() {
@@ -97,10 +96,9 @@ class TableUser extends Component {
       },
       {
         dataField: "Role",
-        text: "Role",
         sort: true,
         headerAlign: "center",
-        formatter: cell => selectOptions[cell],
+        formatter: cell => optionsRole[cell],
         filter: selectFilter({
           options: optionsRole,
           defaultValue: 0
@@ -124,7 +122,11 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar id={row.id} row={row} handleUpdateButton={this.handleUpdate} />
+              <BtnEditar
+                id={row.id}
+                row={row}
+                handleUpdateButton={this.handleUpdate}
+              />
             </div>
           );
         }
