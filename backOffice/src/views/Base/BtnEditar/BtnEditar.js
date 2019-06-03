@@ -22,6 +22,7 @@ class BtnEditar extends React.Component {
     }));
   }
   render() {
+    console.log(this.props);
     return (
       <div>
         <Button

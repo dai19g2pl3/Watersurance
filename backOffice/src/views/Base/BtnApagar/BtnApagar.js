@@ -27,6 +27,11 @@ class BtnApagar extends React.Component {
     }));
   }
 
+  handleDelete = e => {
+    e.preventDefault();
+    console.log(this.props.id);
+  };
+
   render() {
     const closeBtn = (
       <button className="close" onClick={this.toggle}>
@@ -64,7 +69,9 @@ class BtnApagar extends React.Component {
                   terminado de imeadiato.
                 </CardText>
               </h6>
-              <Button color="secondary">Eliminar</Button>
+              <Button color="secondary" onClick={this.handleDelete}>
+                Eliminar
+              </Button>
             </Card>
           </ModalBody>
         </Modal>

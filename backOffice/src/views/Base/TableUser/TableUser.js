@@ -21,8 +21,7 @@ const selectOptions = {
 class TableUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
-    
-  };
+  }
 
   render() {
     const columns = [
@@ -69,7 +68,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar />
+              <BtnEditar id={row} />
             </div>
           );
         }
@@ -82,7 +81,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnApagar />
+              <BtnApagar id={row.id} />
             </div>
           );
         }
@@ -114,11 +113,11 @@ class TableUser extends Component {
       });
     });
     var user = data;
-    
+
+    var idUser;
     const rowEvents = {
       onClick: (e, row, rowIndex) => {
-        console.log(`row: ${row}`);
-        console.log(`rowIndex: ${rowIndex}`)
+        idUser = row.id;
       }
     };
     return (
@@ -144,7 +143,7 @@ class TableUser extends Component {
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
-                rowEvents={ rowEvents }
+                rowEvents={rowEvents}
               />
             </div>
           )}
