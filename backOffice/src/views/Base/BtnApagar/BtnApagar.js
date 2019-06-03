@@ -10,6 +10,9 @@ import {
   CardTitle,
   CardText
 } from "reactstrap";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { deleteUser, fetchAllUsers } from "../../../actions/usersAction";
 
 class BtnApagar extends React.Component {
   constructor(props) {
@@ -26,19 +29,19 @@ class BtnApagar extends React.Component {
       modal: !prevState.modal
     }));
   }
-
+  
   handleDelete = e => {
     e.preventDefault();
-    console.log(this.props.id);
+    this.props.deleteUser(this.props.id);
   };
-
+  
   render() {
     const closeBtn = (
       <button className="close" onClick={this.toggle}>
         &times;
       </button>
     );
-
+    console.log(this.props);
     return (
       <div>
         <Button
@@ -69,7 +72,7 @@ class BtnApagar extends React.Component {
                   terminado de imeadiato.
                 </CardText>
               </h6>
-              <Button color="secondary" onClick={this.handleDelete}>
+              <Button color="secondary" onClick={ (e) => this.handleDelete(e, this.props.id)}>
                 Eliminar
               </Button>
             </Card>
@@ -80,4 +83,20 @@ class BtnApagar extends React.Component {
   }
 }
 
-export default BtnApagar;
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteUser: bindActionCreators(deleteUser, dispatch),
+    fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BtnApagar);

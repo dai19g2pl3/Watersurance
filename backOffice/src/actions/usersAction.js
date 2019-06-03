@@ -55,7 +55,6 @@ export const addUser = user => dispatch => {
     );
 };
 
-/*
 export const deleteUser = (id) => {
   return dispatch => {
     fetch(`https://watersurance-api.herokuapp.com/api/user/` + id , {
@@ -67,9 +66,10 @@ export const deleteUser = (id) => {
       .then(res => {
         console.log("deu fetch");
         dispatch({
-          type: DELETE_USER,
+          type: DELETE_USER_SUCCESS,
+          payload: id
         });
       });
   };
 };
-*/
+

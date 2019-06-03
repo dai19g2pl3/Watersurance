@@ -22,7 +22,7 @@ class TableUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-
+  
   render() {
     const columns = [
       {
@@ -68,7 +68,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar id={row} />
+              <BtnEditar id={row} handleDelete={this.handleDelete}/>
             </div>
           );
         }
