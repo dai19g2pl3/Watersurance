@@ -15,16 +15,6 @@ import { bindActionCreators } from "redux";
 //import { addUser } from "../../../actions/usersAction";
 
 class FormCliente extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "",
-      email: "",
-      nif: "",
-      id: ""
-    };
-  }
-
   render() {
     return (
       <div>
@@ -40,6 +30,7 @@ class FormCliente extends React.Component {
                 id="exampleEmail"
                 placeholder="Insira aqui o email"
                 required
+                defaultValue={this.props.row.email}
               />
               <FormFeedback valid>
                 Esse e-mail está disponivel e é valido!
@@ -60,6 +51,7 @@ class FormCliente extends React.Component {
                 id="exampleName"
                 placeholder="Insira aqui o nome"
                 required
+                defaultValue={this.props.row.name}
               />
             </Col>
           </FormGroup>
@@ -77,6 +69,7 @@ class FormCliente extends React.Component {
                 maxLength={9}
                 min={0.00000000001}
                 required
+                defaultValue={this.props.row.phoneNumber}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
@@ -92,6 +85,7 @@ class FormCliente extends React.Component {
                 maxLength={9}
                 min={0.00000000001}
                 required
+                defaultValue={this.props.row.nif}
               />
             </Col>
           </FormGroup>

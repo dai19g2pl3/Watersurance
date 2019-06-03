@@ -22,7 +22,7 @@ class BtnEditar extends React.Component {
     }));
   }
   render() {
-    //console.log(this.props);
+    console.log(this.props.row);
     return (
       <div>
         <Button
@@ -42,7 +42,7 @@ class BtnEditar extends React.Component {
         >
           <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <FormCliente />
+            <FormCliente row={this.props.row} />
           </ModalBody>
         </Modal>
       </div>

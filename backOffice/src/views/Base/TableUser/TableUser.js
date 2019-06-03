@@ -9,7 +9,11 @@ import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAllUsers, addUser, deleteUser } from "../../../actions/usersAction";
+import {
+  fetchAllUsers,
+  addUser,
+  deleteUser
+} from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -28,9 +32,23 @@ class TableUser extends Component {
     console.log("Aleluia");
     console.log(id);
     this.props.deleteUser(id);
-    setInterval(() => { if(this.props.users.length === 0){
-      this.props.fetchAllUsers();
-    }; }, 250);
+    setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+      }
+    }, 250);
+  };
+
+  handleUpdate = (e, id, form) => {
+    e.preventDefault();
+    console.log("Aleluia");
+    console.log(id);
+    this.props.updateUser(id);
+    setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+      }
+    }, 250);
   };
 
   render() {
@@ -60,6 +78,12 @@ class TableUser extends Component {
         headerAlign: "center"
       },
       {
+        dataField: "phoneNumber",
+        text: "Telefone",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
         dataField: "isActive",
         text: "Estado",
         headerStyle: { width: 150 },
@@ -78,7 +102,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar id={row} />
+              <BtnEditar row={row} />
             </div>
           );
         }
@@ -91,7 +115,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnApagar id={row.id} handleDeleteButton={this.handleDelete}/>
+              <BtnApagar id={row.id} handleDeleteButton={this.handleDelete} />
             </div>
           );
         }
@@ -118,6 +142,7 @@ class TableUser extends Component {
         id: user.id,
         name: user.name,
         email: user.email,
+        phoneNumber: user.phoneNumber,
         nif: user.nif,
         isActive: isActive
       });
