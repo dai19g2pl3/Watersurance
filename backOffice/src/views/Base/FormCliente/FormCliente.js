@@ -10,11 +10,23 @@ import {
   FormText
 } from "reactstrap";
 
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-//import { addUser } from "../../../actions/usersAction";
-
 class FormCliente extends React.Component {
+  state = {
+    id: this.props.row.id,
+    email: this.props.row.email,
+    name: this.props.row.name,
+    nif: this.props.row.nif,
+    phoneNumber: this.props.row.phoneNumber,
+    isActive: this.props.row.isActive
+  }
+
+  handleChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    });
+    console.log(this.state);
+  }
+
   render() {
     return (
       <div>
@@ -30,7 +42,8 @@ class FormCliente extends React.Component {
                 id="exampleEmail"
                 placeholder="Insira aqui o email"
                 required
-                defaultValue={this.props.row.email}
+                onChange={this.handleChange}
+                value={this.state.email}
               />
               <FormFeedback valid>
                 Esse e-mail está disponivel e é valido!
@@ -51,7 +64,8 @@ class FormCliente extends React.Component {
                 id="exampleName"
                 placeholder="Insira aqui o nome"
                 required
-                defaultValue={this.props.row.name}
+                onChange={this.handleChange}
+                value={this.state.name}
               />
             </Col>
           </FormGroup>
@@ -69,7 +83,8 @@ class FormCliente extends React.Component {
                 maxLength={9}
                 min={0.00000000001}
                 required
-                defaultValue={this.props.row.phoneNumber}
+                onChange={this.handleChange}
+                value={this.state.phoneNumber}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
@@ -85,7 +100,8 @@ class FormCliente extends React.Component {
                 maxLength={9}
                 min={0.00000000001}
                 required
-                defaultValue={this.props.row.nif}
+                onChange={this.handleChange}
+                value={this.state.nif}
               />
             </Col>
           </FormGroup>
@@ -102,7 +118,7 @@ class FormCliente extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup>
-            <Button>Submeter</Button>
+            <Button onClick={ (e) => this.props.handleUpdateButton(e, this.state)}>Submeter</Button>
             <Button>Cancelar</Button>
           </FormGroup>
         </Form>
@@ -111,19 +127,4 @@ class FormCliente extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    users: state.users
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    //addUser: bindActionCreators(addUser, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FormCliente);
+export default FormCliente;
