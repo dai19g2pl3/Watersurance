@@ -1,4 +1,4 @@
-import { FETCH_USERS_SUCCESS, DELETE_USER_SUCCESS, ADD_USER_SUCCESS, FETCH_USERS_FAILURE, ADD_USER_FAILURE } from "../actions/usersAction";
+import { FETCH_USERS_SUCCESS, DELETE_USER_SUCCESS, ADD_USER_SUCCESS, FETCH_USERS_FAILURE, ADD_USER_FAILURE, UPDATE_USER_SUCCESS } from "../actions/usersAction";
 let initialState = [];
 
 export default (state = initialState, action) => {
@@ -12,6 +12,8 @@ export default (state = initialState, action) => {
     case ADD_USER_FAILURE:
       return `error: ${action.payload}`
     case DELETE_USER_SUCCESS:
+      return [];
+    case UPDATE_USER_SUCCESS:
       return [];
     default:
       return state;

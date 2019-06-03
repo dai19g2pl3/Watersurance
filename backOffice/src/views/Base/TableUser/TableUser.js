@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   fetchAllUsers,
+  updateUser,
   addUser,
   deleteUser
 } from "../../../actions/usersAction";
@@ -43,16 +44,23 @@ class TableUser extends Component {
     }, 250);
   };
 
-  handleUpdate = (e, id, form) => {
+  handleUpdate = (e, user) => {
     e.preventDefault();
     console.log("Aleluia");
-    console.log(id);
-    this.props.updateUser(id);
+    console.log(user.id);
+    
+    if(user.isActive === 1) {
+      user.isActive = "true";
+    } else user.isActive = "false";
+    console.log(user);
+    
+    this.props.updateUser(user);
     setInterval(() => {
       if (this.props.users.length === 0) {
         this.props.fetchAllUsers();
       }
     }, 250);
+    
   };
 
   render() {
@@ -116,7 +124,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar row={row} />
+              <BtnEditar id={row.id} row={row} handleUpdateButton={this.handleUpdate} />
             </div>
           );
         }
@@ -211,6 +219,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
+    updateUser: bindActionCreators(updateUser, dispatch),
     deleteUser: bindActionCreators(deleteUser, dispatch),
     addUser: bindActionCreators(addUser, dispatch)
   };

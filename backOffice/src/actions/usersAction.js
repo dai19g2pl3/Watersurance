@@ -37,19 +37,20 @@ export const fetchAllUsers = () => dispatch => {
     );
 };
 
-export const updateUser = (id, user) => {
+export const updateUser = (user) => {
   return dispatch => {
-    fetch(`https://watersurance-api.herokuapp.com/api/user/` + id, {
+    fetch(`https://watersurance-api.herokuapp.com/api/user/table/` + user.id, {
       method: "PUT",
       credentials: "include",
-      headers: headers
+      headers: headers,
+      body: JSON.stringify(user)
     })
       .then(res => res.json())
       .then(res => {
         console.log("deu fetch");
         dispatch({
           type: UPDATE_USER_SUCCESS,
-          payload: id
+          payload: user.id
         });
       });
   };
