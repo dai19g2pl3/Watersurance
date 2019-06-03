@@ -16,7 +16,8 @@ import {
   TableSelectHabitation,
   BtnAdicionarHabitation,
   BtnAdicionarUser,
-  TableSelectUser
+  TableSelectUser,
+  FormUser
 } from "./Base";
 
 import Dashboard from "./Dashboard";
@@ -47,5 +48,6 @@ export {
   TableSelectHabitation,
   BtnAdicionarHabitation,
   BtnAdicionarUser,
-  TableSelectUser
+  TableSelectUser,
+  FormUser
 };

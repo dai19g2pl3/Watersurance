@@ -22,6 +22,10 @@ const selectOptions = {
   0: "Inativo"
 };
 
+const optionsRole = {
+  1: "Segurador",
+  0: "Cliente"
+};
 class TableUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
@@ -84,14 +88,24 @@ class TableUser extends Component {
         headerAlign: "center"
       },
       {
+        dataField: "Role",
+        text: "Role",
+        sort: true,
+        headerAlign: "center",
+        formatter: cell => selectOptions[cell],
+        filter: selectFilter({
+          options: optionsRole,
+          defaultValue: 0
+        })
+      },
+      {
         dataField: "isActive",
-        text: "Estado",
         headerStyle: { width: 150 },
         headerAlign: "center",
         formatter: cell => selectOptions[cell],
         filter: selectFilter({
           options: selectOptions,
-          defaultValue: 0
+          defaultValue: 1
         })
       },
       {

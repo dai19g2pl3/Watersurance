@@ -17,6 +17,7 @@ import TableSelectHabitation from "./TableSelectHabitation";
 import TableSelectUser from "./TableSelectUser";
 import BtnAdicionarHabitation from "./BtnAdicionarHabitation";
 import BtnAdicionarUser from "./BtnAdicionarUser";
+import FormUser from "./FormUser";
 
 export {
   Breadcrumbs,
@@ -37,5 +38,6 @@ export {
   TableSelectHabitation,
   BtnAdicionarHabitation,
   BtnAdicionarUser,
-  TableSelectUser
+  TableSelectUser,
+  FormUser
 };

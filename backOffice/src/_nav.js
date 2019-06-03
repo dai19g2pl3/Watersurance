@@ -4,11 +4,22 @@ export default {
       title: true,
       name: "Utilizadores"
     },
-
     {
-      name: "Cliente",
-      url: "/base/table-user",
-      icon: "icon-user"
+      name: "Utilizadores",
+      url: "/base",
+      icon: "icon-user",
+      children: [
+        {
+          name: "Listar",
+          url: "/base/table-user",
+          icon: "icon-people"
+        },
+        {
+          name: "Adicionar",
+          url: "/base/form-user",
+          icon: "icon-user-follow"
+        }
+      ]
     },
     {
       divider: true

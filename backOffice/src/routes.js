@@ -18,6 +18,7 @@ const BtnAdicionarUser = React.lazy(() =>
 const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
+const FormUser = React.lazy(() => import("./views/Base/FormUser"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
 const CardCasa = React.lazy(() => import("./views/Base/CardCasa"));
 const TableSelectHabitation = React.lazy(() =>
@@ -144,6 +145,12 @@ const routes = [
     exact: true,
     name: "Button Adicionar Habitation",
     component: BtnAdicionarHabitation
+  },
+  {
+    path: "/base/form-user",
+    exact: true,
+    name: "Form User",
+    component: FormUser
   }
 ];
 
