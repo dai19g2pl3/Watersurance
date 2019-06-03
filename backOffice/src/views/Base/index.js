@@ -13,6 +13,10 @@ import BtnEditar from "./BtnEditar";
 import TableUser from "./TableUser";
 import CardCasa from "./CardCasa";
 import TableSensor from "./TableSensor";
+import TableSelectHabitation from "./TableSelectHabitation";
+import TableSelectUser from "./TableSelectUser";
+import BtnAdicionarHabitation from "./BtnAdicionarHabitation";
+import BtnAdicionarUser from "./BtnAdicionarUser";
 
 export {
   Breadcrumbs,
@@ -29,5 +33,9 @@ export {
   BtnEditar,
   TableUser,
   CardCasa,
-  TableSensor
+  TableSensor,
+  TableSelectHabitation,
+  BtnAdicionarHabitation,
+  BtnAdicionarUser,
+  TableSelectUser
 };

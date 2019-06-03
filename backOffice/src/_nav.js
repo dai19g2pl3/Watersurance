@@ -35,7 +35,7 @@ export default {
         },
         {
           name: "Adicionar",
-          url: "/base/form-habitacao",
+          url: "/base/table-select-user",
           icon: "icon-arrow-right"
         }
       ]
@@ -52,7 +52,7 @@ export default {
         },
         {
           name: "Submeter",
-          url: "/base/form-ocorrencia",
+          url: "/base/table-select-habitation",
           icon: "icon-arrow-right"
         }
       ]

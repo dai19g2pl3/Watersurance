@@ -12,7 +12,11 @@ import {
   FormHabitacao,
   FormOcorrencia,
   TableUser,
-  TableSensor
+  TableSensor,
+  TableSelectHabitation,
+  BtnAdicionarHabitation,
+  BtnAdicionarUser,
+  TableSelectUser
 } from "./Base";
 
 import Dashboard from "./Dashboard";
@@ -39,5 +43,9 @@ export {
   FormOcorrencia,
   DashboardCliente,
   TableUser,
-  TableSensor
+  TableSensor,
+  TableSelectHabitation,
+  BtnAdicionarHabitation,
+  BtnAdicionarUser,
+  TableSelectUser
 };
