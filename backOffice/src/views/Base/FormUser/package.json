@@ -1,0 +1,6 @@
+{
+  "name": "FormUser",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormUser.js"
+}

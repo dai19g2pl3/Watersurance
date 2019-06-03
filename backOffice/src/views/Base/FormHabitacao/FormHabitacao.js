@@ -78,22 +78,6 @@ export default class FormHabitacao extends React.Component {
         </Row>
         <Form>
           <FormGroup>
-            <Label for="exampleCliente">Cliente</Label>
-            <Input
-              type="select"
-              name="cliente"
-              id="exampleCliente"
-              placeholder="Escolha o cliente associado a esta habitação"
-              required
-            >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-            </Input>
-          </FormGroup>
-          <FormGroup>
             <Label for="exampleAdress">Morada</Label>
             <Input
               type="text"

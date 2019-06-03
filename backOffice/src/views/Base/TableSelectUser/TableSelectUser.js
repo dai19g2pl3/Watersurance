@@ -3,31 +3,21 @@ import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 //eslint-disable-next-line
-import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
+import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnEditar from "../BtnEditar/BtnEditar";
-import BtnApagar from "../BtnApagar/BtnApagar";
+import BtnAdicionarHabitation from "./../BtnAdicionarHabitation/BtnAdicionarHabitation";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   fetchAllUsers,
-  updateUser,
   addUser,
   deleteUser
 } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
-const selectOptions = {
-  1: "Ativo",
-  0: "Inativo"
-};
-
-const optionsRole = {
-  1: "Segurador",
-  0: "Cliente"
-};
-class TableUser extends Component {
+class TableSelectUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
@@ -44,23 +34,16 @@ class TableUser extends Component {
     }, 250);
   };
 
-  handleUpdate = (e, user) => {
+  handleUpdate = (e, id, form) => {
     e.preventDefault();
     console.log("Aleluia");
-    console.log(user.id);
-    
-    if(user.isActive === 1) {
-      user.isActive = "true";
-    } else user.isActive = "false";
-    console.log(user);
-    
-    this.props.updateUser(user);
+    console.log(id);
+    this.props.updateUser(id);
     setInterval(() => {
       if (this.props.users.length === 0) {
         this.props.fetchAllUsers();
       }
     }, 250);
-    
   };
 
   render() {
@@ -90,54 +73,14 @@ class TableUser extends Component {
         headerAlign: "center"
       },
       {
-        dataField: "phoneNumber",
-        text: "Telefone",
-        sort: true,
-        headerAlign: "center"
-      },
-      {
-        dataField: "Role",
-        text: "Role",
-        sort: true,
-        headerAlign: "center",
-        formatter: cell => selectOptions[cell],
-        filter: selectFilter({
-          options: optionsRole,
-          defaultValue: 0
-        })
-      },
-      {
-        dataField: "isActive",
-        headerStyle: { width: 150 },
-        headerAlign: "center",
-        formatter: cell => selectOptions[cell],
-        filter: selectFilter({
-          options: selectOptions,
-          defaultValue: 1
-        })
-      },
-      {
-        dataField: "edit",
+        dataField: "addUser",
         isDummyField: true,
-        text: "Editar",
+        text: "Adicionar",
         headerAlign: "center",
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar id={row.id} row={row} handleUpdateButton={this.handleUpdate} />
-            </div>
-          );
-        }
-      },
-      {
-        dataField: "delete",
-        isDummyField: true,
-        text: "Apagar",
-        headerAlign: "center",
-        formatter: (cell, row, rowIndex, formatExtraData) => {
-          return (
-            <div>
-              <BtnApagar id={row.id} handleDeleteButton={this.handleDelete} />
+              <BtnAdicionarHabitation />
             </div>
           );
         }
@@ -219,7 +162,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
-    updateUser: bindActionCreators(updateUser, dispatch),
     deleteUser: bindActionCreators(deleteUser, dispatch),
     addUser: bindActionCreators(addUser, dispatch)
   };
@@ -228,4 +170,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TableUser);
+)(TableSelectUser);
