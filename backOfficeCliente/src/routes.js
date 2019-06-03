@@ -13,12 +13,17 @@ const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const BtnEditar = React.lazy(() => import("./views/Base/BtnEditar"));
 const BtnApagar = React.lazy(() => import("./views/Base/BtnApagar"));
 const FormOcorrencia = React.lazy(() => import("./views/Base/FormOcorrencia"));
+const FormOcorrenciaCliente = React.lazy(() =>
+  import("./views/Base/FormOcorrenciaCliente/FormOcorrenciaCliente")
+);
 const FormHabitacao = React.lazy(() => import("./views/Base/FormHabitacao"));
 const FormCliente = React.lazy(() => import("./views/Base/FormCliente"));
 const CardUser = React.lazy(() => import("./views/Base/CardUser"));
 const CardCasa = React.lazy(() => import("./views/Base/CardCasa"));
+const CardPerfil = React.lazy(() => import("./views/Base/CardPerfil"));
 const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 const TableSensor = React.lazy(() => import("./views/Base/TableSensor"));
+const Contract = React.lazy(() => import("./views/Base/Contract"));
 const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
 const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
@@ -108,6 +113,24 @@ const routes = [
     exact: true,
     name: "Card Casa",
     component: CardCasa
+  },
+  {
+    path: "/base/card-perfil",
+    exact: true,
+    name: "Card Perfil",
+    component: CardPerfil
+  },
+  {
+    path: "/base/contract",
+    exact: true,
+    name: "Contract",
+    component: Contract
+  },
+  {
+    path: "/base/form-ocorrencia-cliente",
+    exact: true,
+    name: "Form Ocorrencia Cliente",
+    component: FormOcorrenciaCliente
   }
 ];
 
