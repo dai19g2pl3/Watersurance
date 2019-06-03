@@ -9,7 +9,7 @@ import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAllUsers, addUser } from "../../../actions/usersAction";
+import { fetchAllUsers, addUser, deleteUser } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -22,7 +22,17 @@ class TableUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
   }
-  
+
+  handleDelete = (e, id) => {
+    e.preventDefault();
+    console.log("Aleluia");
+    console.log(id);
+    this.props.deleteUser(id);
+    setInterval(() => { if(this.props.users.length === 0){
+      this.props.fetchAllUsers();
+    }; }, 250);
+  };
+
   render() {
     const columns = [
       {
@@ -68,7 +78,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar id={row} handleDelete={this.handleDelete}/>
+              <BtnEditar id={row} />
             </div>
           );
         }
@@ -81,7 +91,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnApagar id={row.id} />
+              <BtnApagar id={row.id} handleDeleteButton={this.handleDelete}/>
             </div>
           );
         }
@@ -162,6 +172,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
+    deleteUser: bindActionCreators(deleteUser, dispatch),
     addUser: bindActionCreators(addUser, dispatch)
   };
 }

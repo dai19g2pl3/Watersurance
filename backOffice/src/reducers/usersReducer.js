@@ -12,16 +12,7 @@ export default (state = initialState, action) => {
     case ADD_USER_FAILURE:
       return `error: ${action.payload}`
     case DELETE_USER_SUCCESS:
-      console.log(action.payload);
-      console.log(state);
-      /*
-      state.forEach((user, index) => {
-        if(user.id === action.payload) {
-          delete state[index];
-        }
-      })
-      */
-      return state;
+      return [];
     default:
       return state;
   }

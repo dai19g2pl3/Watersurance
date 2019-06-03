@@ -29,19 +29,14 @@ class BtnApagar extends React.Component {
       modal: !prevState.modal
     }));
   }
-  
-  handleDelete = e => {
-    e.preventDefault();
-    this.props.deleteUser(this.props.id);
-  };
-  
+
   render() {
     const closeBtn = (
       <button className="close" onClick={this.toggle}>
         &times;
       </button>
     );
-    console.log(this.props);
+    
     return (
       <div>
         <Button
@@ -72,7 +67,7 @@ class BtnApagar extends React.Component {
                   terminado de imeadiato.
                 </CardText>
               </h6>
-              <Button color="secondary" onClick={ (e) => this.handleDelete(e, this.props.id)}>
+              <Button color="secondary" onClick={ (e) => this.props.handleDeleteButton(e, this.props.id)}>
                 Eliminar
               </Button>
             </Card>
