@@ -9,12 +9,12 @@ export default {
     },
     {
       name: "Meu Perfil",
-      url: "/base/card-user",
+      url: "/base/card-perfil",
       icon: "icon-user"
     },
     {
-      name: "Contrato",
-      url: "/base/tables",
+      name: "Sensores",
+      url: "/base/table-sensor",
       icon: "icon-notebook"
     },
     {
@@ -29,7 +29,7 @@ export default {
         },
         {
           name: "Submeter",
-          url: "/base/form-ocorrencia",
+          url: "/base/form-ocorrencia-cliente",
           icon: "icon-arrow-right"
         }
       ]

@@ -89,68 +89,48 @@ const CardCasa = () => {
             </Media>
             <Media body>
               <Media heading center>
-                Meus Dados
+                Dados da Habitação
               </Media>
               <Form>
                 <FormGroup row>
-                  <Label for="exampleEmail" sm={2}>
-                    Email
-                  </Label>
-                  <Col sm={10}>
-                    <Input
-                      type="email"
-                      name="email"
-                      id="exampleEmail"
-                      placeholder="Insira aqui o e-mail"
-                      required
-                      disabled
-                    />
-                  </Col>
-                </FormGroup>
-                <FormGroup row>
-                  <Label for="exampleNome" sm={2}>
-                    Nome
+                  <Label for="exampleMorada" sm={2}>
+                    Morada
                   </Label>
                   <Col sm={10}>
                     <Input
                       type="text"
-                      name="name"
-                      id="exampleName"
-                      placeholder="Insira aqui o nome"
+                      name="Morada"
+                      id="exampleMorada"
+                      placeholder="Insira aqui a morada"
                       required
                       disabled
                     />
                   </Col>
                 </FormGroup>
+
                 <FormGroup row>
-                  <Label for="exampleNome" sm={2}>
-                    Telefone
+                  <Label for="exampleCodigoPostal" sm={2}>
+                    Codigo-Postal
                   </Label>
                   <Col sm={4}>
                     <Input
-                      type="number"
-                      name="telefone"
-                      id="exampleTelefone"
-                      placeholder="Insira aqui o telefone"
-                      minLength={9}
-                      maxLength={9}
-                      min={0.00000000001}
+                      type="zip"
+                      name="Codigo-Postal"
+                      id="exampleCodigoPostal"
+                      placeholder="Insira aqui o Codigo-Postal"
                       required
                       disabled
                     />
                   </Col>
                   <Label for="exampleNIF" sm={2}>
-                    NIF
+                    Qt Sensores
                   </Label>
                   <Col sm={4}>
                     <Input
                       type="number"
-                      name="nif"
-                      id="exampleNIF"
-                      placeholder="Insira aqui o nif"
-                      minLength={9}
-                      maxLength={9}
-                      min={0.00000000001}
+                      name="Sensor"
+                      id="exampleSensor"
+                      placeholder="Insira aqui o numero de sensores"
                       required
                       disabled
                     />

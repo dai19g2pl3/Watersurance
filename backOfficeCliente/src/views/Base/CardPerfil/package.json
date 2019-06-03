@@ -1,0 +1,6 @@
+{
+  "name": "CardCasa",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./CardPerfil.js"
+}

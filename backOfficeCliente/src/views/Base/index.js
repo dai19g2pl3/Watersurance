@@ -13,6 +13,8 @@ import BtnEditar from "./BtnEditar";
 import TableUser from "./TableUser";
 import CardCasa from "./CardCasa";
 import TableSensor from "./TableSensor";
+import CardPerfil from "./CardPerfil";
+import FormOcorrenciaCliente from "./FormOcorrenciaCliente";
 
 export {
   Breadcrumbs,
@@ -29,5 +31,7 @@ export {
   BtnEditar,
   TableUser,
   CardCasa,
-  TableSensor
+  TableSensor,
+  CardPerfil,
+  FormOcorrenciaCliente
 };
