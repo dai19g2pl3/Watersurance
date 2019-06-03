@@ -37,6 +37,24 @@ export const fetchAllUsers = () => dispatch => {
     );
 };
 
+export const updateUser = (id, user) => {
+  return dispatch => {
+    fetch(`https://watersurance-api.herokuapp.com/api/user/` + id, {
+      method: "PUT",
+      credentials: "include",
+      headers: headers
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log("deu fetch");
+        dispatch({
+          type: UPDATE_USER_SUCCESS,
+          payload: id
+        });
+      });
+  };
+};
+
 export const addUser = user => dispatch => {
   fetch(`https://watersurance-api.herokuapp.com/api/signup` + user.id, {
     method: "POST",
@@ -55,9 +73,9 @@ export const addUser = user => dispatch => {
     );
 };
 
-export const deleteUser = (id) => {
+export const deleteUser = id => {
   return dispatch => {
-    fetch(`https://watersurance-api.herokuapp.com/api/user/` + id , {
+    fetch(`https://watersurance-api.herokuapp.com/api/user/` + id, {
       method: "DELETE",
       credentials: "include",
       headers: headers
@@ -72,4 +90,3 @@ export const deleteUser = (id) => {
       });
   };
 };
-
