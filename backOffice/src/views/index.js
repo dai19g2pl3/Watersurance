@@ -16,15 +16,13 @@ import {
 } from "./Base";
 
 import Dashboard from "./Dashboard";
-import { Login, Page404, Page500, Register, User } from "./Pages";
+import { Page404, Page500 } from "./Pages";
 import Widgets from "./Widgets";
 import DashboardCliente from "./DashboardCliente";
 
 export {
   Page404,
   Page500,
-  Register,
-  Login,
   Tables,
   Dashboard,
   Widgets,
@@ -41,6 +39,5 @@ export {
   FormOcorrencia,
   DashboardCliente,
   TableUser,
-  TableSensor,
-  User
+  TableSensor
 };
