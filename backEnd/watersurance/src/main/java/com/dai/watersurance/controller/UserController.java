@@ -7,6 +7,7 @@ import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
 import com.dai.watersurance.payload.request.UpdatePasswordRequest;
+import com.dai.watersurance.payload.request.UpdateTableUserRequest;
 import com.dai.watersurance.payload.request.UpdateUserOrInsurerRequest;
 import com.dai.watersurance.payload.request.UpdateUserProfileRequest;
 import com.dai.watersurance.projection.NoPwdUser;
@@ -109,6 +110,13 @@ public class UserController {
     public ResponseEntity<ApiResponse> updateMyProfile(@CurrentUser UserPrincipal currentUser, 
     		@Valid @RequestBody UpdateUserProfileRequest updateUserProfileRequest) {        
     	return userService.updateMyProfile(currentUser, updateUserProfileRequest);
+    }
+    
+    @PreAuthorize("hasRole('INSURER') or hasRole('ADMIN')")
+    @PutMapping("/user/table/{id}")
+    public ResponseEntity<ApiResponse> updateUserOrInsurerTableUser(@PathVariable(value = "id") long id, 
+    		@Valid @RequestBody UpdateTableUserRequest updateTableUserRequest) {        
+    	return userService.updateUserOrInsurerTableUser(id, updateTableUserRequest);
     }
     
     @PreAuthorize("hasRole('ADMIN')")
