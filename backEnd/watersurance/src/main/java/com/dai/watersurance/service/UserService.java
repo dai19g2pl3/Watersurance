@@ -25,6 +25,7 @@ import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
 import com.dai.watersurance.payload.request.UpdatePasswordRequest;
+import com.dai.watersurance.payload.request.UpdateTableUserRequest;
 import com.dai.watersurance.payload.request.UpdateUserOrInsurerRequest;
 import com.dai.watersurance.payload.request.UpdateUserProfileRequest;
 import com.dai.watersurance.payload.response.ApiResponse;
@@ -239,6 +240,21 @@ public class UserService {
     	return ResponseEntity.ok().body(new ApiResponse(true, "Password updated successfully"));
     }
     
+    public ResponseEntity<ApiResponse> updateUserOrInsurerTableUser(@PathVariable(value = "id") long id, 
+    		@Valid @RequestBody UpdateTableUserRequest updateTableUserRequest) {        
+    	User user = userRepository.findById(id)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    	
+    	user.setName(updateTableUserRequest.getName());
+    	user.setEmail(updateTableUserRequest.getEmail());
+    	user.setNif(updateTableUserRequest.getNif());
+    	user.setPhoneNumber(updateTableUserRequest.getPhoneNumber());
+    	user.setIsActive(updateTableUserRequest.getIsActive());
+    	
+    	userRepository.save(user);
+        return ResponseEntity.ok().body(new ApiResponse(true, "User updated successfully"));
+    }
+    
     public ResponseEntity<ApiResponse> updateMyProfile(@CurrentUser UserPrincipal currentUser, 
     		@Valid @RequestBody UpdateUserProfileRequest updateUserProfileRequest) {
     	User user = userRepository.findById(currentUser.getId(), User.class)
@@ -270,6 +286,8 @@ public class UserService {
     	return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Failed to delete User"), 
     			HttpStatus.BAD_REQUEST);
     }
+    
+    
         
     public ResponseEntity<ApiResponse> deleteUserOrInsurer(@PathVariable(value = "id") long id) {
     	User user = userRepository.findById(id)
