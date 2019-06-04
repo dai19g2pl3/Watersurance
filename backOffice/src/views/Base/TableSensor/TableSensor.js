@@ -15,7 +15,6 @@ class TableSensor extends Component {
         sort: true,
         hidden: true
       },
-
       {
         dataField: "name",
         text: "Nome",
@@ -73,29 +72,3 @@ class TableSensor extends Component {
 }
 
 export default TableSensor;
-
-/*
-    const fetchLastOcurrences = this.props.lastOcurrences;
-    let data = [];
-    console.log("this.props", this.props);
-    /*
-    const fetchUser = this.props.users;
-    let data = [];
-
-    fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        nif: user.nif,
-        isActive: isActive
-      });
-    });
-    var user = data;
-    */

@@ -17,27 +17,21 @@ class TableSensor extends Component {
       },
 
       {
-        dataField: "name",
-        text: "Nome",
+        dataField: "morada",
+        text: "Morada",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "email",
-        text: "Email",
-        sort: true,
-        headerAlign: "center"
-      },
-      {
-        dataField: "nif",
-        text: "NIF",
+        dataField: "estado",
+        text: "Estado",
         sort: true,
         headerAlign: "center"
       }
     ];
     const defaultSorted = [
       {
-        dataField: "name",
+        dataField: "morada",
         order: "desc"
       }
     ];
