@@ -17,6 +17,7 @@ class BtnAdicionarUser extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
+    console.log(this.props.row);
   }
   render() {
     return (
@@ -32,13 +33,13 @@ class BtnAdicionarUser extends React.Component {
         <Modal
           isOpen={this.state.modal}
           modalTransition={{ timeout: 500 }}
-          backdropTransition={{ timeout: 1000 }}
+          backdropTransition={{ timeout: 700 }}
           toggle={this.toggle}
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <FormOcorrencia />
+            <FormOcorrencia row={this.props.row} />
           </ModalBody>
         </Modal>
       </div>
