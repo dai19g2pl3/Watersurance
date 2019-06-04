@@ -84,7 +84,6 @@ class BtnAddObject extends React.Component {
   }
 
   render() {
-    console.log(this.props.idHabitation);
     const closeBtn = (
       <button className="close" onClick={this.toggle}>
         &times;
@@ -107,7 +106,7 @@ class BtnAddObject extends React.Component {
             &nbsp;Adicionar Objeto
           </ModalHeader>
           <ModalBody>
-            <FormObject />
+            <FormObject idHabitation={this.props.idHabitation} />
           </ModalBody>
         </Modal>
       </div>

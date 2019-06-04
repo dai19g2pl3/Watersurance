@@ -10,6 +10,9 @@ import {
   Col
 } from "reactstrap";
 import { PropTypes } from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addObject } from "../../../actions/objectsAction";
 
 Input.propTypes = {
   children: PropTypes.node,
@@ -69,18 +72,46 @@ FormText.propTypes = {
 };
 
 class FormObject extends React.Component {
+  state = {
+    price: '',
+    ref: '',
+    description: ''
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  handleAddObject = (e, object, idHabitation) => {
+    e.preventDefault();
+    console.log(object);
+    console.log(idHabitation);
+    this.props.addObject(object, idHabitation);
+    /*
+    var refresh = setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+        clearInterval(refresh);
+      }
+    }, 250);
+    */
+  };
+
   render() {
-    //console.log(this.props.row);
     return (
       <Form>
         <FormGroup>
           <Label for="exampleAdress">Descrição</Label>
           <Input
             type="text"
-            name="descricao"
+            name="description"
             id="exampleDescricao"
             placeholder="Insira uma breve descrição"
             required
+            onChange={this.handleChange}
+            value={this.state.description}
           />
         </FormGroup>
         <Row>
@@ -93,6 +124,8 @@ class FormObject extends React.Component {
                 id="exampleZip"
                 placeholder="Insira o preço"
                 required
+                onChange={this.handleChange}
+                value={this.state.price}
               />
             </FormGroup>
           </Col>
@@ -105,13 +138,25 @@ class FormObject extends React.Component {
                 id="exampleRef"
                 placeholder="Insira a referência"
                 required
+                onChange={this.handleChange}
+                value={this.state.ref}
               />
             </FormGroup>
           </Col>
         </Row>
-        <Button>Adicionar</Button>
+        <Button onClick={e => this.handleAddObject(e, this.state, this.props.idHabitation)}>Adicionar</Button>
       </Form>
     );
   }
 }
-export default FormObject;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addObject: bindActionCreators(addObject, dispatch)
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(FormObject);
