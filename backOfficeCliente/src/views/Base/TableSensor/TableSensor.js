@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import { log } from "util";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+  fetchObjectSensor,
+} from "../../../actions/objectSensorAction";
 
 const { SearchBar } = Search;
 
-const data = [];
 class TableSensor extends Component {
+
   render() {
     const columns = [
       {
@@ -35,9 +41,36 @@ class TableSensor extends Component {
         order: "desc"
       }
     ];
+
+    const fetchHabitations = this.props.habitations;
+    const fetchObjectSensor = this.props.objectSensor;
+    let data = [];
+    
+    fetchHabitations.forEach(function(habitation) {
+      fetchObjectSensor.forEach(element => {
+        console.log(element.value);
+        var estado;
+        if(element.value > 200) {
+          estado = "Inudação";
+        } else if(element.value <= 200) {
+          estado = "Ok"
+        } else if(element.value == null) {
+          estado = "Falha";
+        }
+        
+        data.push({
+          id: habitation.id,
+          morada: habitation.address,
+          estado: estado
+        });
+      });
+    });
+    
+    var habitations = data;
+
     return (
       <div>
-        <ToolkitProvider keyField="id" data={data} columns={columns} search>
+        <ToolkitProvider keyField="id" data={habitations} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -54,7 +87,7 @@ class TableSensor extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={data}
+                data={habitations}
                 bordered={false}
                 defaultSorted={defaultSorted}
               />
@@ -66,30 +99,22 @@ class TableSensor extends Component {
   }
 }
 
-export default TableSensor;
+function mapStateToProps(state) {
+  return {
+    habitations: state.habitations,
+    objectSensor: state.objectSensor,
+    occurrenceSensor: state.occurrenceSensor
+  };
+}
 
-/*
-    const fetchLastOcurrences = this.props.lastOcurrences;
-    let data = [];
-    console.log("this.props", this.props);
-    /*
-    const fetchUser = this.props.users;
-    let data = [];
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
+  };
+}
 
-    fetchUser.forEach(function(user) {
-      let isActive;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TableSensor);
 
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        nif: user.nif,
-        isActive: isActive
-      });
-    });
-    var user = data;
-    */
