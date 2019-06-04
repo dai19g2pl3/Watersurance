@@ -23,6 +23,7 @@ import com.dai.watersurance.model.RoleName;
 import com.dai.watersurance.model.User;
 import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
+import com.dai.watersurance.payload.request.PostUserOrInsurerRequestTable;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
 import com.dai.watersurance.payload.request.UpdatePasswordRequest;
 import com.dai.watersurance.payload.request.UpdateTableUserRequest;
@@ -149,6 +150,41 @@ public class UserService {
     	role.add(userRole);
     	user.setRoles(role);
     	user.setInsurer(insurer);
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));
+    }
+    
+    public ResponseEntity<ApiResponse> registerUserOrInsurerTable(@Valid @RequestBody PostUserOrInsurerRequestTable postUserOrInsurerRequestTable) {
+    	if(userRepository.existsByEmail(postUserOrInsurerRequestTable.getEmail())) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+    	
+    	// Creating user's account
+        User user = new User(postUserOrInsurerRequestTable.getName(), postUserOrInsurerRequestTable.getEmail(),
+        		postUserOrInsurerRequestTable.getPassword(), postUserOrInsurerRequestTable.getNif(),
+        		postUserOrInsurerRequestTable.getPhoneNumber(), postUserOrInsurerRequestTable.getIsActive(), null);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	
+        Role userRole;
+        switch(postUserOrInsurerRequestTable.getRole()) {
+    	case "ROLE_USER":
+    		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+    		.orElseThrow(() -> new AppException("User role not set.")); break;
+    	case "ROLE_INSURER":
+    		userRole = roleRepository.findByName(RoleName.ROLE_INSURER)
+    		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+    	default:
+    		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+    		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+    	}
+    	
+    	Set<Role> role = new HashSet<Role>();
+    	role.add(userRole);
+    	user.setRoles(role);
+
     	userRepository.save(user);
     	
     	return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));

@@ -63,7 +63,7 @@ public class SensorService {
 				Criteria.where("date").lte(sensorOccurrenceRequest.getEndDate()));
 		query.addCriteria(c);
 		
-		List<Sensor> sensors = mongoTemplate.find(query, Sensor.class, "Object - " + id);
+		List<Sensor> sensors = mongoTemplate.find(query, Sensor.class, "Object" + id);
 		Occurrence occurrence = new Occurrence();
 		boolean wasOccurrenceCreated = false;
 		int i = 0;

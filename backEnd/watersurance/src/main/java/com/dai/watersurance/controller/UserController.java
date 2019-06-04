@@ -5,6 +5,7 @@ import com.dai.watersurance.payload.response.UserIdentityAvailability;
 import com.dai.watersurance.model.User;
 import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
+import com.dai.watersurance.payload.request.PostUserOrInsurerRequestTable;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
 import com.dai.watersurance.payload.request.UpdatePasswordRequest;
 import com.dai.watersurance.payload.request.UpdateTableUserRequest;
@@ -82,6 +83,12 @@ public class UserController {
     @PostMapping("/user")
     public ResponseEntity<ApiResponse> registerUserOrInsurer(@Valid @RequestBody PostUserOrInsurerRequest postUserOrInsurerRequest) {
     	return userService.registerUserOrInsurer(postUserOrInsurerRequest);
+    }
+    
+    @PreAuthorize("hasRole('INSURER') or hasRole('ADMIN')")
+    @PostMapping("/user/table")
+    public ResponseEntity<ApiResponse> registerUserOrInsurerTable(@Valid @RequestBody PostUserOrInsurerRequestTable postUserOrInsurerRequestTable) {
+    	return userService.registerUserOrInsurerTable(postUserOrInsurerRequestTable);
     }
     
     @PreAuthorize("hasRole('ADMIN')")
