@@ -17,7 +17,7 @@ class BtnAdicionarUser extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
-    console.log(this.props.row);
+    //console.log(this.props.row);
   }
   render() {
     return (

@@ -7,11 +7,16 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchAllUsers } from "../../../actions/usersAction";
+import { fetchAllHabitations } from "../../../actions/habitationsAction";
 import BtnAdicionarUser from "../BtnAdicionarUser/BtnAdicionarUser";
 
 const { SearchBar } = Search;
 
 class TableSelectHabitation extends Component {
+  componentDidMount() {
+    this.props.fetchAllHabitations();
+    this.props.fetchAllUsers();
+  }
   render() {
     const columns = [
       {
@@ -27,17 +32,23 @@ class TableSelectHabitation extends Component {
         headerAlign: "center"
       },
       {
-        dataField: "casa",
-        text: "Habitação",
+        dataField: "address",
+        text: "Morada",
         sort: true,
         headerAlign: "center"
       },
-
+      {
+        dataField: "nif",
+        text: "NIF",
+        sort: true,
+        headerAlign: "center"
+      },
       {
         dataField: "AddUser",
         isDummyField: true,
         text: "Escolher",
         headerAlign: "center",
+        textAlign: "center",
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
@@ -53,23 +64,23 @@ class TableSelectHabitation extends Component {
         order: "desc"
       }
     ];
-
+    //console.log(this.props);
     const fetchUser = this.props.users;
+    const fetchHabitation = this.props.habitations;
     let data = [];
 
     fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        nif: user.nif,
-        isActive: isActive
+      fetchHabitation.forEach(function(habitation) {
+        if (user.id === habitation.userId) {
+          data.push({
+            idUser: user.id,
+            name: user.name,
+            nif: user.nif,
+            idHab: habitation.id,
+            address: habitation.address,
+            zipCode: habitation.zipCode
+          });
+        } else console.log(user, habitation);
       });
     });
     var user = data;
@@ -107,13 +118,15 @@ class TableSelectHabitation extends Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users
+    users: state.users,
+    habitations: state.habitations
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    //getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch),
+    fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch)
   };
 }
 

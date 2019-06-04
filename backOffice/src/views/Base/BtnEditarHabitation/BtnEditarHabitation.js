@@ -2,17 +2,12 @@
 
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import FormCliente from "../FormCliente";
 
-class BtnEditar extends React.Component {
-  constructor(props, user) {
-    super(props, user);
+class BtnEditarHabitation extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      modal: false,
-      name: user.name,
-      email: user.email,
-      nif: user.nif,
-      id: user.id
+      modal: false
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -40,17 +35,11 @@ class BtnEditar extends React.Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle} />
-          <ModalBody>
-            <FormCliente
-              id={this.props.id}
-              row={this.props.row}
-              handleUpdateButton={this.props.handleUpdateButton}
-            />
-          </ModalBody>
+          <ModalBody>IMPRIMIR FORM EDITAR HABITAÇAO</ModalBody>
         </Modal>
       </div>
     );
   }
 }
 
-export default BtnEditar;
+export default BtnEditarHabitation;

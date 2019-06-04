@@ -18,14 +18,14 @@ class FormCliente extends React.Component {
     nif: this.props.row.nif,
     phoneNumber: this.props.row.phoneNumber,
     isActive: this.props.row.isActive
-  }
+  };
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
-        [e.target.name]: e.target.value
+      [e.target.name]: e.target.value
     });
-    console.log(this.state);
-  }
+    //console.log(this.state);
+  };
 
   render() {
     return (
@@ -70,7 +70,7 @@ class FormCliente extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleNome" sm={2}>
+            <Label for="exampleTelefone" sm={2}>
               Telefone
             </Label>
             <Col sm={4}>
@@ -118,7 +118,9 @@ class FormCliente extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup>
-            <Button onClick={ (e) => this.props.handleUpdateButton(e, this.state)}>Submeter</Button>
+            <Button onClick={e => this.props.handleUpdateButton(e, this.state)}>
+              Submeter
+            </Button>
             <Button>Cancelar</Button>
           </FormGroup>
         </Form>
