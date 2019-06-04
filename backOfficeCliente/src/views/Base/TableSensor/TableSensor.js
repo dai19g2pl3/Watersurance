@@ -5,14 +5,11 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { log } from "util";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  fetchObjectSensor,
-} from "../../../actions/objectSensorAction";
+import { fetchObjectSensor } from "../../../actions/objectSensorAction";
 
 const { SearchBar } = Search;
 
 class TableSensor extends Component {
-
   render() {
     const columns = [
       {
@@ -21,10 +18,15 @@ class TableSensor extends Component {
         sort: true,
         hidden: true
       },
-
       {
         dataField: "morada",
         text: "Morada",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "tipo",
+        text: "Tipo",
         sort: true,
         headerAlign: "center"
       },
@@ -44,33 +46,56 @@ class TableSensor extends Component {
 
     const fetchHabitations = this.props.habitations;
     const fetchObjectSensor = this.props.objectSensor;
+    const fetchHabitationSensor = this.props.habitationSensor;
     let data = [];
-    
+    console.log(fetchHabitations);
+    console.log(fetchObjectSensor);
+    console.log(fetchHabitationSensor);
+
+    var habitationId;
+    var habitationAddress;
+    var estadoHabitation;
+    var estadoObject;
     fetchHabitations.forEach(function(habitation) {
-      fetchObjectSensor.forEach(element => {
-        console.log(element.value);
-        var estado;
-        if(element.value > 200) {
-          estado = "Inudação";
-        } else if(element.value <= 200) {
-          estado = "Ok"
-        } else if(element.value == null) {
-          estado = "Falha";
-        }
-        
-        data.push({
-          id: habitation.id,
-          morada: habitation.address,
-          estado: estado
+      fetchObjectSensor.forEach(sensorObject => {
+        fetchHabitationSensor.forEach(sensorHabitation => {
+          console.log(sensorObject.value);
+          console.log(sensorHabitation.value);
+          
+          if (sensorHabitation.value > 150) {
+            estadoHabitation = "Inundação";
+          } else if (sensorHabitation.value <= 150) {
+            estadoHabitation = "Ok";
+          } else if (sensorHabitation.value == null) {
+            estadoHabitation = "Falha";
+          }
+
+          if (sensorObject.value > 150) {
+            estadoObject = "Inundação";
+          } else if (sensorObject.value <= 150) {
+            estadoObject = "Ok";
+          } else if (sensorObject.value == null) {
+            estadoObject = "Falha";
+          }
+
+          habitationId = habitation.id;
+          habitationAddress = habitation.address;
         });
       });
     });
-    
+
+    data = [{id: habitationId, morada: habitationAddress, estado: estadoHabitation, tipo: "Ocorrência"},
+       {id: habitationId, morada: habitationAddress, estado: estadoObject, tipo: "Objeto"}]
     var habitations = data;
 
     return (
       <div>
-        <ToolkitProvider keyField="id" data={habitations} columns={columns} search>
+        <ToolkitProvider
+          keyField="id"
+          data={habitations}
+          columns={columns}
+          search
+        >
           {props => (
             <div>
               <SearchBar
@@ -103,13 +128,13 @@ function mapStateToProps(state) {
   return {
     habitations: state.habitations,
     objectSensor: state.objectSensor,
-    occurrenceSensor: state.occurrenceSensor
+    habitationSensor: state.habitationSensor
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
+    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch)
   };
 }
 
@@ -117,4 +142,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(TableSensor);
-

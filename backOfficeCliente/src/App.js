@@ -5,8 +5,9 @@ import Loadable from "react-loadable";
 import "./App.scss";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAllHabitations} from "./actions/habitationsAction";
+import { fetchAllHabitations } from "./actions/habitationsAction";
 import { fetchObjectSensor } from "./actions/objectSensorAction";
+import { fetchHabitationSensor } from "./actions/habitationSensorAction";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">Loading...</div>
@@ -30,37 +31,31 @@ const Page500 = Loadable({
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchAllHabitations();
-    
-    const fetchObjectSensor = (id) => {this.props.fetchObjectSensor(id)};
-    var stop = 0;
-    var refresh = setInterval(() => {
-      var habitations = this.props.habitations;
-      if(habitations.length > 0) {
-        habitations.forEach(function(habitation) {
-          if(stop === 0) {
-            fetchObjectSensor(habitation.id);      
-            stop = 1;
-          }    
-        });
-        clearInterval(refresh);
-      }
-    }, 250);
+    setInterval(() => {
+      this.props.fetchAllHabitations();
 
-    const fetchOccurrenceSensor = (id) => {this.props.fetchOccurrenceSensor(id)};
-    var stop = 0;
-    var refresh = setInterval(() => {
-      var habitations = this.props.habitations;
-      if(habitations.length > 0) {
-        habitations.forEach(function(habitation) {
-          if(stop === 0) {
-            fetchOccurrenceSensor(habitation.id);      
-            stop = 1;
-          }    
-        });
-        clearInterval(refresh);
-      }
-    }, 250);
+      const fetchHabitationSensor = id => {
+        this.props.fetchHabitationSensor(id);
+      };
+      const fetchObjectSensor = id => {
+        this.props.fetchObjectSensor(id);
+      };
+      var stop = 0;
+      var refresh = setInterval(() => {
+        var habitations = this.props.habitations;
+        if (habitations.length > 0) {
+          habitations.forEach(function(habitation) {
+            if (stop === 0) {
+              console.log(habitation.id);
+              fetchObjectSensor(19);
+              fetchHabitationSensor(habitation.id);
+              stop = 1;
+            }
+          });
+          clearInterval(refresh);
+        }
+      }, 250);
+    }, 1000);
   }
 
   render() {
@@ -86,6 +81,7 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch),
     fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
+    fetchHabitationSensor: bindActionCreators(fetchHabitationSensor, dispatch)
   };
 }
 
