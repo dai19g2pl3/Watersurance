@@ -58,7 +58,7 @@ export const updateUser = (user) => {
 
 export const addUser = (user) => {
   return dispatch => {
-    fetch(`https://watersurance-api.herokuapp.com/api/user/table/` + user.id, {
+    fetch(`https://watersurance-api.herokuapp.com/api/user/table`, {
       method: "POST",
       credentials: "include",
       headers: headers,

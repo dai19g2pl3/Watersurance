@@ -8,7 +8,7 @@ export default (state = initialState, action) => {
     case FETCH_USERS_FAILURE:
       return `error: ${action.payload}`
     case ADD_USER_SUCCESS:
-      return [...state, ...action.payload];
+      return [];
     case ADD_USER_FAILURE:
       return `error: ${action.payload}`
     case DELETE_USER_SUCCESS:

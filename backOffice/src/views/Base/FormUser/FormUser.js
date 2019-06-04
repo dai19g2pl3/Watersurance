@@ -8,12 +8,46 @@ import {
   Label,
   Input
 } from "reactstrap";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-//import { addUser } from "../../../actions/usersAction";
+import { addUser } from "../../../actions/usersAction";
 
 class FormUser extends React.Component {
+  state = {
+    email: "",
+    name: "",
+    phoneNumber: "",
+    nif: "",
+    password: "",
+    role: "Segurador",
+    isActive: "true"
+  }
+  handleAdd = (e, user) => {
+    e.preventDefault();
+    console.log(user);
+    if(user.role === "Segurador") {
+      user.role = "ROLE_INSURER";
+    } else if(user.role === "Cliente") {
+      user.role = "ROLE_USER";
+    }
+    this.props.addUser(user);
+    /*
+    var refresh = setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+        clearInterval(refresh);
+      }
+    }, 250);
+    */
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    //console.log(this.state);
+  };
+
   render() {
     return (
       <div>
@@ -29,6 +63,8 @@ class FormUser extends React.Component {
                 id="exampleEmail"
                 placeholder="Insira aqui o email"
                 required
+                onChange={this.handleChange}
+                value={this.state.email}
               />
               <FormFeedback valid>
                 Esse e-mail está disponivel e é valido!
@@ -49,6 +85,8 @@ class FormUser extends React.Component {
                 id="exampleName"
                 placeholder="Insira aqui o nome"
                 required
+                onChange={this.handleChange}
+                value={this.state.name}
               />
             </Col>
           </FormGroup>
@@ -59,13 +97,15 @@ class FormUser extends React.Component {
             <Col sm={4}>
               <Input
                 type="number"
-                name="telefone"
+                name="phoneNumber"
                 id="exampleTelefone"
                 placeholder="Insira aqui o telefone"
                 minLength={9}
                 maxLength={9}
                 min={0.00000000001}
                 required
+                onChange={this.handleChange}
+                value={this.state.phoneNumber}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
@@ -81,6 +121,8 @@ class FormUser extends React.Component {
                 maxLength={9}
                 min={0.00000000001}
                 required
+                onChange={this.handleChange}
+                value={this.state.nif}
               />
             </Col>
           </FormGroup>
@@ -95,20 +137,23 @@ class FormUser extends React.Component {
                 id="examplePassword"
                 placeholder="Insira aqui a sua password"
                 required
+                onChange={this.handleChange}
+                value={this.state.password}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
               Role
             </Label>
             <Col sm={4}>
-              <Input type="select" name="select" id="exampleSelect">
+              <Input type="select" name="role" id="exampleSelect" onChange={this.handleChange}
+                value={this.state.role}>
                 <option>Segurador</option>
                 <option>Cliente</option>
               </Input>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Button>Submeter</Button>
+            <Button onClick={e => this.handleAdd(e, this.state)}>Submeter</Button>
           </FormGroup>
         </Form>
       </div>
@@ -124,7 +169,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    //addUser: bindActionCreators(addUser, dispatch)
+    addUser: bindActionCreators(addUser, dispatch)
   };
 }
 
