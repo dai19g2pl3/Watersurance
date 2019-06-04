@@ -86,15 +86,17 @@ class FormUser extends React.Component {
             </Col>
           </FormGroup>
           <FormGroup row>
-            <Label for="exampleFile" sm={2}>
-              Fotografias
+            <Label for="examplePassword" sm={2}>
+              Password
             </Label>
             <Col sm={4}>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
-                Se nos quiser fornecer uma fotografia para o perfil, faça-o
-                aqui.
-              </FormText>
+              <Input
+                type="password"
+                name="password"
+                id="examplePassword"
+                placeholder="Insira aqui a sua password"
+                required
+              />
             </Col>
             <Label for="exampleNIF" sm={2}>
               Role
@@ -108,7 +110,6 @@ class FormUser extends React.Component {
           </FormGroup>
           <FormGroup>
             <Button>Submeter</Button>
-            <Button>Cancelar</Button>
           </FormGroup>
         </Form>
       </div>
