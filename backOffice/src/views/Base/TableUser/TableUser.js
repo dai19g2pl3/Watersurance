@@ -96,13 +96,9 @@ class TableUser extends Component {
       },
       {
         dataField: "role",
+        text: "Tipo",
         sort: true,
         headerAlign: "center",
-        formatter: cell => optionsRole[cell],
-        filter: selectFilter({
-          options: optionsRole,
-          defaultValue: 0
-        })
       },
       {
         dataField: "isActive",
