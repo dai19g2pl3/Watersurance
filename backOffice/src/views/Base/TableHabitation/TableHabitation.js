@@ -7,6 +7,7 @@ import BtnEditarHabitation from "../BtnEditarHabitation/BtnEditarHabitation";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchAllHabitations } from "../../../actions/habitationsAction";
+import BtnAddObject from "./../BtnAddObject/BtnAddObject";
 const { SearchBar } = Search;
 
 const data = [];
@@ -58,7 +59,7 @@ class TableHabitation extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditarHabitation user={row} />
+              <BtnEditarHabitation row={row} />
             </div>
           );
         }
@@ -72,6 +73,19 @@ class TableHabitation extends Component {
           return (
             <div>
               <BtnApagar />
+            </div>
+          );
+        }
+      },
+      {
+        dataField: "addObj",
+        isDummyField: true,
+        text: "Objeto",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnAddObject />
             </div>
           );
         }

@@ -69,7 +69,19 @@ FormText.propTypes = {
   cssModule: PropTypes.object
 };
 
-export default class FormHabitacao extends React.Component {
+class FormHabitacaoEditar extends React.Component {
+  state = {
+    id: this.props.row.id,
+    address: this.props.row.address,
+    zipCode: this.props.row.zipCode
+  };
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    //console.log(this.state);
+  };
   render() {
     return (
       <div>
@@ -85,6 +97,7 @@ export default class FormHabitacao extends React.Component {
               id="exampleAdress"
               placeholder="Insira a morada"
               required
+              value={this.state.address}
             />
           </FormGroup>
           <FormGroup>
@@ -95,6 +108,7 @@ export default class FormHabitacao extends React.Component {
               id="exampleZip"
               placeholder="Insira o código-postal"
               required
+              value={this.state.zipCode}
             />
           </FormGroup>
           <FormGroup>
@@ -109,14 +123,6 @@ export default class FormHabitacao extends React.Component {
             />
           </FormGroup>
 
-          <FormGroup>
-            <Label for="exampleFile">Contrato</Label>
-            <Input type="file" name="file" id="exampleFile" required />
-            <FormText color="muted">
-              Insira aqui o contrato associado a esta habitação.
-            </FormText>
-          </FormGroup>
-
           <Button size="lg" block color="success">
             Submeter
           </Button>
@@ -125,3 +131,4 @@ export default class FormHabitacao extends React.Component {
     );
   }
 }
+export default FormHabitacaoEditar;

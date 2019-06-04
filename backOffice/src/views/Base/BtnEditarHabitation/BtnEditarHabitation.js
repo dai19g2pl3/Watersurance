@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import FormHabitacaoEditar from "../FormHabitacaoEditar/FormHabitacaoEditar";
 
 class BtnEditarHabitation extends React.Component {
   constructor(props) {
@@ -35,7 +36,9 @@ class BtnEditarHabitation extends React.Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle} />
-          <ModalBody>IMPRIMIR FORM EDITAR HABITAÇAO</ModalBody>
+          <ModalBody>
+            <FormHabitacaoEditar row={this.props.row} />
+          </ModalBody>
         </Modal>
       </div>
     );
