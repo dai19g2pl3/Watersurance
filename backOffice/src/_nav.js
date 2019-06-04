@@ -58,7 +58,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/table-user",
+          url: "/base/table-ocorrencia",
           icon: "icon-arrow-right"
         },
         {
