@@ -95,7 +95,7 @@ class TableUser extends Component {
         headerAlign: "center"
       },
       {
-        dataField: "Role",
+        dataField: "role",
         sort: true,
         headerAlign: "center",
         formatter: cell => optionsRole[cell],
@@ -157,16 +157,26 @@ class TableUser extends Component {
 
     fetchUser.forEach(function(user) {
       let isActive;
+      
+      var roleArray = user.roles[0];
+      var roleName = roleArray.name;
+      
+      var roleUser;
+      if(roleName === "ROLE_INSURER") {
+        roleUser = "Segurador";
+      } else roleUser = "Cliente"
 
       if (user.isActive === false) {
         isActive = 0;
       } else isActive = 1;
 
+      console.log(roleUser);
       data.push({
         id: user.id,
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        role: roleUser, 
         nif: user.nif,
         isActive: isActive
       });
