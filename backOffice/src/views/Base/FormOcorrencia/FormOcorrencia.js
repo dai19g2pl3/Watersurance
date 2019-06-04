@@ -70,6 +70,7 @@ FormText.propTypes = {
 
 export default class FormOcorrencia extends React.Component {
   render() {
+    console.log(this.props.row);
     return (
       <Form>
         <FormGroup>

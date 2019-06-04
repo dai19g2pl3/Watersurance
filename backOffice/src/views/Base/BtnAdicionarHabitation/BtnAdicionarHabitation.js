@@ -16,6 +16,7 @@ class BtnAdicionarHabitation extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
+    console.log(this.props.row);
   }
   render() {
     return (

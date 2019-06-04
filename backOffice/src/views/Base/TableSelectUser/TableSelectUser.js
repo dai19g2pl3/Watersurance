@@ -80,7 +80,7 @@ class TableSelectUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnAdicionarHabitation />
+              <BtnAdicionarHabitation row={row} />
             </div>
           );
         }
