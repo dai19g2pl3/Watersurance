@@ -27,7 +27,10 @@ const TableSelectHabitation = React.lazy(() =>
 const TableSelectUser = React.lazy(() =>
   import("./views/Base/TableSelectUser")
 );
-const TableUser = React.lazy(() => import("./views/Base/TableUser/TableUser"));
+const TableOcorrencia = React.lazy(() =>
+  import("./views/Base/TableOcorrencia")
+);
+const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 const TableSensor = React.lazy(() => import("./views/Base/TableSensor"));
 const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
 const BtnAdicionarHabitation = React.lazy(() =>
@@ -151,6 +154,12 @@ const routes = [
     exact: true,
     name: "Form User",
     component: FormUser
+  },
+  {
+    path: "/base/table-ocorrencia",
+    exact: true,
+    name: "Table Ocorrencia",
+    component: TableOcorrencia
   }
 ];
 

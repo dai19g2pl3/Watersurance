@@ -10,8 +10,6 @@ import { fetchAllHabitations } from "../../../actions/habitationsAction";
 import BtnAddObject from "./../BtnAddObject/BtnAddObject";
 const { SearchBar } = Search;
 
-const data = [];
-
 class TableHabitation extends Component {
   componentDidMount() {
     this.props.fetchAllHabitations();
@@ -107,15 +105,14 @@ class TableHabitation extends Component {
         idUser: habitation.idUser,
         address: habitation.address,
         zipCode: habitation.zipCode,
-        sensorQtd: habitation.sensorQtd,
-        nif: habitation.nif
+        sensorQtd: habitation.sensorQtd
       });
     });
     var user = data;
 
     return (
       <div>
-        <ToolkitProvider keyField="id" data={data} columns={columns} search>
+        <ToolkitProvider keyField="id" data={user} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -132,7 +129,7 @@ class TableHabitation extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={data}
+                data={user}
                 bordered={false}
                 defaultSorted={defaultSorted}
               />
