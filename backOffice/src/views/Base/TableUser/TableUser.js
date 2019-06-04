@@ -173,12 +173,6 @@ class TableUser extends Component {
     });
     var user = data;
 
-    var idUser;
-    const rowEvents = {
-      onClick: (e, row, rowIndex) => {
-        idUser = row.id;
-      }
-    };
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -202,7 +196,6 @@ class TableUser extends Component {
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
-                rowEvents={rowEvents}
               />
             </div>
           )}
