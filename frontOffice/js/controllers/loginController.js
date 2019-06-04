@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function getCookie(name) {
-  var v = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+  var v = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
   return v ? v[2] : null;
 }
 
@@ -31,20 +31,20 @@ function login() {
         }
 
         document.cookie = "token=" + json.accessToken + "; path=/;";
-        if(json.role === "ROLE_ADMIN") {
-          location.href = 'http://localhost:6969/#/dashboard';         
+        if (json.role === "ROLE_ADMIN") {
+          location.href = "http://localhost:6969/#/dashboard";
         }
 
-        if(json.role === "ROLE_INSURER") {
-          location.href = 'http://localhost:3000/#/dashboard';
+        if (json.role === "ROLE_INSURER") {
+          location.href = "http://localhost:3000/#/dashboard";
         }
 
-        if(json.role === "ROLE_USER") {
-          location.href = 'http://localhost:7000/#/dashboard';
+        if (json.role === "ROLE_USER") {
+          location.href = "http://localhost:7000/#/base/table-sensor";
         }
 
         document.getElementById("loginForm").reset();
-        
+
         return json;
       })
     )
@@ -77,5 +77,4 @@ function validatorLogin() {
       }
     }
   );
-
 }

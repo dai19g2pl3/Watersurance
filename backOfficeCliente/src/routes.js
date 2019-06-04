@@ -28,6 +28,9 @@ const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
 const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
 );
+const TableOcorrencia = React.lazy(() =>
+  import("./views/Base/TableOcorrencia")
+);
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -107,6 +110,12 @@ const routes = [
     exact: true,
     name: "Table Home",
     component: TableHabitation
+  },
+  {
+    path: "/base/table-ocorrencia",
+    exact: true,
+    name: "Table Ocorrencia",
+    component: TableOcorrencia
   },
   {
     path: "/base/card-casa",

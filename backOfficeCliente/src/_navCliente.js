@@ -24,7 +24,7 @@ export default {
       children: [
         {
           name: "Listar",
-          url: "/base/tables",
+          url: "/base/table-ocorrencia",
           icon: "icon-arrow-right"
         },
         {

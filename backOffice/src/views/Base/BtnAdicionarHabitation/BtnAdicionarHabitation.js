@@ -37,7 +37,11 @@ class BtnAdicionarHabitation extends React.Component {
         >
           <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <FormHabitacao idUser={this.props.idUser} handleAddButton={this.props.handleAddButton} />
+            <FormHabitacao
+              idUser={this.props.idUser}
+              handleAddButton={this.props.handleAddButton}
+              handleSubmit={this.toggle}
+            />
           </ModalBody>
         </Modal>
       </div>

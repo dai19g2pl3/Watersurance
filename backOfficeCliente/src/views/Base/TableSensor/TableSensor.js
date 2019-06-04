@@ -14,7 +14,7 @@ class TableSensor extends Component {
     const columns = [
       {
         dataField: "id",
-        text: "ID Cliente",
+        text: "ID Habitation",
         sort: true,
         hidden: true
       },
@@ -61,7 +61,7 @@ class TableSensor extends Component {
         fetchHabitationSensor.forEach(sensorHabitation => {
           console.log(sensorObject.value);
           console.log(sensorHabitation.value);
-          
+
           if (sensorHabitation.value > 150) {
             estadoHabitation = "Inundação";
           } else if (sensorHabitation.value <= 150) {
@@ -84,8 +84,20 @@ class TableSensor extends Component {
       });
     });
 
-    data = [{id: habitationId, morada: habitationAddress, estado: estadoHabitation, tipo: "Ocorrência"},
-       {id: habitationId, morada: habitationAddress, estado: estadoObject, tipo: "Objeto"}]
+    data = [
+      {
+        id: habitationId,
+        morada: habitationAddress,
+        estado: estadoHabitation,
+        tipo: "Ocorrência"
+      },
+      {
+        id: habitationId,
+        morada: habitationAddress,
+        estado: estadoObject,
+        tipo: "Objeto"
+      }
+    ];
     var habitations = data;
 
     return (

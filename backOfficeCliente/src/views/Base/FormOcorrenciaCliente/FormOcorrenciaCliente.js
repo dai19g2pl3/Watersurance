@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Row,
-  Col
-} from "reactstrap";
+import { Button, Form, FormGroup, Label, Input, FormText } from "reactstrap";
 import { PropTypes } from "prop-types";
 
 Input.propTypes = {
@@ -73,7 +64,7 @@ export default class FormOcorrenciaCliente extends React.Component {
     return (
       <Form>
         <FormGroup>
-          <Label for="exampleDate">Data</Label>
+          <Label for="exampleDate">Data Inicio</Label>
           <Input
             type="date"
             name="date"
@@ -82,29 +73,19 @@ export default class FormOcorrenciaCliente extends React.Component {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="exampleSelect">Nivel de dano</Label>
-          <Input type="select" name="select" id="exampleSelect">
-            <option>Pouco</option>
-            <option>Médio</option>
-            <option>Alto</option>
-          </Input>
+          <Label for="exampleDatefinal">Data Final</Label>
+          <Input
+            type="date"
+            name="datefinal"
+            id="exampleDatefinal"
+            placeholder="Insira a data final"
+          />
         </FormGroup>
         <FormGroup>
           <Label for="exampleDescricao">Descrição</Label>
           <Input type="textarea" name="descricao" id="exampleDescricao" />
         </FormGroup>
-        <Row>
-          <Col xs={6}>
-            <FormGroup>
-              <Label for="exampleFile">Ficheiro</Label>
-              <Input type="file" name="file" id="exampleFile" />
-              <FormText color="muted">
-                Se quiser enviar um ficheiro para podermos recolher mais
-                informações, faça-o aqui.
-              </FormText>
-            </FormGroup>
-          </Col>
-        </Row>
+
         <Button color="primary">Submeter</Button>
       </Form>
     );
