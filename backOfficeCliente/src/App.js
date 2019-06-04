@@ -5,9 +5,8 @@ import Loadable from "react-loadable";
 import "./App.scss";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  fetchAllHabitations,
-} from "./actions/habitationsAction";
+import { fetchAllHabitations} from "./actions/habitationsAction";
+import { fetchObjectSensor } from "./actions/objectSensorAction";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">Loading...</div>
@@ -32,6 +31,36 @@ const Page500 = Loadable({
 class App extends Component {
   componentDidMount() {
     this.props.fetchAllHabitations();
+    
+    const fetchObjectSensor = (id) => {this.props.fetchObjectSensor(id)};
+    var stop = 0;
+    var refresh = setInterval(() => {
+      var habitations = this.props.habitations;
+      if(habitations.length > 0) {
+        habitations.forEach(function(habitation) {
+          if(stop === 0) {
+            fetchObjectSensor(habitation.id);      
+            stop = 1;
+          }    
+        });
+        clearInterval(refresh);
+      }
+    }, 250);
+
+    const fetchOccurrenceSensor = (id) => {this.props.fetchOccurrenceSensor(id)};
+    var stop = 0;
+    var refresh = setInterval(() => {
+      var habitations = this.props.habitations;
+      if(habitations.length > 0) {
+        habitations.forEach(function(habitation) {
+          if(stop === 0) {
+            fetchOccurrenceSensor(habitation.id);      
+            stop = 1;
+          }    
+        });
+        clearInterval(refresh);
+      }
+    }, 250);
   }
 
   render() {
@@ -49,13 +78,14 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    
+    habitations: state.habitations
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch),
+    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
   };
 }
 
