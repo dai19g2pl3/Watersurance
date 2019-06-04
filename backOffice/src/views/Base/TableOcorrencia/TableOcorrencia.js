@@ -52,7 +52,6 @@ class TableOcorrencia extends Component {
       }
     ];
     const fetchHabitation = this.props.habitations;
-    const fetchOccurrence = this.props.habitations;
     let data = [];
 
     fetchHabitation.forEach(function(habitation) {
@@ -67,8 +66,9 @@ class TableOcorrencia extends Component {
         });
       });
     });
-    console.log(data);
+    console.log(this.props.date);
     var user = data;
+
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>

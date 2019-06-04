@@ -40,6 +40,8 @@ const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
 );
 
+const FormObject = React.lazy(() => import("./views/Base/FormObject"));
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
@@ -160,6 +162,12 @@ const routes = [
     exact: true,
     name: "Table Ocorrencia",
     component: TableOcorrencia
+  },
+  {
+    path: "/base/form-object",
+    exact: true,
+    name: "Form Object",
+    component: FormObject
   }
 ];
 

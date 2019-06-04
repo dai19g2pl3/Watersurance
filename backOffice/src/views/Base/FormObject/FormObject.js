@@ -1,25 +1,16 @@
-/* eslint react/no-multi-comp: 0, react/prop-types: 0 */
-
 import React from "react";
 import {
   Button,
-  ButtonGroup,
-  Modal,
-  ModalHeader,
-  ModalBody,
   Form,
   FormGroup,
-  Input
+  Label,
+  Input,
+  FormText,
+  Row,
+  Col
 } from "reactstrap";
 import { PropTypes } from "prop-types";
-import FormObject from "../FormObject/FormObject";
-ButtonGroup.propTypes = {
-  ariaLabel: PropTypes.string,
-  className: PropTypes.string,
-  role: PropTypes.string,
-  size: PropTypes.string,
-  vertical: PropTypes.bool
-};
+
 Input.propTypes = {
   children: PropTypes.node,
   // type can be things like text, password, (typical input types) as well as select and textarea, providing children as you normally would to those.
@@ -67,52 +58,60 @@ FormGroup.propTypes = {
   cssModule: PropTypes.object
 };
 
-class BtnAddObject extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false
-    };
+FormText.propTypes = {
+  children: PropTypes.node,
+  inline: PropTypes.bool,
+  // Pass in a Component to override default element
+  tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]), // default: 'small'
+  color: PropTypes.string, // default: 'muted'
+  className: PropTypes.string,
+  cssModule: PropTypes.object
+};
 
-    this.toggle = this.toggle.bind(this);
-  }
-
-  toggle() {
-    this.setState(prevState => ({
-      modal: !prevState.modal
-    }));
-  }
-
+class FormObject extends React.Component {
   render() {
-    console.log(this.props.idHabitation);
-    const closeBtn = (
-      <button className="close" onClick={this.toggle}>
-        &times;
-      </button>
-    );
-
+    //console.log(this.props.row);
     return (
-      <div>
-        <Button color="primary" onClick={this.toggle}>
-          <i className="icon-plus" />
-          &nbsp;Adicionar
-        </Button>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-          className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle} close={closeBtn}>
-            <i className="icon-home" />
-            &nbsp;Adicionar Objeto
-          </ModalHeader>
-          <ModalBody>
-            <FormObject />
-          </ModalBody>
-        </Modal>
-      </div>
+      <Form>
+        <FormGroup>
+          <Label for="exampleAdress">Descrição</Label>
+          <Input
+            type="text"
+            name="descricao"
+            id="exampleDescricao"
+            placeholder="Insira uma breve descrição"
+            required
+          />
+        </FormGroup>
+        <Row>
+          <Col xs={6}>
+            <FormGroup>
+              <Label for="examplePrice">Preço</Label>
+              <Input
+                type="number"
+                name="price"
+                id="exampleZip"
+                placeholder="Insira o preço"
+                required
+              />
+            </FormGroup>
+          </Col>
+          <Col xs={6}>
+            <FormGroup>
+              <Label for="exampleRef">Referência</Label>
+              <Input
+                type="number"
+                name="ref"
+                id="exampleRef"
+                placeholder="Insira a referência"
+                required
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Button>Adicionar</Button>
+      </Form>
     );
   }
 }
-
-export default BtnAddObject;
+export default FormObject;
