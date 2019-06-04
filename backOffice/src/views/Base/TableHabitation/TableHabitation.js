@@ -83,7 +83,7 @@ class TableHabitation extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnAddObject />
+              <BtnAddObject idHabitation={row.id} />
             </div>
           );
         }

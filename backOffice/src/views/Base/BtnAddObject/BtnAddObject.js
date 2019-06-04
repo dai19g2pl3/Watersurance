@@ -86,6 +86,7 @@ class BtnAddObject extends React.Component {
   }
 
   render() {
+    console.log(this.props.idHabitation);
     const closeBtn = (
       <button className="close" onClick={this.toggle}>
         &times;

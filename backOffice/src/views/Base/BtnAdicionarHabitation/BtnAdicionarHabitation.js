@@ -16,7 +16,6 @@ class BtnAdicionarHabitation extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
-    console.log(this.props.row);
   }
   render() {
     return (
@@ -38,7 +37,7 @@ class BtnAdicionarHabitation extends React.Component {
         >
           <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <FormHabitacao />
+            <FormHabitacao idUser={this.props.idUser} handleAddButton={this.props.handleAddButton} />
           </ModalBody>
         </Modal>
       </div>

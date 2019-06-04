@@ -70,6 +70,18 @@ FormText.propTypes = {
 };
 
 export default class FormHabitacao extends React.Component {
+  state = {
+    address: "",
+    zipCode: "",
+    sensorQtd: ""
+  }
+
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   render() {
     return (
       <div>
@@ -85,27 +97,33 @@ export default class FormHabitacao extends React.Component {
               id="exampleAdress"
               placeholder="Insira a morada"
               required
+              onChange={this.handleChange}
+              value={this.state.address}
             />
           </FormGroup>
           <FormGroup>
             <Label for="exampleZip">Codigo-Postal</Label>
             <Input
               type="text"
-              name="zip"
+              name="zipCode"
               id="exampleZip"
               placeholder="Insira o código-postal"
               required
+              onChange={this.handleChange}
+              value={this.state.zipCode}
             />
           </FormGroup>
           <FormGroup>
             <Label for="exampleSensor">Sensores de inundação</Label>
             <Input
               type="number"
-              name="sensor"
+              name="sensorQtd"
               id="exampleSensor"
               required
               min={0}
               placeholder="Insira a quantidade de sensores instalados para prevenir inundações"
+              onChange={this.handleChange}
+              value={this.state.sensorQtd}
             />
           </FormGroup>
 
@@ -117,7 +135,7 @@ export default class FormHabitacao extends React.Component {
             </FormText>
           </FormGroup>
 
-          <Button size="lg" block color="success">
+          <Button size="lg" block color="success" onClick={e => this.props.handleAddButton(e, this.state, this.props.idUser)}>
             Submeter
           </Button>
         </Form>

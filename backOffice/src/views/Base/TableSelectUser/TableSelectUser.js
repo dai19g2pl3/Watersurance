@@ -9,11 +9,8 @@ import BtnAdicionarHabitation from "./../BtnAdicionarHabitation/BtnAdicionarHabi
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {
-  fetchAllUsers,
-  addUser,
-  deleteUser
-} from "../../../actions/usersAction";
+import { fetchAllUsers } from "../../../actions/usersAction";
+import { addHabitation } from "../../../actions/habitationsAction";
 
 const { SearchBar } = Search;
 
@@ -22,30 +19,21 @@ class TableSelectUser extends Component {
     this.props.fetchAllUsers();
   }
 
-  handleDelete = (e, id) => {
+  handleAdd = (e, habitation, id) => {
     e.preventDefault();
-    console.log("Aleluia");
     console.log(id);
-    this.props.deleteUser(id);
+    console.log(habitation);
+
+    this.props.addHabitation(habitation, id);
+    /*
     setInterval(() => {
       if (this.props.users.length === 0) {
         this.props.fetchAllUsers();
       }
     }, 250);
+    */
   };
-
-  handleUpdate = (e, id, form) => {
-    e.preventDefault();
-    console.log("Aleluia");
-    console.log(id);
-    this.props.updateUser(id);
-    setInterval(() => {
-      if (this.props.users.length === 0) {
-        this.props.fetchAllUsers();
-      }
-    }, 250);
-  };
-
+  
   render() {
     const columns = [
       {
@@ -80,7 +68,7 @@ class TableSelectUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnAdicionarHabitation row={row} />
+              <BtnAdicionarHabitation idUser={row.id} handleAddButton={this.handleAdd} />
             </div>
           );
         }
@@ -114,12 +102,6 @@ class TableSelectUser extends Component {
     });
     var user = data;
 
-    var idUser;
-    const rowEvents = {
-      onClick: (e, row, rowIndex) => {
-        idUser = row.id;
-      }
-    };
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -143,7 +125,6 @@ class TableSelectUser extends Component {
                 bordered={false}
                 defaultSorted={defaultSorted}
                 filter={filterFactory()}
-                rowEvents={rowEvents}
               />
             </div>
           )}
@@ -162,8 +143,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
-    deleteUser: bindActionCreators(deleteUser, dispatch),
-    addUser: bindActionCreators(addUser, dispatch)
+    addHabitation: bindActionCreators(addHabitation, dispatch),
   };
 }
 
