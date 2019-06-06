@@ -23,8 +23,12 @@ import com.dai.watersurance.model.RoleName;
 import com.dai.watersurance.model.User;
 import com.dai.watersurance.payload.request.PostAdminRequest;
 import com.dai.watersurance.payload.request.PostUserOrInsurerRequest;
+import com.dai.watersurance.payload.request.PostUserOrInsurerRequestTable;
 import com.dai.watersurance.payload.request.UpdateAdminRequest;
+import com.dai.watersurance.payload.request.UpdatePasswordRequest;
+import com.dai.watersurance.payload.request.UpdateTableUserRequest;
 import com.dai.watersurance.payload.request.UpdateUserOrInsurerRequest;
+import com.dai.watersurance.payload.request.UpdateUserProfileRequest;
 import com.dai.watersurance.payload.response.ApiResponse;
 import com.dai.watersurance.payload.response.UserIdentityAvailability;
 import com.dai.watersurance.projection.NoPwdUser;
@@ -151,6 +155,41 @@ public class UserService {
     	return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));
     }
     
+    public ResponseEntity<ApiResponse> registerUserOrInsurerTable(@Valid @RequestBody PostUserOrInsurerRequestTable postUserOrInsurerRequestTable) {
+    	if(userRepository.existsByEmail(postUserOrInsurerRequestTable.getEmail())) {
+            return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Email Address already in use!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+    	
+    	// Creating user's account
+        User user = new User(postUserOrInsurerRequestTable.getName(), postUserOrInsurerRequestTable.getEmail(),
+        		postUserOrInsurerRequestTable.getPassword(), postUserOrInsurerRequestTable.getNif(),
+        		postUserOrInsurerRequestTable.getPhoneNumber(), postUserOrInsurerRequestTable.getIsActive(), null);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    	
+        Role userRole;
+        switch(postUserOrInsurerRequestTable.getRole()) {
+    	case "ROLE_USER":
+    		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+    		.orElseThrow(() -> new AppException("User role not set.")); break;
+    	case "ROLE_INSURER":
+    		userRole = roleRepository.findByName(RoleName.ROLE_INSURER)
+    		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+    	default:
+    		userRole = roleRepository.findByName(RoleName.ROLE_USER)
+    		.orElseThrow(() -> new AppException("Insurer role not set.")); break;
+    	}
+    	
+    	Set<Role> role = new HashSet<Role>();
+    	role.add(userRole);
+    	user.setRoles(role);
+
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "User registered successfully"));
+    }
+    
     public ResponseEntity<ApiResponse> updateAdmin(@PathVariable(value = "id") long id, 
     		@Valid @RequestBody UpdateAdminRequest updateAdminRequest) {        
     	User user = userRepository.findById(id)
@@ -225,6 +264,46 @@ public class UserService {
     	userRepository.save(user);
         return ResponseEntity.ok().body(new ApiResponse(true, "User updated successfully"));
     }
+    
+    public ResponseEntity<ApiResponse> updateMyPassword(@CurrentUser UserPrincipal currentUser, 
+    		@Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {        
+    	User user = userRepository.findById(currentUser.getId(), User.class)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
+    	
+    	user.setPassword(passwordEncoder.encode(updatePasswordRequest.getPassword()));
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "Password updated successfully"));
+    }
+    
+    public ResponseEntity<ApiResponse> updateUserOrInsurerTableUser(@PathVariable(value = "id") long id, 
+    		@Valid @RequestBody UpdateTableUserRequest updateTableUserRequest) {        
+    	User user = userRepository.findById(id)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+    	
+    	user.setName(updateTableUserRequest.getName());
+    	user.setEmail(updateTableUserRequest.getEmail());
+    	user.setNif(updateTableUserRequest.getNif());
+    	user.setPhoneNumber(updateTableUserRequest.getPhoneNumber());
+    	user.setIsActive(updateTableUserRequest.getIsActive());
+    	
+    	userRepository.save(user);
+        return ResponseEntity.ok().body(new ApiResponse(true, "User updated successfully"));
+    }
+    
+    public ResponseEntity<ApiResponse> updateMyProfile(@CurrentUser UserPrincipal currentUser, 
+    		@Valid @RequestBody UpdateUserProfileRequest updateUserProfileRequest) {
+    	User user = userRepository.findById(currentUser.getId(), User.class)
+    			.orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
+    	
+    	user.setEmail(updateUserProfileRequest.getEmail());
+    	user.setName(updateUserProfileRequest.getName());
+    	user.setNif(updateUserProfileRequest.getNif());
+    	user.setPhoneNumber(updateUserProfileRequest.getPhoneNumber());
+    	userRepository.save(user);
+    	
+    	return ResponseEntity.ok().body(new ApiResponse(true, "Profile updated successfully"));
+    }
 
     public ResponseEntity<ApiResponse> deleteAdmin(@PathVariable(value = "id") long id) {
     	User user = userRepository.findById(id)
@@ -243,6 +322,8 @@ public class UserService {
     	return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Failed to delete User"), 
     			HttpStatus.BAD_REQUEST);
     }
+    
+    
         
     public ResponseEntity<ApiResponse> deleteUserOrInsurer(@PathVariable(value = "id") long id) {
     	User user = userRepository.findById(id)

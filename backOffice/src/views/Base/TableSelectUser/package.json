@@ -1,0 +1,6 @@
+{
+  "name": "TableSelectUser",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableSelectUser.js"
+}

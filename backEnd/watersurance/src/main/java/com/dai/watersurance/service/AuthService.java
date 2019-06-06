@@ -30,6 +30,7 @@ import com.dai.watersurance.payload.request.LoginRequest;
 import com.dai.watersurance.payload.request.SignUpRequest;
 import com.dai.watersurance.payload.response.ApiResponse;
 import com.dai.watersurance.payload.response.JwtAuthenticationResponse;
+import com.dai.watersurance.payload.response.JwtAuthenticationResponseRole;
 import com.dai.watersurance.repository.RoleRepository;
 import com.dai.watersurance.repository.UserRepository;
 import com.dai.watersurance.security.JwtTokenProvider;
@@ -109,7 +110,11 @@ public class AuthService {
 			return new ResponseEntity<ApiResponse>(new ApiResponse(false, "Failed to parse Date"),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
+		String roleString = "";
+		Set<Role> roles = user.getRoles();
+		for(Role role: roles) {
+			roleString = role.getName().toString();
+		}
 		userRepository.save(user);
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -117,7 +122,7 @@ public class AuthService {
 		String jwt = tokenProvider.generateToken(authentication);
 		CookieUtils.addCookie(response, "token", jwt, 604800000);
 
-		return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+		return ResponseEntity.ok(new JwtAuthenticationResponseRole(jwt, roleString));
 	}
 
 	public ResponseEntity<ApiResponse> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {

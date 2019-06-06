@@ -1,0 +1,6 @@
+{
+  "name": "FormObject",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormObject.js"
+}

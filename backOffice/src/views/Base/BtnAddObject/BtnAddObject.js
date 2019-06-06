@@ -2,8 +2,6 @@
 
 import React from "react";
 import {
-  Row,
-  Col,
   Button,
   ButtonGroup,
   Modal,
@@ -11,10 +9,10 @@ import {
   ModalBody,
   Form,
   FormGroup,
-  Label,
   Input
 } from "reactstrap";
 import { PropTypes } from "prop-types";
+import FormObject from "../FormObject/FormObject";
 ButtonGroup.propTypes = {
   ariaLabel: PropTypes.string,
   className: PropTypes.string,
@@ -108,48 +106,7 @@ class BtnAddObject extends React.Component {
             &nbsp;Adicionar Objeto
           </ModalHeader>
           <ModalBody>
-            <Form>
-              <FormGroup>
-                <Label for="exampleAdress">Descrição</Label>
-                <Input
-                  type="text"
-                  name="descricao"
-                  id="exampleDescricao"
-                  placeholder="Insira uma breve descrição"
-                  required
-                />
-              </FormGroup>
-              <Row>
-                <Col xs={6}>
-                  <FormGroup>
-                    <Label for="examplePrice">Preço</Label>
-                    <Input
-                      type="number"
-                      name="price"
-                      id="exampleZip"
-                      placeholder="Insira o preço"
-                      required
-                    />
-                  </FormGroup>
-                </Col>
-                <Col xs={6}>
-                  <FormGroup>
-                    <Label for="exampleRef">Referência</Label>
-                    <Input
-                      type="number"
-                      name="ref"
-                      id="exampleRef"
-                      placeholder="Insira a referência"
-                      required
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <ButtonGroup>
-                <Button>Adicionar</Button>
-                <Button>Adicionar outro</Button>
-              </ButtonGroup>
-            </Form>
+            <FormObject idHabitation={this.props.idHabitation} />
           </ModalBody>
         </Modal>
       </div>

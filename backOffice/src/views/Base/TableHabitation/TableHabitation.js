@@ -3,37 +3,49 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BtnApagar from "../BtnApagar/BtnApagar";
-import BtnEditar from "../BtnEditar/BtnEditar";
-
+import BtnEditarHabitation from "../BtnEditarHabitation/BtnEditarHabitation";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { fetchAllHabitations } from "../../../actions/habitationsAction";
+import BtnAddObject from "./../BtnAddObject/BtnAddObject";
 const { SearchBar } = Search;
 
-const data = [];
-
 class TableHabitation extends Component {
+  componentDidMount() {
+    this.props.fetchAllHabitations();
+  }
+
   render() {
+    console.log(this.props.habitations);
     const columns = [
       {
         dataField: "id",
-        text: "ID Cliente",
+        text: "ID Habitation",
+        sort: true,
+        hidden: true
+      },
+      {
+        dataField: "userID",
+        text: "ID User",
         sort: true,
         hidden: true
       },
 
       {
-        dataField: "name",
-        text: "Nome",
+        dataField: "address",
+        text: "Morada",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "email",
-        text: "Email",
+        dataField: "zipCode",
+        text: "Codigo-Postal",
         sort: true,
         headerAlign: "center"
       },
       {
-        dataField: "nif",
-        text: "NIF",
+        dataField: "sensorQtd",
+        text: "Qt Sensores",
         sort: true,
         headerAlign: "center"
       },
@@ -45,7 +57,7 @@ class TableHabitation extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar user={data} />
+              <BtnEditarHabitation row={row} />
             </div>
           );
         }
@@ -62,6 +74,19 @@ class TableHabitation extends Component {
             </div>
           );
         }
+      },
+      {
+        dataField: "addObj",
+        isDummyField: true,
+        text: "Objeto",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnAddObject idHabitation={row.id} />
+            </div>
+          );
+        }
       }
     ];
     const defaultSorted = [
@@ -70,9 +95,24 @@ class TableHabitation extends Component {
         order: "desc"
       }
     ];
+
+    const fetchHabitation = this.props.habitations;
+    let data = [];
+
+    fetchHabitation.forEach(function(habitation) {
+      data.push({
+        id: habitation.id,
+        idUser: habitation.idUser,
+        address: habitation.address,
+        zipCode: habitation.zipCode,
+        sensorQtd: habitation.sensorQtd
+      });
+    });
+    var user = data;
+
     return (
       <div>
-        <ToolkitProvider keyField="id" data={data} columns={columns} search>
+        <ToolkitProvider keyField="id" data={user} columns={columns} search>
           {props => (
             <div>
               <SearchBar
@@ -89,7 +129,7 @@ class TableHabitation extends Component {
                 {...props.baseProps}
                 columns={columns}
                 pagination={paginationFactory()}
-                data={data}
+                data={user}
                 bordered={false}
                 defaultSorted={defaultSorted}
               />
@@ -101,30 +141,19 @@ class TableHabitation extends Component {
   }
 }
 
-export default TableHabitation;
+function mapStateToProps(state) {
+  return {
+    habitations: state.habitations
+  };
+}
 
-/*
-    const fetchLastOcurrences = this.props.lastOcurrences;
-    let data = [];
-    console.log("this.props", this.props);
-    /*
-    const fetchUser = this.props.users;
-    let data = [];
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch)
+  };
+}
 
-    fetchUser.forEach(function(user) {
-      let isActive;
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        nif: user.nif,
-        isActive: isActive
-      });
-    });
-    var user = data;
-    */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TableHabitation);

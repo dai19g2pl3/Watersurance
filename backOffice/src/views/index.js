@@ -12,19 +12,22 @@ import {
   FormHabitacao,
   FormOcorrencia,
   TableUser,
-  TableSensor
+  TableSensor,
+  TableSelectHabitation,
+  BtnAdicionarHabitation,
+  BtnAdicionarUser,
+  TableSelectUser,
+  FormUser
 } from "./Base";
 
 import Dashboard from "./Dashboard";
-import { Login, Page404, Page500, Register, User } from "./Pages";
+import { Page404, Page500 } from "./Pages";
 import Widgets from "./Widgets";
 import DashboardCliente from "./DashboardCliente";
 
 export {
   Page404,
   Page500,
-  Register,
-  Login,
   Tables,
   Dashboard,
   Widgets,
@@ -42,5 +45,9 @@ export {
   DashboardCliente,
   TableUser,
   TableSensor,
-  User
+  TableSelectHabitation,
+  BtnAdicionarHabitation,
+  BtnAdicionarUser,
+  TableSelectUser,
+  FormUser
 };

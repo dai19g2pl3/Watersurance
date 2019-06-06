@@ -10,6 +10,9 @@ import {
   CardTitle,
   CardText
 } from "reactstrap";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { deleteUser, fetchAllUsers } from "../../../actions/usersAction";
 
 class BtnApagar extends React.Component {
   constructor(props) {
@@ -33,7 +36,7 @@ class BtnApagar extends React.Component {
         &times;
       </button>
     );
-
+    
     return (
       <div>
         <Button
@@ -64,7 +67,9 @@ class BtnApagar extends React.Component {
                   terminado de imeadiato.
                 </CardText>
               </h6>
-              <Button color="secondary">Eliminar</Button>
+              <Button color="secondary" onClick={ (e) => this.props.handleDeleteButton(e, this.props.id)}>
+                Eliminar
+              </Button>
             </Card>
           </ModalBody>
         </Modal>
@@ -73,4 +78,20 @@ class BtnApagar extends React.Component {
   }
 }
 
-export default BtnApagar;
+function mapStateToProps(state) {
+  return {
+    users: state.users
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteUser: bindActionCreators(deleteUser, dispatch),
+    fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BtnApagar);

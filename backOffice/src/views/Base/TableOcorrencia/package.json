@@ -1,0 +1,6 @@
+{
+  "name": "TableOcorrencia",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./TableOcorrencia.js"
+}

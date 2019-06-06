@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TablTableUser from "./TableUser";
+import TableUser from "./TableUser";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");

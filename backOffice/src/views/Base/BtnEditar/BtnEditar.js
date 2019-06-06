@@ -41,7 +41,11 @@ class BtnEditar extends React.Component {
         >
           <ModalHeader toggle={this.toggle} />
           <ModalBody>
-            <FormCliente />
+            <FormCliente
+              id={this.props.id}
+              row={this.props.row}
+              handleUpdateButton={this.props.handleUpdateButton}
+            />
           </ModalBody>
         </Modal>
       </div>

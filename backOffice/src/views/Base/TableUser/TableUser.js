@@ -9,7 +9,12 @@ import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllUsers } from "../../../actions/usersAction";
+import {
+  fetchAllUsers,
+  updateUser,
+  addUser,
+  deleteUser
+} from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
@@ -18,10 +23,44 @@ const selectOptions = {
   0: "Inativo"
 };
 
+const optionsRole = {
+  1: "Segurador",
+  0: "Cliente"
+};
 class TableUser extends Component {
   componentDidMount() {
-    this.props.getAllUsers();
+    this.props.fetchAllUsers();
   }
+
+  handleDelete = (e, id) => {
+    e.preventDefault();
+    console.log("Aleluia");
+    console.log(id);
+    this.props.deleteUser(id);
+    setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+      }
+    }, 250);
+  };
+
+  handleUpdate = (e, user) => {
+    e.preventDefault();
+    console.log("Aleluia");
+    console.log(user.id);
+
+    if (user.isActive === 1) {
+      user.isActive = "true";
+    } else user.isActive = "false";
+    console.log(user);
+
+    this.props.updateUser(user);
+    setInterval(() => {
+      if (this.props.users.length === 0) {
+        this.props.fetchAllUsers();
+      }
+    }, 250);
+  };
 
   render() {
     const columns = [
@@ -31,7 +70,6 @@ class TableUser extends Component {
         sort: true,
         hidden: true
       },
-
       {
         dataField: "name",
         text: "Nome",
@@ -51,14 +89,25 @@ class TableUser extends Component {
         headerAlign: "center"
       },
       {
+        dataField: "phoneNumber",
+        text: "Telefone",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "role",
+        text: "Tipo",
+        sort: true,
+        headerAlign: "center",
+      },
+      {
         dataField: "isActive",
-        text: "Estado",
         headerStyle: { width: 150 },
         headerAlign: "center",
         formatter: cell => selectOptions[cell],
         filter: selectFilter({
           options: selectOptions,
-          defaultValue: 0
+          defaultValue: 1
         })
       },
       {
@@ -69,7 +118,11 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnEditar />
+              <BtnEditar
+                id={row.id}
+                row={row}
+                handleUpdateButton={this.handleUpdate}
+              />
             </div>
           );
         }
@@ -82,7 +135,7 @@ class TableUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnApagar />
+              <BtnApagar id={row.id} handleDeleteButton={this.handleDelete} />
             </div>
           );
         }
@@ -100,21 +153,32 @@ class TableUser extends Component {
 
     fetchUser.forEach(function(user) {
       let isActive;
+      
+      var roleArray = user.roles[0];
+      var roleName = roleArray.name;
+      
+      var roleUser;
+      if(roleName === "ROLE_INSURER") {
+        roleUser = "Segurador";
+      } else roleUser = "Cliente"
 
       if (user.isActive === false) {
         isActive = 0;
       } else isActive = 1;
 
+      console.log(roleUser);
       data.push({
         id: user.id,
         name: user.name,
         email: user.email,
+        phoneNumber: user.phoneNumber,
+        role: roleUser, 
         nif: user.nif,
         isActive: isActive
       });
     });
-    console.log(data);
     var user = data;
+
     return (
       <div>
         <ToolkitProvider keyField="id" data={user} columns={columns} search>
@@ -155,7 +219,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getAllUsers: bindActionCreators(getAllUsers, dispatch)
+    fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
+    updateUser: bindActionCreators(updateUser, dispatch),
+    deleteUser: bindActionCreators(deleteUser, dispatch),
+    addUser: bindActionCreators(addUser, dispatch)
   };
 }
 
