@@ -6,7 +6,10 @@ import BtnEditarObject from "../BtnEditarObject/BtnEditarObject";
 import BtnApagarObject from "../BtnApagarObject/BtnApagarObject";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchAllHabitations, resetHabitation } from "../../../actions/habitationsAction";
+import {
+  fetchAllHabitations,
+  resetHabitation
+} from "../../../actions/habitationsAction";
 import { updateObject, deleteObject } from "../../../actions/objectsAction";
 
 const { SearchBar } = Search;
@@ -26,7 +29,6 @@ class TableObject extends Component {
         this.props.fetchAllHabitations();
       }
     }, 250);
-
   };
 
   handleDelete = (e, id) => {
@@ -53,6 +55,13 @@ class TableObject extends Component {
       {
         dataField: "description",
         text: "Descrição",
+        sort: true,
+        headerAlign: "center",
+        align: "center"
+      },
+      {
+        dataField: "ref",
+        text: "Referência",
         sort: true,
         headerAlign: "center",
         align: "center"
@@ -120,20 +129,21 @@ class TableObject extends Component {
     habitations.forEach(habitation => {
       habitation.insuredObjects.forEach(object => {
         users.forEach(user => {
-          if(user.id === habitation.userId) {
+          if (user.id === habitation.userId) {
             data.push({
               id: object.id,
               price: object.price,
               description: object.description,
               nif: user.nif,
-              address: habitation.address
+              address: habitation.address,
+              ref: object.ref
             });
           }
         });
       });
     });
-    
-    var object = data; 
+
+    var object = data;
     return (
       <div>
         <ToolkitProvider keyField="id" data={object} columns={columns} search>
