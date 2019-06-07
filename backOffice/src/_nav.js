@@ -36,7 +36,7 @@ export default {
     },
     {
       name: "Objetos",
-      url: "/base/table-object",
+      url: "/base/table-select-object",
       icon: "icon-notebook"
     },
     {

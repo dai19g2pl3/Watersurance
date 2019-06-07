@@ -73,10 +73,10 @@ FormText.propTypes = {
 
 class FormObject extends React.Component {
   state = {
-    price: '',
-    ref: '',
-    description: ''
-  }
+    price: "",
+    ref: "",
+    description: ""
+  };
 
   handleChange = e => {
     this.setState({
@@ -89,6 +89,7 @@ class FormObject extends React.Component {
     console.log(object);
     console.log(idHabitation);
     this.props.addObject(object, idHabitation);
+
     /*
     var refresh = setInterval(() => {
       if (this.props.users.length === 0) {
@@ -144,7 +145,13 @@ class FormObject extends React.Component {
             </FormGroup>
           </Col>
         </Row>
-        <Button onClick={e => this.handleAddObject(e, this.state, this.props.idHabitation)}>Adicionar</Button>
+        <Button
+          onClick={e =>
+            this.handleAddObject(e, this.state, this.props.idHabitation)
+          }
+        >
+          Adicionar
+        </Button>
       </Form>
     );
   }

@@ -27,6 +27,9 @@ const TableSelectHabitation = React.lazy(() =>
 const TableSelectUser = React.lazy(() =>
   import("./views/Base/TableSelectUser")
 );
+const TableSelectObject = React.lazy(() =>
+  import("./views/Base/TableSelectObject")
+);
 const TableOcorrencia = React.lazy(() =>
   import("./views/Base/TableOcorrencia")
 );
@@ -36,14 +39,17 @@ const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
 const BtnAdicionarHabitation = React.lazy(() =>
   import("./views/Base/BtnAdicionarHabitation")
 );
+const BtnAdicionarObjeto = React.lazy(() =>
+  import("./views/Base/BtnAdicionarObjeto")
+);
 const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
 );
-const TableObject = React.lazy(() =>
-  import("./views/Base/TableObject")
-);
+const TableObject = React.lazy(() => import("./views/Base/TableObject"));
 const FormObject = React.lazy(() => import("./views/Base/FormObject"));
-const FormObjectEditar = React.lazy(() => import("./views/Base/FormObjectEditar"));
+const FormObjectEditar = React.lazy(() =>
+  import("./views/Base/FormObjectEditar")
+);
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -183,6 +189,18 @@ const routes = [
     exact: true,
     name: "Form Object Editar",
     component: FormObjectEditar
+  },
+  {
+    path: "/base/table-select-object",
+    exact: true,
+    name: "Table Select Object",
+    component: TableSelectObject
+  },
+  {
+    path: "/base/btn-adicionar-object",
+    exact: true,
+    name: "Btn Adicionar Object",
+    component: BtnAdicionarObjeto
   }
 ];
 

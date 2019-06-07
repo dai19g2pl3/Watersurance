@@ -1,0 +1,6 @@
+{
+  "name": "BtnAdicionarObjeto",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BtnAdicionarObjeto.js"
+}
