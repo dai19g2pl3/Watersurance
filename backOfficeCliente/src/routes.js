@@ -25,13 +25,18 @@ const TableUser = React.lazy(() => import("./views/Base/TableUser"));
 const TableSensor = React.lazy(() => import("./views/Base/TableSensor"));
 const Contract = React.lazy(() => import("./views/Base/Contract"));
 const BtnAdicionar = React.lazy(() => import("./views/Base/BtnAdicionar"));
+const TableSelectObject = React.lazy(() =>
+  import("./views/Base/TableSelectObject")
+);
 const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
 );
 const TableOcorrencia = React.lazy(() =>
   import("./views/Base/TableOcorrencia")
 );
-
+const BtnAdicionarObjeto = React.lazy(() =>
+  import("./views/Base/BtnAdicionarObjeto")
+);
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
@@ -140,6 +145,18 @@ const routes = [
     exact: true,
     name: "Form Ocorrencia Cliente",
     component: FormOcorrenciaCliente
+  },
+  {
+    path: "/base/table-select-object",
+    exact: true,
+    name: "Table Select Object",
+    component: TableSelectObject
+  },
+  {
+    path: "/base/btn-adicionar-object",
+    exact: true,
+    name: "Btn Adicionar Object",
+    component: BtnAdicionarObjeto
   }
 ];
 
