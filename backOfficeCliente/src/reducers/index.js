@@ -3,6 +3,7 @@ import ocurrences from "./ocurrencesReducer";
 import habitations from "./habitationsReducer";
 import objectSensor from "./objectSensorReducer";
 import habitationSensor from "./habitationSensorReducer";
+import firstTime from "./firstTimeReducer";
 //import contracts from "./contractsReducer";
 import { combineReducers } from "redux";
 
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   ocurrences,
   habitations,
   objectSensor,
-  habitationSensor
+  habitationSensor,
+  firstTime,
   //contracts
 });
 

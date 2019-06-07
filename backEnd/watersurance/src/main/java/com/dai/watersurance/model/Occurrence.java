@@ -37,7 +37,7 @@ public class Occurrence extends UserDateAudit {
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 	
@@ -111,6 +111,10 @@ public class Occurrence extends UserDateAudit {
 
 	public void setInsuredObjects(Set<InsuredObject> insuredObjects) {
 		this.insuredObjects = insuredObjects;
+	}
+	
+	public void addInsuredObject(InsuredObject insuredObject) {
+		this.insuredObjects.add(insuredObject);
 	}
 
 	@Override

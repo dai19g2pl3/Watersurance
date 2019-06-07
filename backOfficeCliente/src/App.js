@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { fetchAllHabitations } from "./actions/habitationsAction";
 import { fetchObjectSensor } from "./actions/objectSensorAction";
 import { fetchHabitationSensor } from "./actions/habitationSensorAction";
+import { fetchFirstTime } from "./actions/firstTimeAction";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">Loading...</div>
@@ -34,6 +35,8 @@ class App extends Component {
     setInterval(() => {
       this.props.fetchAllHabitations();
 
+      this.props.fetchFirstTime();
+
       const fetchHabitationSensor = id => {
         this.props.fetchHabitationSensor(id);
       };
@@ -46,8 +49,7 @@ class App extends Component {
         if (habitations.length > 0) {
           habitations.forEach(function(habitation) {
             if (stop === 0) {
-              console.log(habitation.id);
-              fetchObjectSensor(19);
+              fetchObjectSensor(21);
               fetchHabitationSensor(habitation.id);
               stop = 1;
             }
@@ -55,7 +57,7 @@ class App extends Component {
           clearInterval(refresh);
         }
       }, 250);
-    }, 1000);
+    }, 5000);
   }
 
   render() {
@@ -81,7 +83,8 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch),
     fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
-    fetchHabitationSensor: bindActionCreators(fetchHabitationSensor, dispatch)
+    fetchHabitationSensor: bindActionCreators(fetchHabitationSensor, dispatch),
+    fetchFirstTime: bindActionCreators(fetchFirstTime, dispatch)
   };
 }
 

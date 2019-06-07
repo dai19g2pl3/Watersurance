@@ -1,5 +1,7 @@
+
 package com.dai.watersurance.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,11 +18,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.dai.watersurance.exception.ResourceNotFoundException;
+import com.dai.watersurance.model.Habitation;
 import com.dai.watersurance.model.InsuredObject;
 import com.dai.watersurance.model.Occurrence;
 import com.dai.watersurance.model.Sensor;
 import com.dai.watersurance.payload.request.SensorOccurrenceRequest;
 import com.dai.watersurance.payload.response.ApiResponse;
+import com.dai.watersurance.repository.HabitationRepository;
 import com.dai.watersurance.repository.InsuredObjectRepository;
 import com.dai.watersurance.repository.OccurrenceRepository;
 
@@ -35,6 +39,9 @@ public class SensorService {
 	
 	@Autowired
 	private InsuredObjectRepository insuredObjectRepository;
+	
+	@Autowired
+	private HabitationRepository habitationRepository;
 	
 	public ResponseEntity<Sensor> getLastHabitationSensorValue(@PathVariable(value = "id") long id) {
 		Query query = new Query();
@@ -63,38 +70,46 @@ public class SensorService {
 				Criteria.where("date").lte(sensorOccurrenceRequest.getEndDate()));
 		query.addCriteria(c);
 		
-		List<Sensor> sensors = mongoTemplate.find(query, Sensor.class, "Object" + id);
+		Habitation habitation = habitationRepository.findById(id, Habitation.class)
+				.orElseThrow(() -> new ResourceNotFoundException("Habitation", "id", id));
+		
 		Occurrence occurrence = new Occurrence();
 		boolean wasOccurrenceCreated = false;
-		int i = 0;
-		
-		if(sensors.size() != 0) {
-			for(Sensor sensor : sensors) {
-				if(Integer.parseInt(sensor.getValue()) >= 50) {
-					wasOccurrenceCreated = createOccurrence(occurrence, id, sensorOccurrenceRequest.getStartDate(),
-							sensorOccurrenceRequest.getEndDate());
-					System.out.println(i);
-					i++;
-					break;
-				}
-			}
-		} else return ResponseEntity.ok().body(new ApiResponse(false, "Insured Object collection is empty"));
+		List<Sensor> sensors = new ArrayList<>();
+		for(InsuredObject object : habitation.getInsuredObjects()) {
+			sensors = mongoTemplate.find(query, Sensor.class, "Object - " + object.getId());
+			System.out.println(sensors.size());
+			
+			if(sensors.size() != 0) {
+				for(Sensor sensor : sensors) {
+					if(Integer.parseInt(sensor.getValue()) > 150) {
+						wasOccurrenceCreated = createOccurrence(occurrence, object.getId(), sensorOccurrenceRequest.getStartDate(),
+								sensorOccurrenceRequest.getEndDate());
+						System.out.println(sensor.getValue());
+						System.out.println(object.getId());
+						break;
+					} else System.out.println("Sensor value below 50 (" + sensor.getValue() + ")");
+				} 
+			} else System.out.println("Insured object collection is empty with id: " + object.getId());
+			
+		}
 		
 		return ResponseEntity.ok().body(new ApiResponse(wasOccurrenceCreated, "Sensor occurrence registered successfully"));
 	}
 	
-	private boolean createOccurrence(Occurrence occurrence, long id, Date startDate, Date endDate) {
-		InsuredObject insuredObject = insuredObjectRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Insured Object", "id", id));
+	private boolean createOccurrence(Occurrence occurrence, long idObject, Date startDate, Date endDate) {
+		InsuredObject insuredObject = insuredObjectRepository.findById(idObject)
+				.orElseThrow(() -> new ResourceNotFoundException("Insured Object", "id", idObject));
 
 		occurrence.setPrice(insuredObject.getPrice());
 		occurrence.setStartDate(startDate);
 		occurrence.setEndDate(endDate);
 		occurrence.setHabitation(insuredObject.getHabitation());
+		occurrence.addInsuredObject(insuredObject);
 		occurrenceRepository.saveAndFlush(occurrence);
 		
-		Long idOccurrence = occurrence.getId();
-		insuredObjectRepository.updateInsuredObjectAddOccurrence(idOccurrence, id);
+		//Long idOccurrence = occurrence.getId();
+		//insuredObjectRepository.updateInsuredObjectAddOccurrence(idOccurrence, idObject);
 		
 		return true;
 	}

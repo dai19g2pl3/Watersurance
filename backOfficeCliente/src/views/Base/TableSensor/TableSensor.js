@@ -6,6 +6,7 @@ import { log } from "util";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchObjectSensor } from "../../../actions/objectSensorAction";
+import { alterFirstTime } from "../../../actions/firstTimeAction";
 
 const { SearchBar } = Search;
 
@@ -56,6 +57,10 @@ class TableSensor extends Component {
     var habitationAddress;
     var estadoHabitation;
     var estadoObject;
+
+    var FIRST_TIME = 1;
+    var START_DATE;
+    var END_DATE;
     fetchHabitations.forEach(function(habitation) {
       fetchObjectSensor.forEach(sensorObject => {
         fetchHabitationSensor.forEach(sensorHabitation => {
@@ -64,8 +69,19 @@ class TableSensor extends Component {
 
           if (sensorHabitation.value > 150) {
             estadoHabitation = "Inundação";
+            if(FIRST_TIME == 1) {
+              START_DATE = sensorObject.date;
+              FIRST_TIME = 0;
+            }
           } else if (sensorHabitation.value <= 150) {
             estadoHabitation = "Ok";
+            
+            if(FIRST_TIME == 0) {
+              FIRST_TIME = 1;
+              alert("Start: " + START_DATE);
+              alert("End: " + END_DATE);
+              //Mandar occorrencia
+            } 
           } else if (sensorHabitation.value == null) {
             estadoHabitation = "Falha";
           }
@@ -98,7 +114,8 @@ class TableSensor extends Component {
         tipo: "Objeto"
       }
     ];
-    var habitations = data;
+    
+    var habitations = data; 
 
     return (
       <div>
@@ -140,13 +157,15 @@ function mapStateToProps(state) {
   return {
     habitations: state.habitations,
     objectSensor: state.objectSensor,
-    habitationSensor: state.habitationSensor
+    habitationSensor: state.habitationSensor,
+    firstTime: state.firstTime
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch)
+    fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
+    alterFirstTime: bindActionCreators(alterFirstTime, dispatch)
   };
 }
 

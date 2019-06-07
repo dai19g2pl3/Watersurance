@@ -30,7 +30,6 @@ public class ContractController {
     	return contractService.getContract(id);
     }
 	
-	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/my/contract/{id}")
     public ResponseEntity<Resource> getMyContract(@PathVariable(value = "id") long id) {
     	return contractService.getContract(id);
