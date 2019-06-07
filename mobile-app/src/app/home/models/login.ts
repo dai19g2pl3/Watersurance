@@ -1,7 +1,0 @@
-export interface Login {
-    name:string;
-    email:string;
-    password:string;
-    nif:string;
-    phoneNumber:string;
-}

@@ -1,7 +1,0 @@
-{
-    "name": "CardUser",
-    "version": "0.0.0",
-    "private": true,
-    "main": "./CardUser.js"
-  }
-  
