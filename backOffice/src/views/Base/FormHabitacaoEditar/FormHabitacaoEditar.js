@@ -10,7 +10,6 @@ import {
   FormText
 } from "reactstrap";
 
-import BtnAddObject from "../BtnAddObject/BtnAddObject";
 import { PropTypes } from "prop-types";
 Input.propTypes = {
   children: PropTypes.node,

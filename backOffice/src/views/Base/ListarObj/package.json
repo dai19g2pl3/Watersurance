@@ -1,0 +1,6 @@
+{
+  "name": "ListarObj",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ListarObj.js"
+}

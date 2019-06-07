@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import BtnApagar from "../BtnApagar/BtnApagar";
+import BtnApagarHabitation from "../BtnApagarHabitation/BtnApagarHabitation";
 import BtnEditarHabitation from "../BtnEditarHabitation/BtnEditarHabitation";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchAllHabitations } from "../../../actions/habitationsAction";
 import BtnAddObject from "./../BtnAddObject/BtnAddObject";
+import BtnListarObj from "../BtnListarObj/BtnListarObj";
 const { SearchBar } = Search;
 
 class TableHabitation extends Component {
@@ -17,42 +18,49 @@ class TableHabitation extends Component {
 
   render() {
     console.log(this.props.habitations);
+
     const columns = [
       {
         dataField: "id",
         text: "ID Habitation",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "userID",
         text: "ID User",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
 
       {
         dataField: "address",
         text: "Morada",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "zipCode",
         text: "Codigo-Postal",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "sensorQtd",
         text: "Qt Sensores",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "edit",
         isDummyField: true,
         text: "Editar",
+        align: "center",
         headerAlign: "center",
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
@@ -70,10 +78,11 @@ class TableHabitation extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnApagar />
+              <BtnApagarHabitation />
             </div>
           );
-        }
+        },
+        align: "center"
       },
       {
         dataField: "addObj",
@@ -86,7 +95,22 @@ class TableHabitation extends Component {
               <BtnAddObject idHabitation={row.id} />
             </div>
           );
-        }
+        },
+        align: "center"
+      },
+      {
+        dataField: "listarObj",
+        isDummyField: true,
+        text: "Objeto",
+        headerAlign: "center",
+        formatter: (cell, row, rowIndex, formatExtraData) => {
+          return (
+            <div>
+              <BtnListarObj />
+            </div>
+          );
+        },
+        align: "center"
       }
     ];
     const defaultSorted = [

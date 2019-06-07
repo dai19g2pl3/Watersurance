@@ -23,10 +23,6 @@ const selectOptions = {
   0: "Inativo"
 };
 
-const optionsRole = {
-  1: "Segurador",
-  0: "Cliente"
-};
 class TableUser extends Component {
   componentDidMount() {
     this.props.fetchAllUsers();
@@ -68,37 +64,43 @@ class TableUser extends Component {
         dataField: "id",
         text: "ID Cliente",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "name",
         text: "Nome",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "email",
         text: "Email",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "nif",
         text: "NIF",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "phoneNumber",
         text: "Telefone",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "role",
         text: "Tipo",
         sort: true,
         headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "isActive",
@@ -108,7 +110,8 @@ class TableUser extends Component {
         filter: selectFilter({
           options: selectOptions,
           defaultValue: 1
-        })
+        }),
+        align: "center"
       },
       {
         dataField: "edit",
@@ -125,7 +128,8 @@ class TableUser extends Component {
               />
             </div>
           );
-        }
+        },
+        align: "center"
       },
       {
         dataField: "delete",
@@ -138,7 +142,8 @@ class TableUser extends Component {
               <BtnApagar id={row.id} handleDeleteButton={this.handleDelete} />
             </div>
           );
-        }
+        },
+        align: "center"
       }
     ];
     const defaultSorted = [
@@ -153,14 +158,14 @@ class TableUser extends Component {
 
     fetchUser.forEach(function(user) {
       let isActive;
-      
+
       var roleArray = user.roles[0];
       var roleName = roleArray.name;
-      
+
       var roleUser;
-      if(roleName === "ROLE_INSURER") {
+      if (roleName === "ROLE_INSURER") {
         roleUser = "Segurador";
-      } else roleUser = "Cliente"
+      } else roleUser = "Cliente";
 
       if (user.isActive === false) {
         isActive = 0;
@@ -172,7 +177,7 @@ class TableUser extends Component {
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
-        role: roleUser, 
+        role: roleUser,
         nif: user.nif,
         isActive: isActive
       });

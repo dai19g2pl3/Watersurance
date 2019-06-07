@@ -13,25 +13,29 @@ class TableSensor extends Component {
         dataField: "id",
         text: "ID Cliente",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "name",
         text: "Nome",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "email",
         text: "Email",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "nif",
         text: "NIF",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       }
     ];
     const defaultSorted = [

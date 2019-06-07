@@ -23,25 +23,29 @@ class TableSelectHabitation extends Component {
         dataField: "id",
         text: "ID Cliente",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "name",
         text: "Nome",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "address",
         text: "Morada",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "nif",
         text: "NIF",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "AddUser",
@@ -55,7 +59,8 @@ class TableSelectHabitation extends Component {
               <BtnAdicionarUser row={row} />
             </div>
           );
-        }
+        },
+        align: "center"
       }
     ];
     const defaultSorted = [

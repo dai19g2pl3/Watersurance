@@ -18,31 +18,36 @@ class TableOcorrencia extends Component {
         dataField: "id",
         text: "ID Ocorrencia",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "userId",
         text: "ID User",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "price",
         text: "Preço",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "address",
         text: "Morada",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "date",
         text: "Data",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       }
     ];
     const defaultSorted = [

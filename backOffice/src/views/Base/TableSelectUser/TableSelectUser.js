@@ -33,32 +33,36 @@ class TableSelectUser extends Component {
     }, 250);
     */
   };
-  
+
   render() {
     const columns = [
       {
         dataField: "id",
         text: "ID Cliente",
         sort: true,
-        hidden: true
+        hidden: true,
+        align: "center"
       },
       {
         dataField: "name",
         text: "Nome",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "email",
         text: "Email",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "nif",
         text: "NIF",
         sort: true,
-        headerAlign: "center"
+        headerAlign: "center",
+        align: "center"
       },
       {
         dataField: "addUser",
@@ -68,10 +72,14 @@ class TableSelectUser extends Component {
         formatter: (cell, row, rowIndex, formatExtraData) => {
           return (
             <div>
-              <BtnAdicionarHabitation idUser={row.id} handleAddButton={this.handleAdd} />
+              <BtnAdicionarHabitation
+                idUser={row.id}
+                handleAddButton={this.handleAdd}
+              />
             </div>
           );
-        }
+        },
+        align: "center"
       }
     ];
     const defaultSorted = [
@@ -143,7 +151,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchAllUsers: bindActionCreators(fetchAllUsers, dispatch),
-    addHabitation: bindActionCreators(addHabitation, dispatch),
+    addHabitation: bindActionCreators(addHabitation, dispatch)
   };
 }
 

@@ -21,13 +21,14 @@ class FormUser extends React.Component {
     password: "",
     role: "Segurador",
     isActive: "true"
-  }
+  };
+
   handleAdd = (e, user) => {
     e.preventDefault();
     console.log(user);
-    if(user.role === "Segurador") {
+    if (user.role === "Segurador") {
       user.role = "ROLE_INSURER";
-    } else if(user.role === "Cliente") {
+    } else if (user.role === "Cliente") {
       user.role = "ROLE_USER";
     }
     this.props.addUser(user);
@@ -53,18 +54,17 @@ class FormUser extends React.Component {
       <div>
         <Form>
           <FormGroup row>
-            <Label for="exampleEmail" sm={2}>
+            <Label for="exampleEmailuser" sm={2}>
               Email
             </Label>
             <Col sm={10}>
               <Input
                 type="email"
                 name="email"
-                id="exampleEmail"
+                id="exampleEmailuser"
                 placeholder="Insira aqui o email"
                 required
                 onChange={this.handleChange}
-                value={this.state.email}
               />
               <FormFeedback valid>
                 Esse e-mail está disponivel e é valido!
@@ -86,7 +86,6 @@ class FormUser extends React.Component {
                 placeholder="Insira aqui o nome"
                 required
                 onChange={this.handleChange}
-                value={this.state.name}
               />
             </Col>
           </FormGroup>
@@ -105,7 +104,6 @@ class FormUser extends React.Component {
                 min={0.00000000001}
                 required
                 onChange={this.handleChange}
-                value={this.state.phoneNumber}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
@@ -122,7 +120,6 @@ class FormUser extends React.Component {
                 min={0.00000000001}
                 required
                 onChange={this.handleChange}
-                value={this.state.nif}
               />
             </Col>
           </FormGroup>
@@ -138,22 +135,28 @@ class FormUser extends React.Component {
                 placeholder="Insira aqui a sua password"
                 required
                 onChange={this.handleChange}
-                value={this.state.password}
               />
             </Col>
             <Label for="exampleNIF" sm={2}>
               Role
             </Label>
             <Col sm={4}>
-              <Input type="select" name="role" id="exampleSelect" onChange={this.handleChange}
-                value={this.state.role}>
+              <Input
+                type="select"
+                name="role"
+                id="exampleSelect"
+                onChange={this.handleChange}
+                value={this.state.role}
+              >
                 <option>Segurador</option>
                 <option>Cliente</option>
               </Input>
             </Col>
           </FormGroup>
           <FormGroup>
-            <Button onClick={e => this.handleAdd(e, this.state)}>Submeter</Button>
+            <Button onClick={e => this.handleAdd(e, this.state)}>
+              Submeter
+            </Button>
           </FormGroup>
         </Form>
       </div>

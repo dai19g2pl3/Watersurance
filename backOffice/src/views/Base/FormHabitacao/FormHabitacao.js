@@ -10,7 +10,6 @@ import {
   FormText
 } from "reactstrap";
 
-import BtnAddObject from "../BtnAddObject/BtnAddObject";
 import { PropTypes } from "prop-types";
 Input.propTypes = {
   children: PropTypes.node,
@@ -74,7 +73,7 @@ export default class FormHabitacao extends React.Component {
     address: "",
     zipCode: "",
     sensorQtd: ""
-  }
+  };
 
   handleChange = e => {
     this.setState({
@@ -135,7 +134,14 @@ export default class FormHabitacao extends React.Component {
             </FormText>
           </FormGroup>
 
-          <Button size="lg" block color="success" onClick={e => this.props.handleAddButton(e, this.state, this.props.idUser)}>
+          <Button
+            size="lg"
+            block
+            color="success"
+            onClick={e =>
+              this.props.handleAddButton(e, this.state, this.props.idUser)
+            }
+          >
             Submeter
           </Button>
         </Form>

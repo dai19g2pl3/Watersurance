@@ -7,8 +7,6 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BtnEditar from "../BtnEditar/BtnEditar";
 import BtnApagar from "../BtnApagar/BtnApagar";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { fetchAllUsers } from "../../../actions/usersAction";
 
 const { SearchBar } = Search;
 
