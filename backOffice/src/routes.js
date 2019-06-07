@@ -39,8 +39,11 @@ const BtnAdicionarHabitation = React.lazy(() =>
 const TableHabitation = React.lazy(() =>
   import("./views/Base/TableHabitation")
 );
-
+const TableObject = React.lazy(() =>
+  import("./views/Base/TableObject")
+);
 const FormObject = React.lazy(() => import("./views/Base/FormObject"));
+const FormObjectEditar = React.lazy(() => import("./views/Base/FormObjectEditar"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -168,6 +171,18 @@ const routes = [
     exact: true,
     name: "Form Object",
     component: FormObject
+  },
+  {
+    path: "/base/table-object",
+    exact: true,
+    name: "Table Object",
+    component: TableObject
+  },
+  {
+    path: "/base/form-object-editar",
+    exact: true,
+    name: "Form Object Editar",
+    component: FormObjectEditar
   }
 ];
 

@@ -35,6 +35,11 @@ export default {
       icon: "icon-notebook"
     },
     {
+      name: "Objetos",
+      url: "/base/table-object",
+      icon: "icon-notebook"
+    },
+    {
       name: "Habitações",
       url: "/base/tables",
       icon: "icon-home",

@@ -1,0 +1,6 @@
+{
+  "name": "BtnEditarObject",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./BtnEditarObject.js"
+}

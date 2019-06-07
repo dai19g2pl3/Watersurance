@@ -1,0 +1,6 @@
+{
+  "name": "FormObjectEditar",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./FormObjectEditar.js"
+}

@@ -154,34 +154,36 @@ class TableUser extends Component {
     ];
 
     const fetchUser = this.props.users;
+    console.log(this.props);
     let data = [];
+    if(fetchUser.length > 0) {
+      fetchUser.forEach(function(user) {
+        let isActive;
 
-    fetchUser.forEach(function(user) {
-      let isActive;
+        var roleArray = user.roles[0];
+        var roleName = roleArray.name;
+  
+        var roleUser;
+        if (roleName === "ROLE_INSURER") {
+          roleUser = "Segurador";
+        } else roleUser = "Cliente";
+  
+        if (user.isActive === false) {
+          isActive = 0;
+        } else isActive = 1;
 
-      var roleArray = user.roles[0];
-      var roleName = roleArray.name;
-
-      var roleUser;
-      if (roleName === "ROLE_INSURER") {
-        roleUser = "Segurador";
-      } else roleUser = "Cliente";
-
-      if (user.isActive === false) {
-        isActive = 0;
-      } else isActive = 1;
-
-      console.log(roleUser);
-      data.push({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role: roleUser,
-        nif: user.nif,
-        isActive: isActive
+        data.push({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          role: roleUser,
+          nif: user.nif,
+          isActive: isActive
+        });
       });
-    });
+    }
+    
     var user = data;
 
     return (
