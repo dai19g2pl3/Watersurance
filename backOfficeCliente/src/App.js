@@ -9,6 +9,7 @@ import { fetchAllHabitations } from "./actions/habitationsAction";
 import { fetchObjectSensor } from "./actions/objectSensorAction";
 import { fetchHabitationSensor } from "./actions/habitationSensorAction";
 import { fetchFirstTime } from "./actions/firstTimeAction";
+import { fetchStartDate } from "./actions/startDateAction";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">Loading...</div>
@@ -34,7 +35,7 @@ class App extends Component {
   componentDidMount() {
     setInterval(() => {
       this.props.fetchAllHabitations();
-
+      this.props.fetchStartDate();
       this.props.fetchFirstTime();
 
       const fetchHabitationSensor = id => {
@@ -84,7 +85,8 @@ function mapDispatchToProps(dispatch) {
     fetchAllHabitations: bindActionCreators(fetchAllHabitations, dispatch),
     fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
     fetchHabitationSensor: bindActionCreators(fetchHabitationSensor, dispatch),
-    fetchFirstTime: bindActionCreators(fetchFirstTime, dispatch)
+    fetchFirstTime: bindActionCreators(fetchFirstTime, dispatch),
+    fetchStartDate: bindActionCreators(fetchStartDate, dispatch)
   };
 }
 

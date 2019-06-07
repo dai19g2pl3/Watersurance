@@ -1,5 +1,6 @@
 export const FETCH_HABITATION_SENSOR_SUCCESS = "FETCH_HABITATION_SENSOR_SUCCESS";
 export const FETCH_HABITATION_SENSOR_FAILURE = "FETCH_HABITATION_SENSOR_FAILURE";
+export const ADD_SENSOR_OCCURRENCE_SUCCESS = "ADD_SENSOR_OCCURRENCE_SUCCESS";
 
 const headers = new Headers({
     "Content-Type": "application/json"
@@ -30,4 +31,21 @@ const headers = new Headers({
           dispatch({ type: FETCH_HABITATION_SENSOR_FAILURE, payload: error.response });
         }
       );
+  };
+
+  export const addSensorOccurrence = (dates, id) => {
+    return dispatch => {
+      fetch(`http://localhost:8080/api/occurrenceSensor/` + id, {
+        method: "POST",
+        credentials: "include",
+        headers: headers,
+        body: JSON.stringify(dates)
+      })
+        .then(res => res.json())
+        .then(res => {
+          dispatch({
+            type: ADD_SENSOR_OCCURRENCE_SUCCESS,
+          });
+        });
+    };
   };

@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchObjectSensor } from "../../../actions/objectSensorAction";
 import { alterFirstTime } from "../../../actions/firstTimeAction";
+import { alterStartDate } from "../../../actions/startDateAction";
+import { addSensorOccurrence } from "../../../actions/habitationSensorAction";
 
 const { SearchBar } = Search;
 
@@ -48,6 +50,11 @@ class TableSensor extends Component {
     const fetchHabitations = this.props.habitations;
     const fetchObjectSensor = this.props.objectSensor;
     const fetchHabitationSensor = this.props.habitationSensor;
+    const firstTime = this.props.firstTime;
+    const alterTime = (number) => {this.props.alterFirstTime(number);}
+    const startDate = this.props.startDate;
+    const alterDate = (date) => {this.props.alterStartDate(date);}
+    const sensorOccurrence = (dates, id) => {this.props.addSensorOccurrence(dates, id);} 
     let data = [];
     console.log(fetchHabitations);
     console.log(fetchObjectSensor);
@@ -57,30 +64,30 @@ class TableSensor extends Component {
     var habitationAddress;
     var estadoHabitation;
     var estadoObject;
-
-    var FIRST_TIME = 1;
-    var START_DATE;
-    var END_DATE;
+    
     fetchHabitations.forEach(function(habitation) {
       fetchObjectSensor.forEach(sensorObject => {
         fetchHabitationSensor.forEach(sensorHabitation => {
           console.log(sensorObject.value);
           console.log(sensorHabitation.value);
-
+          habitationId = habitation.id;
           if (sensorHabitation.value > 150) {
             estadoHabitation = "Inundação";
-            if(FIRST_TIME == 1) {
-              START_DATE = sensorObject.date;
-              FIRST_TIME = 0;
+            if(firstTime == 1) {
+              alterDate(sensorObject.date);
+              alterTime(0);
             }
           } else if (sensorHabitation.value <= 150) {
             estadoHabitation = "Ok";
-            
-            if(FIRST_TIME == 0) {
-              FIRST_TIME = 1;
-              alert("Start: " + START_DATE);
-              alert("End: " + END_DATE);
-              //Mandar occorrencia
+            if(firstTime == 0) {
+              alert("Start: " + startDate[0]);
+              alert("End: " + sensorObject.date);
+              var dates = {	
+                "startDate": startDate[0],
+                "endDate": sensorObject.date
+              }
+              sensorOccurrence(dates, habitationId);
+              alterTime(1);             
             } 
           } else if (sensorHabitation.value == null) {
             estadoHabitation = "Falha";
@@ -94,7 +101,7 @@ class TableSensor extends Component {
             estadoObject = "Falha";
           }
 
-          habitationId = habitation.id;
+          
           habitationAddress = habitation.address;
         });
       });
@@ -158,14 +165,17 @@ function mapStateToProps(state) {
     habitations: state.habitations,
     objectSensor: state.objectSensor,
     habitationSensor: state.habitationSensor,
-    firstTime: state.firstTime
+    firstTime: state.firstTime,
+    startDate: state.startDate
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     fetchObjectSensor: bindActionCreators(fetchObjectSensor, dispatch),
-    alterFirstTime: bindActionCreators(alterFirstTime, dispatch)
+    alterFirstTime: bindActionCreators(alterFirstTime, dispatch),
+    alterStartDate: bindActionCreators(alterStartDate, dispatch),
+    addSensorOccurrence: bindActionCreators(addSensorOccurrence, dispatch)
   };
 }
 
