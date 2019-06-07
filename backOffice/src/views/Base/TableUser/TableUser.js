@@ -16,6 +16,8 @@ import {
   deleteUser
 } from "../../../actions/usersAction";
 
+import Swal from "sweetalert2";
+
 const { SearchBar } = Search;
 
 const selectOptions = {
@@ -38,6 +40,8 @@ class TableUser extends Component {
         this.props.fetchAllUsers();
       }
     }, 250);
+
+    Swal.fire("User Apagado com sucesso!");
   };
 
   handleUpdate = (e, user) => {
@@ -56,6 +60,7 @@ class TableUser extends Component {
         this.props.fetchAllUsers();
       }
     }, 250);
+    Swal.fire("User atualizado com sucesso!");
   };
 
   render() {
@@ -156,18 +161,18 @@ class TableUser extends Component {
     const fetchUser = this.props.users;
     console.log(this.props);
     let data = [];
-    if(fetchUser.length > 0) {
+    if (fetchUser.length > 0) {
       fetchUser.forEach(function(user) {
         let isActive;
 
         var roleArray = user.roles[0];
         var roleName = roleArray.name;
-  
+
         var roleUser;
         if (roleName === "ROLE_INSURER") {
           roleUser = "Segurador";
         } else roleUser = "Cliente";
-  
+
         if (user.isActive === false) {
           isActive = 0;
         } else isActive = 1;
@@ -183,7 +188,7 @@ class TableUser extends Component {
         });
       });
     }
-    
+
     var user = data;
 
     return (

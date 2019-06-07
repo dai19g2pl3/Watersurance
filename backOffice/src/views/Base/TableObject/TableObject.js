@@ -11,6 +11,7 @@ import {
   resetHabitation
 } from "../../../actions/habitationsAction";
 import { updateObject, deleteObject } from "../../../actions/objectsAction";
+import Swal from "sweetalert2";
 
 const { SearchBar } = Search;
 
@@ -29,6 +30,7 @@ class TableObject extends Component {
         this.props.fetchAllHabitations();
       }
     }, 250);
+    Swal.fire("Objeto alterado com sucesso!");
   };
 
   handleDelete = (e, id) => {

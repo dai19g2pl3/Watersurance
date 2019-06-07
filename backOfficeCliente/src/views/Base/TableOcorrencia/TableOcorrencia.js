@@ -39,8 +39,14 @@ class TableOcorrencia extends Component {
         headerAlign: "center"
       },
       {
-        dataField: "date",
-        text: "Data",
+        dataField: "startDate",
+        text: "Início",
+        sort: true,
+        headerAlign: "center"
+      },
+      {
+        dataField: "endDate",
+        text: "Início",
         sort: true,
         headerAlign: "center"
       }
@@ -61,7 +67,8 @@ class TableOcorrencia extends Component {
           idUser: habitation.userId,
           address: habitation.address,
           id: element.id,
-          date: element.startDate,
+          startDate: element.startDate,
+          endDate: element.endDate,
           price: element.price
         });
       });

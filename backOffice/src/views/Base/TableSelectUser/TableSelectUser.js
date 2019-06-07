@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchAllUsers } from "../../../actions/usersAction";
 import { addHabitation } from "../../../actions/habitationsAction";
-
+import Swal from "sweetalert2";
 const { SearchBar } = Search;
 
 class TableSelectUser extends Component {
@@ -25,6 +25,7 @@ class TableSelectUser extends Component {
     console.log(habitation);
 
     this.props.addHabitation(habitation, id);
+    Swal.fire("Habitação registada com sucesso");
     /*
     setInterval(() => {
       if (this.props.users.length === 0) {

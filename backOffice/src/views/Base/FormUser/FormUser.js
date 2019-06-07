@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addUser } from "../../../actions/usersAction";
-
+import Swal from "sweetalert2";
 class FormUser extends React.Component {
   state = {
     email: "",
@@ -32,6 +32,7 @@ class FormUser extends React.Component {
       user.role = "ROLE_USER";
     }
     this.props.addUser(user);
+    Swal.fire("User registado com sucesso!");
     /*
     var refresh = setInterval(() => {
       if (this.props.users.length === 0) {

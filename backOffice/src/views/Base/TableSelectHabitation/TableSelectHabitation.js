@@ -9,7 +9,6 @@ import { bindActionCreators } from "redux";
 import { fetchAllUsers } from "../../../actions/usersAction";
 import { fetchAllHabitations } from "../../../actions/habitationsAction";
 import BtnAdicionarUser from "../BtnAdicionarUser/BtnAdicionarUser";
-
 const { SearchBar } = Search;
 
 class TableSelectHabitation extends Component {
